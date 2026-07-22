@@ -1,0 +1,1586 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Patient Financial Services Training Portal</title>
+<style>
+:root{
+  --nav:#17324d;
+  --nav-2:#20496b;
+  --blue:#285f8f;
+  --blue-dark:#1f527e;
+  --light:#eef4f8;
+  --border:#d6e0e8;
+  --border-strong:#c3d1dc;
+  --surface:#ffffff;
+  --surface-soft:#f8fafc;
+  --text:#1e2933;
+  --muted:#687985;
+  --green:#1f7a4d;
+  --red:#a73535;
+  --amber:#a96700;
+  --accent-bg:#edf6fc;
+  --shadow-sm:0 1px 2px rgba(23,50,77,.05);
+  --shadow-md:0 8px 24px rgba(23,50,77,.08);
+  --shadow-lg:0 20px 55px rgba(15,35,55,.18)
+}
+*{box-sizing:border-box}
+html{background:#f3f6f9}
+body{
+  margin:0;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  background:#f3f6f9;
+  color:var(--text);
+  font-size:14px;
+  line-height:1.5;
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility
+}
+button,input,select,textarea{font:inherit}
+header{
+  background:linear-gradient(110deg,var(--nav) 0%,var(--nav-2) 100%);
+  color:white;
+  padding:14px 26px;
+  min-height:58px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:16px;
+  border-bottom:1px solid rgba(255,255,255,.1);
+  box-shadow:0 4px 16px rgba(14,35,54,.14)
+}
+header h1{font-size:19px;margin:0;font-weight:650;letter-spacing:.15px}
+.header-actions{display:flex;align-items:center;gap:10px}
+.environment-tag{
+  font-size:11px;
+  letter-spacing:.35px;
+  text-transform:uppercase;
+  background:rgba(255,255,255,.12);
+  border:1px solid rgba(255,255,255,.16);
+  padding:6px 10px;
+  border-radius:999px
+}
+.guide-button{
+  background:#fff;
+  color:var(--nav);
+  border:1px solid rgba(255,255,255,.75);
+  padding:8px 13px;
+  border-radius:8px;
+  font-weight:650;
+  cursor:pointer;
+  box-shadow:0 2px 8px rgba(0,0,0,.08);
+  transition:transform .15s ease,box-shadow .15s ease,background .15s ease
+}
+.guide-button:hover{background:#f7fbfe;box-shadow:0 4px 12px rgba(0,0,0,.12);transform:translateY(-1px)}
+.container{display:flex;min-height:calc(100vh - 58px)}
+.sidebar{
+  width:248px;
+  background:#fbfdff;
+  border-right:1px solid var(--border);
+  padding:18px 14px;
+  box-shadow:2px 0 12px rgba(23,50,77,.025)
+}
+.sidebar button{
+  width:100%;
+  min-height:39px;
+  padding:10px 12px;
+  margin:2px 0;
+  border:1px solid transparent;
+  background:transparent;
+  color:#405261;
+  text-align:left;
+  border-radius:8px;
+  cursor:pointer;
+  font-size:13px;
+  transition:background .14s ease,color .14s ease,border-color .14s ease,box-shadow .14s ease
+}
+.sidebar button:hover{background:#f0f5f9;color:var(--nav)}
+.sidebar button.active{
+  background:#eaf2f8;
+  color:#124e79;
+  border-color:#d7e4ed;
+  box-shadow:inset 3px 0 0 var(--blue);
+  font-weight:650
+}
+.main{flex:1;padding:22px;overflow:auto}
+.card{
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:12px;
+  padding:17px;
+  margin-bottom:15px;
+  box-shadow:var(--shadow-sm)
+}
+#accountBanner{
+  border-color:#cbd9e4;
+  background:linear-gradient(180deg,#ffffff 0%,#fbfdff 100%);
+  box-shadow:0 5px 18px rgba(23,50,77,.055)
+}
+.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:13px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:15px}
+.grid4{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:13px}
+label{
+  font-size:11px;
+  font-weight:700;
+  color:#566876;
+  display:block;
+  margin-bottom:6px;
+  letter-spacing:.18px
+}
+input,select,textarea{
+  width:100%;
+  padding:10px 11px;
+  border:1px solid #afbfcc;
+  border-radius:8px;
+  background:#fff;
+  color:var(--text);
+  transition:border-color .15s ease,box-shadow .15s ease,background .15s ease
+}
+input:hover,select:hover,textarea:hover{border-color:#91a8b9}
+input:focus,select:focus,textarea:focus{
+  outline:none;
+  border-color:var(--blue);
+  box-shadow:0 0 0 3px rgba(40,95,143,.13)
+}
+button.primary,button.secondary{
+  min-height:37px;
+  padding:9px 14px;
+  border-radius:8px;
+  cursor:pointer;
+  font-weight:650;
+  transition:transform .14s ease,box-shadow .14s ease,background .14s ease,border-color .14s ease
+}
+button.primary{
+  background:var(--blue);
+  color:white;
+  border:1px solid var(--blue);
+  box-shadow:0 3px 9px rgba(40,95,143,.16)
+}
+button.primary:hover{background:var(--blue-dark);border-color:var(--blue-dark);box-shadow:0 5px 13px rgba(40,95,143,.22);transform:translateY(-1px)}
+button.secondary{background:white;border:1px solid #7d9fba;color:var(--blue)}
+button.secondary:hover{background:#f2f7fb;border-color:var(--blue);transform:translateY(-1px)}
+button:disabled{opacity:.55;cursor:not-allowed;transform:none!important;box-shadow:none!important}
+.big-balance{font-size:25px;font-weight:720;color:var(--nav);letter-spacing:-.25px}
+.pill{
+  display:inline-flex;
+  align-items:center;
+  min-height:25px;
+  padding:4px 9px;
+  border-radius:999px;
+  background:#eef4f8;
+  color:#465866;
+  border:1px solid #dde6ed;
+  font-size:11px;
+  font-weight:700;
+  letter-spacing:.12px
+}
+.warn{background:#fff4dc;color:#855400;border-color:#f2dfae}
+.danger{background:#fdeaea;color:#8f2525;border-color:#f2caca}
+.ok{background:#e8f5ed;color:#1d6b43;border-color:#c9e8d5}
+table{width:100%;border-collapse:separate;border-spacing:0;font-size:13px}
+th,td{border-bottom:1px solid #e3e9ee;padding:10px 9px;text-align:left;vertical-align:top}
+th{
+  background:#f5f8fa;
+  color:#526270;
+  font-size:11px;
+  text-transform:uppercase;
+  letter-spacing:.36px;
+  font-weight:750
+}
+thead th:first-child{border-top-left-radius:8px}
+thead th:last-child{border-top-right-radius:8px}
+tbody tr:hover td{background:#fbfdff}
+.hidden{display:none!important}
+.login{max-width:790px;margin:42px auto;padding:0 18px}
+.login .card{padding:24px;box-shadow:var(--shadow-md);border-color:#ccd9e3}
+.notice,.info-note{
+  padding:11px 13px;
+  border-radius:8px;
+  margin-bottom:14px;
+  font-size:13px
+}
+.notice{background:#fff6df;border:1px solid #efddb0;border-left:4px solid #c78300}
+.info-note{background:#eef6fb;border:1px solid #cfe0ec;border-left:4px solid var(--blue)}
+.contact-activity{
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  gap:16px;
+  padding:12px 14px;
+  margin:14px 0 0;
+  border:1px solid #d5e2eb;
+  border-radius:10px;
+  background:#f7fafc
+}
+.contact-activity strong{display:block;color:var(--nav);margin-bottom:2px}
+.contact-activity .contact-count{font-size:20px;font-weight:720;color:var(--blue);white-space:nowrap}
+.responsible-party-card{
+  margin-top:15px;
+  padding:15px;
+  border:1px solid #d4e0e8;
+  border-radius:10px;
+  background:linear-gradient(180deg,#fbfdff 0%,#f5f9fc 100%)
+}
+.minor-banner{background:#fff6df;border:1px solid #efddb0;border-left:4px solid #c78300;padding:11px 13px;border-radius:8px;margin-bottom:14px}
+.pos-payment-summary{border-color:#cbdde9;background:linear-gradient(180deg,#fafdff 0%,#f2f8fc 100%)}
+.modal{position:fixed;inset:0;background:rgba(10,27,42,.62);backdrop-filter:blur(3px);display:flex;align-items:center;justify-content:center;z-index:20;padding:18px}
+.modalbox{
+  position:relative;
+  background:white;
+  width:min(850px,94vw);
+  max-height:90vh;
+  overflow:auto;
+  border:1px solid #d4dee7;
+  border-radius:14px;
+  padding:54px 22px 22px;
+  box-shadow:var(--shadow-lg)
+}
+.modal-close{
+  position:absolute;
+  top:14px;
+  right:14px;
+  width:34px;
+  height:34px;
+  border:1px solid var(--border);
+  border-radius:50%;
+  background:#fff;
+  color:var(--nav);
+  font-size:21px;
+  line-height:1;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  cursor:pointer;
+  box-shadow:0 2px 7px rgba(23,50,77,.08)
+}
+.modal-close:hover{background:var(--light);border-color:#b8c9d5}
+.modalbox.statement-wide{width:min(1080px,96vw)}
+.actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:13px}
+.section-title{margin:0 0 12px;font-size:16px;font-weight:700;color:var(--nav);letter-spacing:.05px}
+.muted{color:var(--muted);font-size:12.5px}
+.kpi{
+  padding:13px;
+  background:linear-gradient(180deg,#fbfdff 0%,#f7fafc 100%);
+  border:1px solid #dce5eb;
+  border-radius:10px
+}
+.kpi b{display:block;font-size:14px;margin-top:5px;line-height:1.4;color:#253847}
+.metric-label{font-size:11px;color:#5c6e7c;font-weight:700;letter-spacing:.2px}
+.metric-value{font-size:16px;font-weight:720;margin-top:4px;color:var(--nav)}
+.payment-options-card{
+  border:1px solid #8db2cd;
+  background:linear-gradient(180deg,#f2f8fc 0%,#eaf4fa 100%);
+  box-shadow:0 7px 20px rgba(40,95,143,.075)
+}
+.payment-options-card .kpi{background:#fff;border-color:#c4d9e7;box-shadow:0 2px 8px rgba(40,95,143,.04)}
+.payment-choice-grid{padding:13px;border:1px solid #8db2cd;background:linear-gradient(180deg,#f3f9fc,#eaf4fa);border-radius:10px}
+.payment-choice{background:#fff;border:1px solid #c3d5e2;border-radius:9px;padding:12px;display:flex;align-items:flex-start;gap:9px;margin:0}
+.payment-choice input{width:auto;margin:3px 0 0}
+.payment-choice span{display:block}
+.payment-choice strong{display:block;font-size:13px;color:#293e4f}
+.payment-choice small{display:block;margin-top:3px;color:#607381;font-size:12px}
+.coverage-card{
+  border:1px solid #cbd8e2;
+  border-radius:11px;
+  padding:15px;
+  background:linear-gradient(180deg,#ffffff 0%,#fbfdff 100%);
+  box-shadow:0 4px 14px rgba(23,50,77,.045)
+}
+.coverage-card.primary-coverage{border-left:4px solid var(--blue)}
+.coverage-card.secondary-coverage{border-left:4px solid #718292}
+.coverage-head{display:flex;justify-content:space-between;gap:10px;align-items:center;margin-bottom:11px;padding-bottom:10px;border-bottom:1px solid #e7edf2}
+.coverage-title{font-size:14px;font-weight:720;color:var(--nav)}
+.coverage-details{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:11px}
+.coverage-details div span{display:block;font-size:10.5px;color:#71818e;font-weight:700;text-transform:uppercase;letter-spacing:.28px}
+.coverage-details div b{font-size:13px;font-weight:650;color:#273b4a;word-break:break-word}
+.script-guide details{border:1px solid #d8e1e8;border-radius:9px;margin:9px 0;background:#fff;overflow:hidden}
+.script-guide summary{cursor:pointer;padding:12px 14px;font-weight:700;background:#f5f8fa;color:#2c4355}
+.script-guide .script-body{padding:13px 15px}
+.script-line{background:#f7fafc;border:1px solid #e3ebf0;border-left:4px solid var(--blue);border-radius:6px;padding:10px 12px;margin:8px 0}
+.script-check{margin:6px 0;padding-left:18px}
+.letter-status{white-space:nowrap}
+.patient-letter-table .letter-actions-column{width:156px;min-width:156px}
+.patient-letter-actions{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:7px;
+  width:100%;
+  min-width:138px
+}
+.patient-letter-actions button{
+  width:100%;
+  min-height:34px;
+  padding:7px 10px;
+  white-space:nowrap;
+  text-align:center
+}
+.patient-letter-actions button.primary{box-shadow:none}
+.support-strip{display:flex;justify-content:space-between;gap:14px;align-items:center;padding:11px 13px;background:#eef6fb;border:1px solid #c7dce9;border-radius:9px;margin-bottom:14px}
+.support-strip b{display:block}
+.review-tat-panel{margin-top:12px;padding:14px 15px;background:#eef6fb;border:1px solid #c3d9e7;border-left:4px solid var(--blue);border-radius:9px}
+.review-tat-head{display:flex;justify-content:space-between;gap:12px;align-items:flex-start;margin-bottom:8px}
+.review-tat-head strong{font-size:14px}
+.review-tat-value{font-size:14px;font-weight:720;color:var(--nav)}
+.review-tat-grid{display:grid;grid-template-columns:180px 1fr;gap:7px 12px}
+.review-tat-grid span{font-size:11px;color:#526270;font-weight:700;text-transform:uppercase;letter-spacing:.22px}
+.review-tat-script{margin-top:10px;padding:10px 12px;background:#fff;border:1px solid #dce7ee;border-left:4px solid var(--blue);border-radius:6px}
+.priority-note{margin-top:8px;font-size:12px;color:#687985}
+hr{border:0;border-top:1px solid #dce5eb;margin:17px 0}
+h4{font-size:14px;margin:12px 0 9px;color:#30495b}
+
+.patient-statement-copy{border:1px solid #b7c6d2;border-radius:10px;padding:20px;background:#fff;color:#27333d}
+.statement-header{display:flex;justify-content:space-between;gap:18px;border-bottom:3px solid var(--nav);padding-bottom:11px}
+.statement-header h2{margin:0 0 3px;font-size:21px;color:var(--nav)}
+.statement-meta{text-align:right;font-size:12.5px;line-height:1.55}
+.statement-addresses{margin-top:14px;font-size:13px;line-height:1.5}
+.statement-amount-due{margin:18px 0 12px;padding:14px 16px;background:#eaf2f7;border:1px solid #d4e1e9;border-radius:8px;display:flex;justify-content:space-between;align-items:center}
+.statement-amount-due strong{font-size:22px;color:var(--nav)}
+.statement-explanation{margin-bottom:13px;padding:11px 13px;background:#f7fafc;border-left:4px solid var(--blue);border-radius:6px;font-size:12.5px;line-height:1.5}
+.statement-reconciliation{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin:0 0 14px}
+.statement-reconciliation-item{border:1px solid #d7e2e9;border-radius:8px;background:#fbfdff;padding:10px 11px}
+.statement-reconciliation-item span{display:block;font-size:10.5px;font-weight:700;color:#657684;text-transform:uppercase;letter-spacing:.25px;margin-bottom:4px}
+.statement-reconciliation-item b{font-size:15px;color:var(--nav)}
+.statement-reconciliation-item.adjustment{background:#f2f7fa;border-color:#c9dce8}
+.statement-table-wrap{overflow-x:auto;border:1px solid #dbe5eb;border-radius:8px}
+.statement-table-wrap table{margin:0;min-width:850px}
+.statement-detail-table th{font-size:10.5px;line-height:1.25;white-space:normal}
+.statement-detail-table td{font-size:12px}
+.statement-total-row td{font-weight:720;background:#f2f6f9;border-top:2px solid #c7d5df}
+.statement-balance-grid{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(260px,.8fr);gap:16px;margin-top:16px;align-items:start}
+.statement-help-note{padding:12px 13px;background:#f7fafc;border:1px solid #dde7ed;border-radius:8px;font-size:12.5px;line-height:1.5}
+.statement-calculation{border:1px solid #cad8e2;border-radius:8px;overflow:hidden;background:#fff}
+.statement-calc-title{padding:10px 12px;background:#edf4f8;font-weight:720;color:var(--nav)}
+.statement-calc-row{display:flex;justify-content:space-between;gap:15px;padding:9px 12px;border-top:1px solid #e7edf1;font-size:12.5px}
+.statement-calc-row b{white-space:nowrap}
+.statement-calc-row.statement-final{background:#f2f7fa;font-size:14px;color:var(--nav)}
+.statement-payment-options{margin-top:16px;padding-top:13px;border-top:1px solid #dce5eb;font-size:12.5px;line-height:1.5}
+@media(max-width:700px){.statement-header{display:block}.statement-meta{text-align:left;margin-top:10px}.statement-balance-grid{grid-template-columns:1fr}.statement-reconciliation{grid-template-columns:1fr 1fr}}
+
+.user-identity-panel{margin:16px 0 18px;padding:15px 16px;border:1px solid #bfd0dd;border-radius:12px;background:linear-gradient(180deg,#f9fcfe 0%,#f2f7fa 100%)}
+.user-identity-panel label{margin-top:0;color:var(--nav)}
+.user-identity-help{margin-top:6px;font-size:12px;color:var(--muted)}
+.user-badge{max-width:260px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.search-results{margin-top:16px;border:1px solid #cbd9e3;border-radius:10px;overflow:hidden;background:#fff}
+.search-results-head{padding:12px 14px;background:#f4f8fb;border-bottom:1px solid #d8e3ea}
+.search-results-head b{display:block;font-size:14px}
+.search-results table{margin:0}
+.search-results th{background:#f8fafc}
+.search-results .select-account{white-space:nowrap}
+@media(max-width:1050px){.grid4{grid-template-columns:1fr 1fr}.coverage-details{grid-template-columns:1fr 1fr}}
+@media(max-width:900px){.sidebar{width:200px}.grid{grid-template-columns:1fr 1fr}.grid2{grid-template-columns:1fr}}
+@media(max-width:650px){header{align-items:flex-start;padding:13px 16px}.header-actions{flex-direction:column;align-items:flex-end}.container{display:block}.sidebar{width:100%;border-right:0;border-bottom:1px solid var(--border);padding:10px}.grid,.grid4,.coverage-details{grid-template-columns:1fr}.main{padding:13px}.support-strip{align-items:flex-start;flex-direction:column}.login{margin:24px auto}.card{border-radius:10px}}
+
+.balance-summary{margin-bottom:16px}
+.balance-summary .kpi{padding:18px 20px;min-height:112px;display:flex;flex-direction:column;justify-content:center}
+.balance-summary .balance-value{font-size:28px;font-weight:760;line-height:1.1;margin-top:6px;letter-spacing:-.025em;color:var(--nav)}
+.patient-balance-kpi{border-color:#9eb7cc;background:linear-gradient(180deg,#ffffff 0%,#f5f9fc 100%)}
+.insurance-balance-kpi{border-color:#a9bdce;background:linear-gradient(180deg,#ffffff 0%,#f7fafc 100%)}
+.insurance-balance-card{border-color:#9eb7cc;background:linear-gradient(180deg,#fbfdff 0%,#f3f8fc 100%)}
+.insurance-balance-card .insurance-balance-amount{font-size:24px;font-weight:700;color:#17324d;letter-spacing:-.02em}
+.no-statement-state{padding:18px;border:1px dashed #aebdca;border-radius:12px;background:#f8fbfd;color:#334a5f}
+.reversal-notice{border:1px solid #aebdca;border-radius:12px;padding:20px;background:#fff}
+.reversal-banner{padding:14px 16px;border-radius:10px;background:#eef5fa;border:1px solid #c5d7e5;color:#17324d;margin:14px 0}
+</style>
+</head>
+<body>
+<header><h1>Patient Financial Services</h1><div class="header-actions"><button class="guide-button" type="button" onclick="openScriptGuide()">Call &amp; Script Guide</button><span id="activeUserBadge" class="environment-tag user-badge hidden"></span><span class="environment-tag">Training Environment</span></div></header>
+
+<div id="loginView" class="login">
+  <div class="card">
+    <h2>Access Patient Account</h2>
+    <div class="user-identity-panel">
+      <label for="userName">Your Full Name</label>
+      <input id="userName" autocomplete="name" placeholder="Enter your name as it should appear in account notes">
+      <div class="user-identity-help">Your name will be recorded as the source of notes and actions you save during this training session.</div>
+    </div>
+    <p class="muted">Enter at least one patient identifier to search. Partial information is accepted. Suggested patient matches will display so you can verify the DOB, MRN, and guarantor number before opening the account.</p>
+    <div class="grid2">
+      <div><label>Patient Name</label><input id="loginName" placeholder="e.g., TORRES, MICHAEL ANDREW"></div>
+      <div><label>Date of Birth</label><input id="loginDob" placeholder="MM/DD/YYYY"></div>
+      <div><label>Guarantor Number</label><input id="loginGuar" placeholder="GRT-XXXXXX"></div>
+      <div><label>MRN</label><input id="loginMrn" placeholder="MRN-XXXXXX"></div>
+      <div><label>Statement Number</label><input id="loginStmt" placeholder="STM-XXXXXX"></div>
+    </div>
+    <div class="actions"><button class="primary" onclick="findAccount()">Search Account</button></div>
+    <div id="loginMsg" class="notice hidden"></div>
+    <div id="searchResults" class="search-results hidden"></div>
+  </div>
+</div>
+
+<div id="appView" class="container hidden">
+  <aside class="sidebar">
+    <button class="active" onclick="showTab('overview',this)">Account Overview</button>
+    <button onclick="showTab('demographics',this)">Patient Demographics</button>
+    <button onclick="showTab('insurance',this)">Insurance</button>
+    <button onclick="showTab('billing',this)">Billing History</button>
+    <button onclick="showTab('letters',this)">Patient Letters</button>
+    <button onclick="showTab('eob',this)">Explanation of Benefits</button>
+    <button onclick="showTab('transactions',this)">Financial Transactions</button>
+    <button onclick="showTab('statements',this)">Statement History</button>
+    <button onclick="showTab('notes',this)">Account Notes</button>
+    <button onclick="showTab('payment',this)">Take Payment</button>
+    <button onclick="showTab('escalation',this)">Internal Review</button>
+    <button onclick="generateTransactionReport()">Generate Submission PDF</button><button onclick="logout()">Exit Account</button>
+  </aside>
+  <main class="main">
+    <div id="accountBanner" class="card"></div>
+    <section id="overview" class="tab"></section>
+    <section id="demographics" class="tab hidden"></section>
+    <section id="insurance" class="tab hidden"></section>
+    <section id="billing" class="tab hidden"></section>
+    <section id="letters" class="tab hidden"></section>
+    <section id="eob" class="tab hidden"></section>
+    <section id="transactions" class="tab hidden"></section>
+    <section id="statements" class="tab hidden"></section>
+    <section id="notes" class="tab hidden"></section>
+    <section id="payment" class="tab hidden"></section>
+    <section id="escalation" class="tab hidden"></section>
+  </main>
+</div>
+
+<div id="modal" class="modal hidden"><div class="modalbox"><button class="modal-close" type="button" aria-label="Close window" title="Close" onclick="closeModal()">&times;</button><div id="modalContent"></div></div></div>
+
+<script>
+const accounts = [{"id":"ACC-1001","name":"TORRES, MICHAEL ANDREW","dob":"11/15/1985","mrn":"MRN-774512","guarantor":"GRT-774512","statement":"STM-100145","phone":"(555) 713-2298","email":"michael.torres@example.com","address":"1458 Pinecrest Ave, Phoenix, AZ 85016","insurance":"Aetna","member":"AET99823411","group":"GRP-44552","plan":"PPO","provider":"Dr. Lisa Nguyen","facility":"Desert Valley Clinic","claim":"CLM-884522","dos":"03/05/2026","balance":140.0,"status":"Balance Due","eob":{"billed":950,"allowed":700,"paid":560,"patient":140,"writeoff":250},"lines":[["99213","Office Visit",250,180,140,40,"PR-3 Copay"],["80050","General Health Panel",400,300,240,60,"PR-2 Coinsurance"],["36415","Venipuncture",100,70,56,14,"PR-2 Coinsurance"],["Facility Fee","Clinic Fee",200,150,124,26,"PR-2 Coinsurance"]],"transactions":[["03/18/2026","Insurance Payment",560,"Posted","Aetna EFT"],["03/18/2026","Contractual Adjustment",-250,"Posted","CO-45 Contractual obligation"]],"notes":[["03/18/2026 10:22 AM","System","Insurance payment and contractual adjustment posted. Patient responsibility: $140.00."],["03/25/2026 2:10 PM","Statement Services","Initial statement generated and mailed."]]},{"id":"ACC-1002","name":"LEE, SAMANTHA ROSE","dob":"09/27/1993","mrn":"MRN-556781","guarantor":"GRT-556781","statement":"STM-100216","phone":"(555) 662-9182","email":"samantha.lee@example.com","address":"998 Harbor St, San Diego, CA 92101","insurance":"Blue Cross Blue Shield","member":"BCBS33221144","group":"GRP-77221","plan":"PPO","provider":"Dr. Aaron Kim","facility":"Coastal Medical Group","claim":"CLM-771233","dos":"02/18/2026","balance":180.0,"status":"Balance Due","eob":{"billed":1200,"allowed":900,"paid":720,"patient":180,"writeoff":300},"lines":[["99214","Office Visit",350,250,200,50,"PR-3 Copay"],["93000","ECG",250,200,160,40,"PR-2 Coinsurance"],["71020","Chest X-Ray",300,250,200,50,"PR-2 Coinsurance"],["Facility Fee","Diagnostic Services",300,200,160,40,"PR-2 Coinsurance"]],"transactions":[["03/01/2026","Insurance Payment",720,"Posted","BCBS ERA"],["03/01/2026","Adjustment",-300,"Posted","Contractual write-off"]],"notes":[["03/01/2026 9:15 AM","System","Claim finalized. Patient responsibility assigned per EOB."],["03/08/2026 4:05 PM","Statement Services","Statement delivered by email."]]},{"id":"ACC-1003","name":"RIVERA, DANIEL JOSE","dob":"01/08/1978","mrn":"MRN-889122","guarantor":"GRT-889122","statement":"STM-100337","phone":"(555) 334-5567","email":"daniel.rivera@example.com","address":"221 Sunset Dr, Dallas, TX 75201","insurance":"UnitedHealthcare","member":"UHC77889900","group":"GRP-88219","plan":"HDHP","provider":"Dr. Emily Carter","facility":"Lone Star Medical Center","claim":"CLM-665544","dos":"03/10/2026","balance":400.0,"status":"Balance Due","eob":{"billed":1500,"allowed":1000,"paid":600,"patient":400,"writeoff":500},"lines":[["99215","Office Visit",400,300,150,150,"PR-1 Deductible"],["80061","Lipid Panel",300,200,160,40,"PR-2 Coinsurance"],["84443","Thyroid Test",300,200,160,40,"PR-2 Coinsurance"],["Facility Fee","Outpatient Charge",500,300,130,170,"PR-1 Deductible"]],"transactions":[["03/20/2026","Insurance Payment",600,"Posted","UHC ERA"],["03/20/2026","Contractual Adjustment",-500,"Posted","CO-45"]],"notes":[["03/20/2026 11:40 AM","System","Deductible and coinsurance applied by payer."],["04/02/2026 1:30 PM","Patient Services","Patient requested itemized statement; sent by email."]]},{"id":"ACC-1004","name":"MARTINEZ, OLIVIA MARIE","dob":"04/12/1988","mrn":"MRN-221133","guarantor":"GRT-221133","statement":"STM-100458","phone":"(555) 778-4432","email":"olivia.martinez@example.com","address":"554 Elm St, Miami, FL 33101","insurance":"Humana","member":"HUM44332211","group":"GRP-99113","plan":"HMO","provider":"Dr. Kevin Brooks","facility":"Sunshine Health Clinic","claim":"CLM-992211","dos":"02/28/2026","balance":150.0,"status":"Partial Payment Made","eob":{"billed":1300,"allowed":950,"paid":650,"patient":300,"writeoff":350},"lines":[["99214","Office Visit",300,220,120,100,"PR-1 Deductible"],["87086","Urine Culture",200,150,120,30,"PR-2 Coinsurance"],["81001","Urinalysis",200,150,120,30,"PR-2 Coinsurance"],["Facility Fee","Lab Services",600,430,290,140,"PR-3 Copay"]],"transactions":[["03/12/2026","Insurance Payment",650,"Posted","Humana ERA"],["03/12/2026","Adjustment",-350,"Posted","Contractual"],["04/01/2026","Patient Payment",150,"Posted","Visa ending 4242"]],"notes":[["04/01/2026 3:18 PM","Patient Services","Patient paid $150.00 by phone. Confirmation PMT-482193. Remaining balance $150.00."],["04/15/2026 8:50 AM","Statement Services","Updated statement sent by text link."]]},{"id":"ACC-1005","name":"COOPER, BRIAN JAMES","dob":"07/19/1975","mrn":"MRN-667890","guarantor":"GRT-667890","statement":"STM-100579","phone":"(555) 921-7744","email":"brian.cooper@example.com","address":"320 Ridge Rd, Denver, CO 80203","insurance":"Kaiser Permanente","member":"KP99887766","group":"GRP-66789","plan":"HMO","provider":"Dr. Rachel Adams","facility":"Mountain View Outpatient Center","claim":"CLM-554433","dos":"03/15/2026","balance":240.0,"status":"Balance Due","eob":{"billed":1800,"allowed":1200,"paid":960,"patient":240,"writeoff":600},"lines":[["99214","Office Visit",400,300,240,60,"PR-3 Copay"],["72148","MRI Lumbar Spine",900,600,480,120,"PR-2 Coinsurance"],["96372","Injection",200,150,120,30,"PR-2 Coinsurance"],["Facility Fee","Imaging Center Fee",300,150,120,30,"PR-2 Coinsurance"]],"transactions":[["03/28/2026","Insurance Payment",960,"Posted","Kaiser ERA"],["03/28/2026","Adjustment",-600,"Posted","Contractual"]],"notes":[["03/28/2026 10:05 AM","System","Claim processed. Patient responsibility $240.00."],["04/08/2026 5:12 PM","Patient Services","Patient asked about payment plan options; no plan established."]]},{"id":"ACC-1006","name":"MILES, REBECCA ANN","dob":"03/11/1984","mrn":"MRN-445566","guarantor":"GRT-445566","statement":"STM-100681","phone":"(555) 778-9912","email":"rebecca.miles@example.com","address":"144 Cedar Lane, Houston, TX 77002","insurance":"UnitedHealthcare","member":"UHC55443322","group":"GRP-65422","plan":"PPO","provider":"Dr. Hannah Lewis","facility":"Memorial Outpatient Center","claim":"CLM-883311","dos":"03/14/2026","balance":220.0,"status":"Balance Due / Partial Denial","eob":{"billed":1400,"allowed":950,"paid":730,"patient":220,"writeoff":450},"lines":[["99214","Office Visit",350,250,200,50,"PR-3 Copay"],["80053","Comprehensive Metabolic Panel",250,180,144,36,"PR-2 Coinsurance"],["71020","Chest X-Ray",300,0,0,0,"CO-50 Non-covered service"],["Facility Fee","Outpatient Services",500,520,386,134,"PR-1 Deductible"]],"transactions":[["03/29/2026","Insurance Payment",730,"Posted","UHC ERA"],["03/29/2026","Adjustment",-450,"Posted","Contractual/denial adjustment"]],"notes":[["03/29/2026 2:40 PM","System","Chest X-ray denied CO-50. Denied amount not transferred to patient."],["04/04/2026 11:05 AM","Patient Services","Patient advised balance is deductible/copay only; denial under provider review."]]},{"id":"ACC-1007","name":"COLLINS, ANDREW PAUL","dob":"07/26/1979","mrn":"MRN-778211","guarantor":"GRT-778211","statement":"STM-100792","phone":"(555) 226-1188","email":"andrew.collins@example.com","address":"882 River Rd, Nashville, TN 37201","insurance":"Cigna","member":"CIG77884411","group":"GRP-77884","plan":"PPO","provider":"Dr. Melissa Grant","facility":"Riverbend Medical Clinic","claim":"CLM-441122","dos":"02/27/2026","balance":310.0,"status":"Balance Due / Denial Review","eob":{"billed":1650,"allowed":1050,"paid":740,"patient":310,"writeoff":600},"lines":[["99215","Office Visit",400,300,240,60,"PR-3 Copay"],["93000","ECG",250,180,144,36,"PR-2 Coinsurance"],["97110","Physical Therapy",400,0,0,0,"CO-16 Missing information"],["Facility Fee","Therapy Services",600,570,356,214,"PR-1 Deductible"]],"transactions":[["03/13/2026","Insurance Payment",740,"Posted","Cigna ERA"],["03/13/2026","Adjustment",-600,"Posted","Contractual/denial"]],"notes":[["03/13/2026 1:45 PM","System","PT line denied CO-16. Coding team notified."],["03/18/2026 9:25 AM","Billing Review","Missing therapy plan of care requested from clinic. Patient billing hold applied to denied line."]]},{"id":"ACC-1008","name":"BENNETT, JASON MICHAEL","dob":"01/17/1975","mrn":"MRN-114477","guarantor":"GRT-114477","statement":"STM-100913","phone":"(555) 339-8821","email":"jason.bennett@example.com","address":"554 Highland Dr, Charlotte, NC 28202","insurance":"Aetna","member":"AET22335577","group":"GRP-22335","plan":"PPO","provider":"Dr. Nicole Reed","facility":"Highland Family Clinic","claim":"CLM-889955","dos":"03/19/2026","balance":420.0,"status":"Balance Due / Authorization Denial","eob":{"billed":1700,"allowed":1100,"paid":680,"patient":420,"writeoff":600},"lines":[["99214","Office Visit",350,250,150,100,"PR-1 Deductible"],["80061","Lipid Panel",250,180,144,36,"PR-2 Coinsurance"],["72148","MRI Lumbar Spine",700,0,0,0,"CO-197 Authorization required"],["Facility Fee","Imaging Facility Charge",400,670,386,284,"PR-1 Deductible"]],"transactions":[["04/01/2026","Insurance Payment",680,"Posted","Aetna ERA"],["04/01/2026","Adjustment",-600,"Posted","Contractual/denial"]],"notes":[["04/01/2026 4:00 PM","System","MRI denied for missing authorization; denial not patient responsibility."],["04/07/2026 10:20 AM","Authorization Team","Retro-authorization request submitted. Do not bill denied MRI line while under review."]]},{"id":"ACC-1009","name":"TURNER, MELISSA GRACE","dob":"06/29/1988","mrn":"MRN-663311","guarantor":"GRT-663311","statement":"STM-101024","phone":"(555) 880-4477","email":"melissa.turner@example.com","address":"999 Palm St, San Antonio, TX 78205","insurance":"Humana","member":"HUM11442255","group":"GRP-11442","plan":"HMO","provider":"Dr. Robert Kim","facility":"Southside Medical Group","claim":"CLM-774488","dos":"03/11/2026","balance":0.0,"status":"Do Not Bill - Reprocessing","eob":{"billed":1350,"allowed":920,"paid":660,"patient":260,"writeoff":430},"lines":[["99214","Office Visit",300,220,176,44,"PR-3 Copay"],["87086","Urine Culture",200,150,120,30,"PR-2 Coinsurance"],["96372","Injection Administration",250,0,0,0,"CO-151 Information missing"],["Facility Fee","Outpatient Facility Charge",600,550,364,186,"PR-1 Deductible"]],"transactions":[["03/25/2026","Insurance Payment",660,"Posted","Humana ERA"],["03/25/2026","Adjustment",-430,"Posted","Contractual"],["04/05/2026","Patient Balance Reversal",-260,"Posted","Insurance requested reprocessing"]],"notes":[["04/05/2026 9:12 AM","Insurance Call","Humana representative advised claim is being reprocessed. Requested patient billing stop. Reference HUM-RP-7741."],["04/05/2026 9:20 AM","Patient Services","Patient balance reversed and billing hold applied. Do not collect until new EOB posts."]]},{"id":"ACC-1010","name":"HALL, CHRISTINA MARIE","dob":"10/08/1992","mrn":"MRN-991100","guarantor":"GRT-991100","statement":"STM-101135","phone":"(555) 661-7744","email":"christina.hall@example.com","address":"223 Magnolia Ave, Orlando, FL 32801","insurance":"Blue Cross Blue Shield","member":"BCBS88776655","group":"GRP-88776","plan":"PPO","provider":"Dr. Kevin Morris","facility":"Central Florida Specialty Center","claim":"CLM-552244","dos":"03/03/2026","balance":0.0,"status":"No-Show Charge Under Review","eob":{"billed":150,"allowed":0,"paid":0,"patient":150,"writeoff":0},"lines":[["NO-SHOW","Missed Appointment Fee",150,0,0,150,"Patient charge - no claim adjudication"]],"transactions":[["03/03/2026","No-Show Charge",150,"Posted","Appointment marked no-show"],["03/10/2026","Billing Hold",0,"Posted","Dispute review"]],"notes":[["03/03/2026 3:30 PM","Scheduling","Patient marked no-show for 2:00 PM appointment."],["03/10/2026 11:18 AM","Patient Services","Patient disputed no-show and stated cancellation was made by phone. Escalated to clinic manager. Balance placed on hold."]]},{"id":"ACC-1011","name":"MORGAN, ASHLEY NICOLE","dob":"12/02/1990","mrn":"MRN-335902","guarantor":"GRT-335902","statement":"STM-101246","phone":"(555) 417-2268","email":"ashley.morgan@example.com","address":"715 Willow Bend, Columbus, OH 43215","insurance":"Anthem Blue Cross Blue Shield","member":"ANT55119420","group":"GRP-19420","plan":"PPO","provider":"Dr. Simone Wright","facility":"Riverside Specialty Clinic","claim":"CLM-615740","dos":"04/02/2026","balance":415.0,"status":"Balance Due - Plan Exclusion","eob":{"billed":900.0,"allowed":575.0,"paid":160.0,"patient":415.0,"writeoff":325.0},"lines":[["99213","Office Visit",300,200,160,40,"PR-3 Copayment"],["97014","Electrical Stimulation",350,300,0,300,"PR-204 Service excluded by plan"],["L3020","Orthotic Supply",250,75,0,75,"PR-204 Service excluded by plan"]],"transactions":[],"notes":[]},{"id":"ACC-1012","name":"ELLIS, ROBERT JAMES","dob":"05/21/1954","mrn":"MRN-704418","guarantor":"GRT-704418","statement":"STM-101357","phone":"(555) 903-4471","email":"robert.ellis@example.com","address":"440 Lakeview Terrace, Tampa, FL 33602","insurance":"Medicare / Cigna","member":"1EG4TE5MK72","group":"CIG-88417","plan":"Medicare Primary + PPO Secondary","provider":"Dr. Elena Foster","facility":"Bayview Medical Pavilion","claim":"CLM-702219","dos":"03/26/2026","balance":1200.0,"status":"COB Billing Order Review - Billing Hold","eob":{"billed":1200,"allowed":0,"paid":0,"patient":1200,"writeoff":0},"lines":[["99215","Office Visit",400,0,0,400,"CO-22 Possible coverage by another payer"],["93000","Electrocardiogram",300,0,0,300,"CO-22 Possible coverage by another payer"],["71046","Chest X-Ray",500,0,0,500,"CO-22 Possible coverage by another payer"]],"transactions":[],"notes":[]},{"id":"ACC-1013","name":"PARKER, LINDA MAY","dob":"08/30/1967","mrn":"MRN-508631","guarantor":"GRT-508631","statement":"STM-101468","phone":"(555) 231-8064","email":"linda.parker@example.com","address":"1840 Oak Crossing, Richmond, VA 23219","insurance":"UnitedHealthcare","member":"UHC77126009","group":"GRP-26009","plan":"PPO","provider":"Dr. Marcus Hill","facility":"Capital Region Outpatient Center","claim":"CLM-508631","dos":"04/08/2026","balance":600.0,"status":"Balance Due","eob":{"billed":2100,"allowed":1500,"paid":900,"patient":600,"writeoff":600},"lines":[["99215","Office Visit",450,350,200,150,"PR-1 Deductible"],["74177","CT Abdomen/Pelvis",1100,800,500,300,"PR-1 Deductible"],["Facility Fee","Outpatient Imaging",550,350,200,150,"PR-2 Coinsurance"]],"transactions":[],"notes":[]},{"id":"ACC-1014","name":"GREEN, MARCUS DAVID","dob":"02/14/1982","mrn":"MRN-882041","guarantor":"GRT-882041","statement":"STM-101579","phone":"(555) 684-2190","email":"marcus.green@example.com","address":"905 Garden Way, Portland, OR 97205","insurance":"Aetna","member":"AET66741020","group":"GRP-41020","plan":"PPO","provider":"Dr. Naomi Bell","facility":"Northwest Ambulatory Center","claim":"CLM-882041","dos":"04/11/2026","balance":0.0,"status":"Do Not Bill - Patient Information Requested","eob":{"billed":2200,"allowed":0,"paid":0,"patient":0,"writeoff":0},"lines":[["99214","Office Visit",400,0,0,0,"Claim pending member questionnaire"],["73564","Knee X-Ray",600,0,0,0,"Claim pending accident details"],["73721","MRI Lower Extremity",1200,0,0,0,"Claim pending accident details"]],"transactions":[],"notes":[]},{"id":"ACC-1015","name":"HALL, CHRISTINA MARIE","dob":"03/22/1986","mrn":"MRN-462781","guarantor":"GRT-462781","statement":"STM-101680","phone":"(555) 284-9017","email":"christina.hall86@example.com","address":"641 Cypress Grove, Jacksonville, FL 32202","insurance":"Cigna","member":"CIG46278190","group":"GRP-46278","plan":"PPO","provider":"Dr. Lauren Price","facility":"North River Primary Care","claim":"CLM-462781","dos":"04/15/2026","balance":95.0,"status":"Balance Due","eob":{"billed":520,"allowed":380,"paid":285,"patient":95,"writeoff":140},"lines":[["99213","Office Visit",260,190,143,47,"PR-3 Copayment"],["80048","Basic Metabolic Panel",180,130,98,32,"PR-2 Coinsurance"],["36415","Venipuncture",80,60,44,16,"PR-2 Coinsurance"]],"transactions":[],"notes":[]},{"id":"ACC-1016","name":"LEE, SAMANTHA ROSE","dob":"02/14/1987","mrn":"MRN-830514","guarantor":"GRT-830514","statement":"STM-101791","phone":"(555) 775-4130","email":"samantha.lee87@example.com","address":"2801 Meadow Ridge, Sacramento, CA 95814","insurance":"Aetna","member":"AET83051422","group":"GRP-83051","plan":"HMO","provider":"Dr. Peter Wallace","facility":"Capitol Family Medicine","claim":"CLM-830514","dos":"04/18/2026","balance":275.0,"status":"Balance Due","eob":{"billed":1250,"allowed":900,"paid":625,"patient":275,"writeoff":350},"lines":[["99214","Office Visit",350,250,175,75,"PR-1 Deductible"],["71046","Chest X-Ray",500,360,250,110,"PR-2 Coinsurance"],["Facility Fee","Outpatient Diagnostic Fee",400,290,200,90,"PR-1 Deductible"]],"transactions":[],"notes":[]}];
+accounts.push({"id":"ACC-1017","name":"WILSON, ETHAN JAMES","dob":"09/14/2014","mrn":"MRN-294817","guarantor":"GRT-651204","statement":"STM-101902","phone":"(555) 412-9076","email":"sarah.wilson@example.com","address":"742 Brookfield Lane, Raleigh, NC 27601","insurance":"Blue Cross Blue Shield","member":"BCBS29481701","group":"GRP-29481","plan":"PPO Dependent","provider":"Dr. Maya Patel","facility":"North Carolina Children's Clinic","claim":"CLM-294817","dos":"05/02/2026","balance":85.0,"status":"Balance Due - Copay Paid at Visit","eob":{"billed":780,"allowed":540,"paid":425,"patient":115,"writeoff":240},"lines":[["99213","Pediatric Office Visit",280,200,170,30,"PR-3 Copayment"],["87880","Rapid Strep Test",180,130,104,26,"PR-2 Coinsurance"],["87081","Throat Culture",220,150,120,30,"PR-2 Coinsurance"],["Facility Fee","Pediatric Clinic Services",100,60,31,29,"PR-2 Coinsurance"]],"transactions":[],"notes":[],"isMinor":true,"guarantorName":"WILSON, SARAH ELIZABETH","guarantorDob":"06/23/1986","guarantorPhone":"(555) 412-9076","guarantorRelationship":"Mother","patientRelationship":"Child / Dependent"},
+{"id":"ACC-1018","name":"CARTER, EMILY GRACE","dob":"04/21/1991","mrn":"MRN-740218","guarantor":"GRT-740219","statement":"STM-102013","phone":"(555) 638-1154","email":"emily.carter@example.com","address":"1935 Lakeshore Drive, Chicago, IL 60601","insurance":"UnitedHealthcare","member":"UHC74021844","group":"GRP-74021","plan":"PPO Spouse","provider":"Dr. Alicia Monroe","facility":"Lakeshore Women's Health Center","claim":"CLM-740218","dos":"05/06/2026","balance":140.0,"status":"Balance Due - Copay Paid at Visit","eob":{"billed":1150,"allowed":800,"paid":620,"patient":180,"writeoff":350},"lines":[["99395","Preventive Medicine Visit",400,300,240,60,"PR-3 Copayment"],["76830","Pelvic Ultrasound",500,350,280,70,"PR-2 Coinsurance"],["Facility Fee","Outpatient Women's Health",250,150,100,50,"PR-2 Coinsurance"]],"transactions":[],"notes":[],"isMinor":false,"guarantorName":"CARTER, JONATHAN MICHAEL","guarantorDob":"08/05/1989","guarantorPhone":"(555) 638-1199","guarantorRelationship":"Spouse","patientRelationship":"Spouse / Dependent"});
+
+accounts.push({"id":"ACC-1019","name":"HARRIS, NATALIE JOAN","dob":"12/04/1976","mrn":"MRN-518902","guarantor":"GRT-518902","statement":"STM-102124","phone":"(555) 507-2841","email":"natalie.harris@example.com","address":"418 Willow Crest Drive, Columbus, OH 43215","insurance":"Anthem Blue Cross","member":"ABC51890277","group":"GRP-51890","plan":"PPO","provider":"Dr. Thomas Reed","facility":"Lakeside Diagnostic Center","claim":"CLM-518902","dos":"05/09/2026","balance":0.0,"status":"Insurance Balance - Late Charge Denial Review","eob":{"billed":900,"allowed":650,"paid":520,"patient":130,"writeoff":250},"lines":[["99214","Office Visit",350,250,200,50,"PR-3 Copayment"],["93000","Electrocardiogram",300,220,176,44,"PR-2 Coinsurance"],["Facility Fee","Outpatient Diagnostic Services",250,180,144,36,"PR-2 Coinsurance"]],"transactions":[],"notes":[]});
+
+function normalizeEobAdjudication(account){
+  const originalPatient=Number(account.eob?.patient||0);
+  account.lines=(account.lines||[]).map(raw=>{
+    const line=[...raw];
+    const reason=String(line[6]||'').toUpperCase();
+    const isCoDenial=/^CO-\d+/.test(reason);
+    const isPlanExclusion=/^PR-(96|204)\b/.test(reason)||/SERVICE EXCLUDED BY PLAN|NOT COVERED BY (THE )?PLAN/.test(reason);
+    if(isCoDenial){
+      line[4]=0;
+      line[5]=0;
+    }else if(isPlanExclusion){
+      line[4]=0;
+      line[5]=Number(line[3]||line[2]||0);
+    }
+    return line;
+  });
+  const billed=account.lines.reduce((sum,line)=>sum+Number(line[2]||0),0);
+  const allowed=account.lines.reduce((sum,line)=>sum+Number(line[3]||0),0);
+  const paid=account.lines.reduce((sum,line)=>sum+Number(line[4]||0),0);
+  const patient=account.lines.reduce((sum,line)=>sum+Number(line[5]||0),0);
+  account.eob={...(account.eob||{}),billed,allowed,paid,patient,writeoff:Math.max(0,billed-allowed)};
+  if(Math.abs(Number(account.balance||0)-originalPatient)<0.005){
+    account.balance=patient;
+  }
+  return account;
+}
+accounts.forEach(normalizeEobAdjudication);
+
+accounts.forEach((a,i)=>{
+  const outcomes=['approved','issuer_decline','approved','expired_card','approved','insufficient_funds','approved','processor_unavailable','approved','issuer_decline','approved','approved','insufficient_funds','processor_unavailable','approved','issuer_decline','approved','approved','approved'];
+  a.paymentScenario = outcomes[i % outcomes.length];
+  a.paymentPlanEligible = a.balance >= 150;
+  a.discountEligible = a.balance >= 400 && !a.status.includes('Billing Hold') && !a.status.includes('Do Not Bill');
+  a.discountRate = a.discountEligible ? 0.15 : 0;
+});
+let current=null;
+let activeUserName='';
+
+function cleanUserName(value){return String(value||'').trim().replace(/\s+/g,' ').replace(/[<>]/g,'')}
+function noteAuthor(){return activeUserName||'Training User'}
+function setActiveUserName(value){
+  activeUserName=cleanUserName(value);
+  try{if(activeUserName)sessionStorage.setItem('pfsTrainingUserName',activeUserName);else sessionStorage.removeItem('pfsTrainingUserName')}catch(error){}
+  const badge=document.getElementById('activeUserBadge');
+  if(badge){
+    badge.textContent=activeUserName?`User: ${activeUserName}`:'';
+    badge.classList.toggle('hidden',!activeUserName);
+  }
+  const input=document.getElementById('userName');
+  if(input&&activeUserName&&input.value!==activeUserName)input.value=activeUserName;
+}
+function restoreActiveUserName(){
+  try{const saved=sessionStorage.getItem('pfsTrainingUserName');if(saved)setActiveUserName(saved)}catch(error){}
+}
+
+function atNoon(value=new Date()){
+  const d=new Date(value);
+  d.setHours(12,0,0,0);
+  return d;
+}
+function addDays(value,days){const d=new Date(value);d.setDate(d.getDate()+days);return d}
+function addBusinessDays(value,days){
+  const d=new Date(value);let moved=0;
+  while(moved<days){d.setDate(d.getDate()+1);if(d.getDay()!==0&&d.getDay()!==6)moved++}
+  return d;
+}
+function fmtDate(value){return new Intl.DateTimeFormat('en-US',{month:'2-digit',day:'2-digit',year:'numeric'}).format(value)}
+function calculateAge(dob,reference=new Date()){
+  const parts=String(dob||'').split('/').map(Number);
+  if(parts.length!==3||parts.some(Number.isNaN))return null;
+  const [month,day,year]=parts;
+  let age=reference.getFullYear()-year;
+  const beforeBirthday=(reference.getMonth()+1<month)||((reference.getMonth()+1===month)&&reference.getDate()<day);
+  if(beforeBirthday)age--;
+  return age;
+}
+function fmtDateTime(value,time='9:00 AM'){return `${fmtDate(value)} ${time}`}
+function ackNumber(prefix,account,sequence){
+  const digits=account.id.replace(/\D/g,'');
+  const now=new Date();
+  const stamp=`${now.getFullYear()}${String(now.getMonth()+1).padStart(2,'0')}${String(now.getDate()).padStart(2,'0')}`;
+  return `${prefix}-${digits}-${stamp}-${sequence}`;
+}
+function buildRemittanceDetails(account,adjudicationDate,eraReceipt,variation){
+  const paid=Number(account.eob?.paid||0);
+  const digits=account.id.replace(/\D/g,'').padStart(6,'0');
+  const dateStamp=`${adjudicationDate.getFullYear()}${String(adjudicationDate.getMonth()+1).padStart(2,'0')}${String(adjudicationDate.getDate()).padStart(2,'0')}`;
+  const payerClaimControl=`PCCN-${digits}-${dateStamp.slice(2)}`;
+  if(paid<=0){
+    return {
+      issued:false,
+      method:'No payment issued',
+      paymentDate:'N/A',
+      amount:0,
+      paymentNumber:'N/A',
+      traceNumber:'N/A',
+      remittanceAdvice:eraReceipt,
+      payerClaimControl,
+      payee:account.facility,
+      depositStatus:'No payment'
+    };
+  }
+  const useCheck=variation%4===0;
+  const paymentNumber=useCheck?`CHK-${dateStamp.slice(2)}${digits.slice(-4)}`:`EFT-${dateStamp.slice(2)}-${digits.slice(-4)}`;
+  const traceNumber=useCheck?'N/A':`${dateStamp}${digits.slice(-6)}${String(variation).padStart(2,'0')}`;
+  return {
+    issued:true,
+    method:useCheck?'Paper check':'Electronic funds transfer (EFT)',
+    paymentDate:fmtDate(adjudicationDate),
+    amount:paid,
+    paymentNumber,
+    traceNumber,
+    remittanceAdvice:eraReceipt,
+    payerClaimControl,
+    payee:account.facility,
+    depositStatus:'Posted to patient accounting'
+  };
+}
+function navButton(id){return [...document.querySelectorAll('.sidebar button')].find(b=>(b.getAttribute('onclick')||'').includes(`showTab('${id}'`))}
+
+function buildRuntimeAccount(base){
+  const a=JSON.parse(JSON.stringify(base));
+  const anchor=atNoon(new Date());
+  const variation=parseInt(a.id.slice(-1),10)||1;
+  const dosDate=addDays(anchor,-(48+(variation%4)*6));
+  const chargeDate=addDays(dosDate,1);
+  const billDate=addDays(dosDate,4);
+  const clearingDate=billDate;
+  const payerAckDate=addDays(billDate,1);
+  const adjudicationDate=addDays(anchor,-(25+(variation%3)*3));
+  const firstStatementDate=addDays(anchor,-16);
+  const latestStatementDate=addDays(anchor,-4);
+  const initialAck=ackNumber('CH-999',a,'01');
+  const payerAck=ackNumber('277CA',a,'02');
+  const eraReceipt=ackNumber('ERA',a,'03');
+
+  a.accessDate=fmtDate(anchor);
+  a.dos=fmtDate(dosDate);
+  a.eobProcessedDate=fmtDate(adjudicationDate);
+  a.remittance=buildRemittanceDetails(a,adjudicationDate,eraReceipt,variation);
+  a.clearinghouseStatus='Accepted';
+  a.latestClearinghouseReceipt=initialAck;
+  a.latestBilledDate=fmtDateTime(billDate,'6:42 PM');
+  a.coverages=[{priority:'Primary',payer:a.insurance,member:a.member,group:a.group,plan:a.plan,effective:'Active on DOS',status:'Active'}];
+  a.patientLetters=[];
+  a.coverageRequests=[];
+  a.age=calculateAge(a.dob,anchor);
+  a.isMinor=typeof a.isMinor==='boolean'?a.isMinor:(Number.isFinite(a.age)&&a.age<18);
+  a.patientRelationship=a.patientRelationship||(a.isMinor?'Child / Dependent':'Self');
+  a.guarantorName=a.guarantorName||a.name;
+  a.guarantorDob=a.guarantorDob||a.dob;
+  a.guarantorPhone=a.guarantorPhone||a.phone;
+  a.guarantorRelationship=a.guarantorRelationship||(a.isMinor?'Parent / Guardian':'Self');
+  a.posCopay=null;
+  a.reminderCallHistory=[];
+  a.reminderCallCount=0;
+  a.insuranceBalance=Number(a.insuranceBalance||0);
+  a.insuranceBalanceStatus=a.insuranceBalanceStatus||'';
+  a.insuranceBalanceDetail=a.insuranceBalanceDetail||'';
+  a.insuranceBalanceOwner=a.insuranceBalanceOwner||'';
+  a.insuranceBalanceTAT=a.insuranceBalanceTAT||'';
+  a.insuranceFollowupDate=a.insuranceFollowupDate||'';
+
+  // Expected reimbursement remains in Insurance AR when a CO-denied line is unresolved.
+  // These values represent the anticipated payer amount, not the full billed charge.
+  const deniedExpectedByAccount={
+    'ACC-1006':{'71020':210},
+    'ACC-1007':{'97110':280},
+    'ACC-1008':{'72148':500},
+    'ACC-1009':{'96372':175},
+    'ACC-1012':{'99215':300,'93000':225,'71046':375}
+  };
+  const deniedExpectedMap=deniedExpectedByAccount[a.id]||{};
+  a.deniedInsuranceLines=(a.lines||[]).filter(line=>/^CO-/.test(String(line[6]||''))).map(line=>({
+    code:String(line[0]),
+    description:String(line[1]),
+    expected:Number(deniedExpectedMap[String(line[0])]||0)
+  })).filter(line=>line.expected>0);
+  const deniedExpectedTotal=a.deniedInsuranceLines.reduce((sum,line)=>sum+line.expected,0);
+  if(deniedExpectedTotal>0){
+    a.insuranceBalance=deniedExpectedTotal;
+    a.insuranceBalanceStatus='Pending payer resolution';
+    a.insuranceBalanceDetail=`Expected reimbursement for ${a.deniedInsuranceLines.length} unresolved claim line${a.deniedInsuranceLines.length===1?'':'s'} remains assigned to insurance.`;
+    a.insuranceBalanceOwner='Denial Management Team';
+    a.insuranceBalanceTAT='Review the latest account notes and billing history for the applicable turnaround time.';
+    a.insuranceFollowupDate=fmtDate(addBusinessDays(anchor,10));
+  }
+  a.statementMode='patient';
+  a.reversalNotice=null;
+
+  a.billingHistory=[
+    [fmtDateTime(chargeDate,'11:18 AM'),'Charges released to billing','Patient Accounting','Completed','N/A',`Charges totaling ${money(a.eob.billed)} were finalized for billing.`],
+    [fmtDateTime(billDate,'6:40 PM'),'Initial professional claim billed','Clearinghouse','Submitted',ackNumber('BATCH',a,'00'),`Claim ${a.claim} transmitted electronically.`],
+    [fmtDateTime(clearingDate,'6:42 PM'),'999 implementation acknowledgment','Clearinghouse','Accepted',initialAck,'Claim file passed clearinghouse syntax and format validation.'],
+    [fmtDateTime(payerAckDate,'8:16 AM'),'277CA claim acknowledgment',a.insurance,'Accepted',payerAck,'Payer accepted the claim into adjudication.'],
+    [fmtDateTime(adjudicationDate,'7:05 AM'),'ERA/EOB received',a.insurance,'Processed',eraReceipt,`Payer adjudication completed. Patient responsibility: ${money(a.eob.patient)}.`]
+  ];
+
+  a.transactions=[
+    [fmtDate(adjudicationDate),'Insurance Payment',a.eob.paid,'Posted',`${a.insurance} ERA ${eraReceipt}`],
+    [fmtDate(adjudicationDate),'Contractual Adjustment',-a.eob.writeoff,'Posted','CO-45 contractual obligation']
+  ];
+  if(deniedExpectedTotal>0){
+    a.transactions.push([fmtDate(adjudicationDate),'Expected Insurance Receivable',deniedExpectedTotal,'Open',`${a.deniedInsuranceLines.length} unresolved CO-denied claim line${a.deniedInsuranceLines.length===1?'':'s'} retained in Insurance AR`]);
+  }
+
+  a.statementHistory=[
+    {date:fmtDate(latestStatementDate),number:a.statement,method:'Email/Text',status:a.status.includes('Do Not Bill')||a.status.includes('Under Review')?'Suppressed - Account Hold':'Delivered',balance:a.balance},
+    {date:fmtDate(firstStatementDate),number:a.statement,method:'Mail',status:'Generated',balance:a.eob.patient}
+  ];
+
+  a.notes=[
+    [fmtDateTime(adjudicationDate,'7:10 AM'),'System',`ERA posted from ${a.insurance}. Patient responsibility calculated at ${money(a.eob.patient)}.`],
+    [fmtDateTime(firstStatementDate,'2:05 PM'),'Statement Services',`Initial patient statement ${a.statement} generated and mailed.`],
+    [fmtDateTime(latestStatementDate,'9:20 AM'),'Statement Services',`Updated statement delivered electronically. Current balance ${money(a.balance)}.`]
+  ];
+
+  const followup5=fmtDate(addBusinessDays(anchor,5));
+  const followup10=fmtDate(addBusinessDays(anchor,10));
+  const followup15=fmtDate(addBusinessDays(anchor,15));
+  const followup30=fmtDate(addBusinessDays(anchor,30));
+
+  if(a.id==='ACC-1004'){
+    const paymentDate=addDays(anchor,-9);
+    a.transactions.unshift([fmtDate(paymentDate),'Patient Payment',150,'Posted','Visa ending 4242; confirmation PMT-482193']);
+    a.notes.unshift([fmtDateTime(paymentDate,'3:18 PM'),'Collections Team',`Inbound payment of $150.00 posted successfully. Remaining balance ${money(a.balance)}. No additional research required.`]);
+  }
+
+  if(a.id==='ACC-1005'){
+    const workDate=addDays(anchor,-6);
+    a.notes.unshift([fmtDateTime(workDate,'5:12 PM'),'Collections Team',`Patient requested payment-plan information. Options reviewed; no plan established. Follow-up assigned for ${followup5}. Expected TAT: 5 business days.`]);
+  }
+
+  if(a.id==='ACC-1006'){
+    const denialDate=adjudicationDate;
+    const reviewDate=addDays(anchor,-20);
+    const appealDate=addDays(anchor,-15);
+    const appealAck=ackNumber('CH-999',a,'04');
+    const payerAppealAck=ackNumber('277CA',a,'05');
+    a.latestClearinghouseReceipt=appealAck;
+    a.latestBilledDate=fmtDateTime(appealDate,'4:18 PM');
+    a.billingHistory.push(
+      [fmtDateTime(denialDate,'7:08 AM'),'CO-50 denial posted',a.insurance,'Denied',eraReceipt,'Chest X-ray denied as non-covered; denied amount not transferred to patient.'],
+      [fmtDateTime(reviewDate,'10:25 AM'),'Denial review completed','Denial Management','Worked',ackNumber('DM',a,'06'),'Medical-necessity documentation validated and reconsideration prepared.'],
+      [fmtDateTime(appealDate,'4:18 PM'),'Reconsideration claim submitted','Clearinghouse','Accepted',appealAck,'Submission successfully accepted by clearinghouse.'],
+      [fmtDateTime(addDays(appealDate,1),'8:40 AM'),'Reconsideration acknowledgment',a.insurance,'Accepted',payerAppealAck,`Payer review pending. Expected TAT: 30 business days; follow-up ${followup30}.`]
+    );
+    a.notes.unshift(
+      [fmtDateTime(reviewDate,'10:25 AM'),'Denial Management',`Reviewed CO-50 denial. Supporting documentation confirmed and reconsideration prepared. Work item DM-${a.id.slice(-4)}. Expected TAT after payer acceptance: 30 business days.`],
+      [fmtDateTime(addDays(appealDate,1),'8:45 AM'),'Denial Management',`Reconsideration accepted by payer under acknowledgment ${payerAppealAck}. Follow-up scheduled ${followup30}. Patient billing remains limited to valid deductible/copay/coinsurance.`]
+    );
+  }
+
+  if(a.id==='ACC-1007'){
+    const denialDate=adjudicationDate;
+    const workDate=addDays(anchor,-18);
+    const correctedDate=addDays(anchor,-11);
+    const correctedAck=ackNumber('CH-999',a,'04');
+    const correctedPayerAck=ackNumber('277CA',a,'05');
+    a.latestClearinghouseReceipt=correctedAck;
+    a.latestBilledDate=fmtDateTime(correctedDate,'5:32 PM');
+    a.billingHistory.push(
+      [fmtDateTime(denialDate,'7:08 AM'),'CO-16 denial posted',a.insurance,'Denied',eraReceipt,'Physical therapy line denied for missing information.'],
+      [fmtDateTime(workDate,'9:25 AM'),'Missing documentation obtained','Denial Management','Worked',ackNumber('DM',a,'06'),'Therapy plan of care received from clinic; corrected claim prepared.'],
+      [fmtDateTime(correctedDate,'5:32 PM'),'Corrected claim billed','Clearinghouse','Accepted',correctedAck,'Corrected claim passed clearinghouse validation.'],
+      [fmtDateTime(addDays(correctedDate,1),'8:12 AM'),'Corrected claim acknowledgment',a.insurance,'Accepted',correctedPayerAck,`Payer adjudication pending. Expected TAT: 15-30 calendar days; follow-up ${followup15}.`]
+    );
+    a.notes.unshift(
+      [fmtDateTime(workDate,'9:25 AM'),'Denial Management',`CO-16 denial reviewed. Missing therapy plan of care obtained from clinic; patient billing hold retained on denied line.`],
+      [fmtDateTime(addDays(correctedDate,1),'8:18 AM'),'Denial Management',`Corrected claim successfully accepted by payer. Acknowledgment ${correctedPayerAck}. Expected TAT: 15-30 calendar days. Follow-up ${followup15}.`]
+    );
+  }
+
+  if(a.id==='ACC-1008'){
+    const workDate=addDays(anchor,-17);
+    const appealDate=addDays(anchor,-9);
+    const appealAck=ackNumber('CH-999',a,'04');
+    const payerAppealAck=ackNumber('277CA',a,'05');
+    a.latestClearinghouseReceipt=appealAck;
+    a.latestBilledDate=fmtDateTime(appealDate,'3:44 PM');
+    a.billingHistory.push(
+      [fmtDateTime(adjudicationDate,'7:08 AM'),'CO-197 denial posted',a.insurance,'Denied',eraReceipt,'MRI denied for authorization requirement; denied amount not transferred to patient.'],
+      [fmtDateTime(workDate,'1:15 PM'),'Authorization review completed','Denial Management','Worked',ackNumber('AUTH',a,'06'),'Authorization record and clinical documentation matched to the DOS.'],
+      [fmtDateTime(appealDate,'3:44 PM'),'Authorization appeal submitted','Clearinghouse','Accepted',appealAck,'Appeal transaction successfully accepted by clearinghouse.'],
+      [fmtDateTime(addDays(appealDate,1),'9:05 AM'),'Appeal acknowledgment',a.insurance,'Accepted',payerAppealAck,`Payer review pending. Expected TAT: 30-45 calendar days; follow-up ${followup30}.`]
+    );
+    a.notes.unshift(
+      [fmtDateTime(workDate,'1:15 PM'),'Denial Management',`CO-197 authorization denial worked. Authorization record and supporting clinicals attached for appeal. Patient not liable for denied MRI while review is pending.`],
+      [fmtDateTime(addDays(appealDate,1),'9:10 AM'),'Denial Management',`Appeal accepted by payer under acknowledgment ${payerAppealAck}. Expected TAT: 30-45 calendar days. Follow-up ${followup30}.`]
+    );
+  }
+
+  if(a.id==='ACC-1009'){
+    const callDate=addDays(anchor,-7);
+    const reprocessRef=ackNumber('HUM-RP',a,'04');
+    a.transactions.push([fmtDate(callDate),'Patient Balance Reversal',-a.eob.patient,'Posted','Insurance requested claim reprocessing']);
+    a.billingHistory.push(
+      [fmtDateTime(callDate,'9:12 AM'),'Payer reprocessing request','Humana','Accepted',reprocessRef,`Claim reopened by payer. Expected TAT: 30 business days; follow-up ${followup30}.`]
+    );
+    const reversalDate=addDays(callDate,1);
+    const reversalNumber=`RV-${a.statement.replace('STM-','')}`;
+    a.statementMode='reversal';
+    a.reversalNotice={
+      number:reversalNumber,
+      date:fmtDate(reversalDate),
+      originalStatement:a.statement,
+      originalAmount:Number(a.eob.patient||0),
+      reason:'The payer reopened the claim for reprocessing and the patient responsibility was reversed while the revised determination is pending.',
+      status:'No payment due while insurance reprocessing is pending'
+    };
+    a.notes=[
+      [fmtDateTime(reversalDate,'9:05 AM'),'Statement Services',`Reversal notice ${reversalNumber} sent to replace statement ${a.statement}. Patient balance is $0.00 while payer reprocessing is pending.`],
+      [fmtDateTime(callDate,'9:12 AM'),'Collections Team',`Contacted Humana regarding CO-151 processing. Payer reopened the claim for reprocessing under reference ${reprocessRef}. Expected TAT: 30 business days. Follow-up ${followup30}.`],
+      [fmtDateTime(callDate,'9:20 AM'),'Collections Team','Patient balance reversed and billing hold applied. Do not collect until a revised ERA/EOB posts.'],
+      [fmtDateTime(firstStatementDate,'2:05 PM'),'Statement Services',`Initial statement ${a.statement} generated before payer reprocessing was requested.`]
+    ];
+    a.statementHistory=[
+      {date:fmtDate(reversalDate),number:reversalNumber,method:'Email and mail',status:'Reversal Notice Delivered',balance:0,type:'Reversal Notice'},
+      {date:fmtDate(firstStatementDate),number:a.statement,method:'Mail',status:'Delivered before payer reprocessing',balance:Number(a.eob.patient||0),type:'Patient Statement'}
+    ];
+  }
+
+  if(a.id==='ACC-1010'){
+    const disputeDate=addDays(anchor,-8);
+    a.eobProcessedDate='Not applicable';
+    a.clearinghouseStatus='Not submitted';
+    a.latestClearinghouseReceipt='N/A - Administrative charge';
+    a.latestBilledDate=fmtDateTime(dosDate,'3:35 PM');
+    a.billingHistory=[
+      [fmtDateTime(dosDate,'3:30 PM'),'Appointment marked no-show','Scheduling','Completed','N/A','Missed appointment recorded by clinic.'],
+      [fmtDateTime(dosDate,'3:35 PM'),'No-show fee posted','Patient Accounting','Posted',ackNumber('NSF',a,'01'),'Administrative patient charge; no insurance claim or clearinghouse submission required.'],
+      [fmtDateTime(disputeDate,'11:18 AM'),'Charge dispute routed','Collections Team','Under Review',ackNumber('REV',a,'02'),`Clinic manager review pending. Expected TAT: 7-10 business days; follow-up ${followup10}.`]
+    ];
+    a.transactions=[
+      [fmtDate(dosDate),'No-Show Charge',150,'Posted','Appointment marked no-show'],
+      [fmtDate(disputeDate),'Billing Hold',0,'Posted','Dispute review pending']
+    ];
+    a.notes=[
+      [fmtDateTime(dosDate,'3:30 PM'),'Scheduling','Patient marked no-show for the scheduled appointment.'],
+      [fmtDateTime(disputeDate,'11:18 AM'),'Collections Team',`Patient disputed the no-show charge and reported a prior cancellation call. Routed to clinic manager under review ${ackNumber('REV',a,'02')}. Expected TAT: 7-10 business days. Follow-up ${followup10}.`],
+      [fmtDateTime(disputeDate,'11:22 AM'),'Collections Team','Balance placed on hold. Do not collect while the dispute is under review.']
+    ];
+    a.statementHistory=[
+      {date:fmtDate(disputeDate),number:a.statement,method:'System',status:'Suppressed - Dispute Hold',balance:0},
+      {date:fmtDate(firstStatementDate),number:a.statement,method:'Mail',status:'Generated',balance:150}
+    ];
+  }
+
+  if(a.id==='ACC-1002'){
+    const cobOpened=addDays(anchor,-13);
+    const letterDate=addDays(anchor,-12);
+    const secondCall=addDays(anchor,-5);
+    a.status='Secondary Insurance Pending - Billing Hold';
+    a.coverages=[
+      {priority:'Primary',payer:'Blue Cross Blue Shield',member:a.member,group:a.group,plan:'PPO',effective:'Active on DOS',status:'Processed'},
+      {priority:'Secondary',payer:'Aetna',member:'AET-20977418',group:'GRP-77418',plan:'PPO',effective:'Active on DOS',status:'COB Verification Needed'}
+    ];
+    a.billingHistory.push([fmtDateTime(cobOpened,'10:30 AM'),'Secondary billing review opened','Insurance Billing','Under Review',ackNumber('COB',a,'07'),`COB verification requested. Expected TAT after complete information: 5-7 business days; follow-up ${followup10}.`]);
+    a.patientLetters=[{date:fmtDate(letterDate),type:'Coordination of Benefits Questionnaire',requested:'Confirm all active medical coverage, policyholder information, effective dates, and which plan was primary on the date of service.',method:'Mail and secure email',status:'Awaiting Patient Response',due:fmtDate(addBusinessDays(letterDate,15)),reference:ackNumber('LTR-COB',a,'01')}];
+    a.notes.unshift(
+      [fmtDateTime(cobOpened,'10:30 AM'),'Insurance Billing',`Primary EOB received. Secondary Aetna coverage is on file, but COB verification is incomplete. Billing hold applied while information is requested.`],
+      [fmtDateTime(addDays(anchor,-9),'2:14 PM'),'Patient Services',`Patient called for the first time regarding the balance. Advised that secondary billing is pending COB information and reviewed the requested items.`],
+      [fmtDateTime(secondCall,'4:26 PM'),'Patient Services',`Patient called again and stated both plans were active on the date of service. No completed COB questionnaire was located. Patient requested a clear status update and next steps.`]
+    );
+  }
+
+  if(a.id==='ACC-1003'){
+    const priorCall=addDays(anchor,-6);
+    const letterDate=addDays(anchor,-5);
+    a.patientLetters=[{date:fmtDate(letterDate),type:'Other Insurance Information Request',requested:'Provide a copy of any secondary insurance card and the policyholder relationship so eligibility and billing order can be reviewed.',method:'Secure email',status:'Open',due:fmtDate(addBusinessDays(letterDate,10)),reference:ackNumber('LTR-OHI',a,'01')}];
+    a.notes.unshift([fmtDateTime(priorCall,'11:42 AM'),'Patient Services',`Patient called about the deductible balance and mentioned possible additional coverage but did not have the insurance card available. Other-insurance request sent. No new coverage added at that time.`]);
+  }
+
+  if(a.id==='ACC-1011'){
+    const callDate=addDays(anchor,-6);
+    a.notes.unshift(
+      [fmtDateTime(adjudicationDate,'7:12 AM'),'System',`Payer EOB assigned ${money(a.eob.patient)} to patient responsibility, including plan-excluded services reported with PR-204.`],
+      [fmtDateTime(callDate,'3:35 PM'),'Patient Services',`Patient called to ask why insurance did not cover all services. Representative reviewed the EOB but the call ended before payment options were discussed.`]
+    );
+  }
+
+  if(a.id==='ACC-1012'){
+    const denialDate=addDays(anchor,-23);
+    a.balance=0;
+    a.eob.patient=0;
+    a.lines=a.lines.map(line=>/^CO-22/.test(String(line[6]||''))?[line[0],line[1],line[2],line[3],line[4],0,line[6]]:line);
+    a.insuranceBalance=900;
+    a.insuranceBalanceStatus='Pending payer resolution';
+    a.insuranceBalanceDetail='Expected reimbursement remains assigned to insurance while the correct primary-to-secondary billing sequence is reviewed.';
+    a.insuranceBalanceOwner='Benefits and Eligibility Verification Team';
+    a.insuranceBalanceTAT='3-5 business days for coverage verification; payer processing begins after the correct billing sequence is confirmed.';
+    a.insuranceFollowupDate=followup10;
+    const reviewDate=addDays(anchor,-8);
+    const call1=addDays(anchor,-15);
+    const call2=addDays(anchor,-4);
+    const cignaAck=ackNumber('CIG-277',a,'04');
+    a.coverages=[
+      {priority:'Primary',payer:'Medicare',member:'1EG4TE5MK72',group:'N/A',plan:'Original Medicare',effective:'Active on DOS',status:'Active - Not Yet Billed'},
+      {priority:'Secondary',payer:'Cigna',member:'CIG88417002',group:'CIG-88417',plan:'PPO',effective:'Active on DOS',status:'Billed Before Primary'}
+    ];
+    a.eobProcessedDate=fmtDate(denialDate);
+    a.latestClearinghouseReceipt=cignaAck;
+    a.latestBilledDate=fmtDateTime(addDays(denialDate,-5),'5:18 PM');
+    a.billingHistory=[
+      [fmtDateTime(addDays(denialDate,-10),'10:20 AM'),'Charges released to billing','Patient Accounting','Completed','N/A',`Charges totaling ${money(a.eob.billed)} were finalized.`],
+      [fmtDateTime(addDays(denialDate,-5),'5:15 PM'),'Claim transmitted to listed payer','Clearinghouse','Submitted',ackNumber('BATCH',a,'00'),'Claim was routed using the payer sequence present at the time of billing.'],
+      [fmtDateTime(addDays(denialDate,-5),'5:18 PM'),'999 implementation acknowledgment','Clearinghouse','Accepted',ackNumber('CH-999',a,'01'),'Claim file passed clearinghouse validation.'],
+      [fmtDateTime(addDays(denialDate,-4),'8:30 AM'),'277CA claim acknowledgment','Cigna - Secondary','Accepted',cignaAck,'Secondary payer accepted the claim into adjudication.'],
+      [fmtDateTime(denialDate,'7:10 AM'),'CO-22 COB response','Cigna - Secondary','Denied',ackNumber('ERA',a,'05'),'Payer indicated another insurer may be primary. Full charge temporarily moved to patient balance before review.'],
+      [fmtDateTime(reviewDate,'1:40 PM'),'COB billing-order review opened','Insurance Billing','Under Review',ackNumber('COB',a,'06'),`Primary coverage verification and corrected billing sequence required. Expected internal TAT: 5-7 business days; follow-up ${followup10}.`]
+    ];
+    a.transactions=[
+      [fmtDate(denialDate),'Temporary Patient Balance Transfer',1200,'Posted','COB response received before primary adjudication'],
+      [fmtDate(reviewDate),'Patient Balance Reversal',-1200,'Posted','CO denial amount removed from patient responsibility'],
+      [fmtDate(reviewDate),'Transfer to Insurance AR',900,'Posted','Expected reimbursement assigned to insurance pending correct billing order'],
+      [fmtDate(reviewDate),'Billing Hold',0,'Posted','COB billing-order review pending']
+    ];
+    a.statementHistory=[
+      {date:fmtDate(reviewDate),number:a.statement,method:'System',status:'Suppressed - COB Billing Hold',balance:0},
+      {date:fmtDate(addDays(anchor,-18)),number:a.statement,method:'Mail',status:'Reversed after coverage review',balance:1200}
+    ];
+    a.patientLetters=[{date:fmtDate(addDays(anchor,-12)),type:'Other Coverage Verification Request',requested:'Confirm Medicare effective date and provide the Medicare card so the correct primary-to-secondary billing sequence can be completed.',method:'Mail and secure email',status:'Patient Contacted - Information Still Needed',due:fmtDate(addBusinessDays(anchor,5)),reference:ackNumber('LTR-COB',a,'01')}];
+    a.notes=[
+      [fmtDateTime(call2,'10:05 AM'),'Patient Services',`Patient called again regarding the full balance and stated Medicare was active before Cigna. Patient expressed frustration because this was not the first call. Billing hold remains active.`],
+      [fmtDateTime(reviewDate,'1:40 PM'),'Insurance Billing',`Review identified that a secondary-payer response posted before primary adjudication. The ${money(1200)} temporary patient balance was reversed, and ${money(a.insuranceBalance)} expected reimbursement was assigned to Insurance AR. Primary coverage verification and corrected billing sequence requested. Expected TAT: 5-7 business days.`],
+      [fmtDateTime(call1,'3:30 PM'),'Patient Services',`Patient called about receiving a statement for the full charge. Representative documented Medicare coverage reported by the patient and routed the account for review.`],
+      [fmtDateTime(denialDate,'7:15 AM'),'System',`CO-22 response posted and full charge transferred to patient pending COB review.`]
+    ];
+  }
+
+  if(a.id==='ACC-1013'){
+    const priorCall=addDays(anchor,-7);
+    const letterDate=addDays(anchor,-6);
+    a.patientLetters=[{date:fmtDate(letterDate),type:'Secondary Insurance Information Request',requested:'Provide payer name, member ID, group number, policyholder, relationship, and effective date for any secondary plan.',method:'Text link and secure email',status:'Awaiting Patient Response',due:fmtDate(addBusinessDays(letterDate,10)),reference:ackNumber('LTR-SEC',a,'01')}];
+    a.notes.unshift([fmtDateTime(priorCall,'1:18 PM'),'Patient Services',`Patient called about the deductible and stated she may have a Medicare supplement plan. She did not have the card available. Request for secondary insurance details was sent.`]);
+  }
+
+  if(a.id==='ACC-1014'){
+    const pendingDate=addDays(anchor,-21);
+    const firstLetter=addDays(anchor,-18);
+    const secondLetter=addDays(anchor,-8);
+    const call1=addDays(anchor,-13);
+    const call2=addDays(anchor,-3);
+    a.eobProcessedDate='Pending member information';
+    a.clearinghouseStatus='Accepted - Payer Pending';
+    a.latestClearinghouseReceipt=ackNumber('AET-PEND',a,'04');
+    a.latestBilledDate=fmtDateTime(addDays(pendingDate,-6),'6:12 PM');
+    a.billingHistory=[
+      [fmtDateTime(addDays(pendingDate,-10),'11:05 AM'),'Charges released to billing','Patient Accounting','Completed','N/A',`Charges totaling ${money(a.eob.billed)} were finalized.`],
+      [fmtDateTime(addDays(pendingDate,-6),'6:10 PM'),'Initial claim billed','Clearinghouse','Submitted',ackNumber('BATCH',a,'00'),`Claim ${a.claim} transmitted electronically.`],
+      [fmtDateTime(addDays(pendingDate,-6),'6:12 PM'),'999 implementation acknowledgment','Clearinghouse','Accepted',ackNumber('CH-999',a,'01'),'Claim passed format validation.'],
+      [fmtDateTime(addDays(pendingDate,-5),'8:05 AM'),'277CA claim acknowledgment','Aetna','Accepted',ackNumber('277CA',a,'02'),'Payer accepted the claim.'],
+      [fmtDateTime(pendingDate,'9:25 AM'),'Member questionnaire requested','Aetna','Pending',ackNumber('AET-PEND',a,'04'),`Payer requested accident details before adjudication. Expected payer TAT after receipt: 15-30 calendar days; follow-up ${followup15}.`]
+    ];
+    a.transactions=[[fmtDate(pendingDate),'Patient Billing Hold',0,'Posted','Payer requires member questionnaire before adjudication']];
+    a.statementHistory=[{date:fmtDate(secondLetter),number:a.statement,method:'System',status:'Suppressed - Do Not Bill Hold',balance:0}];
+    a.patientLetters=[
+      {date:fmtDate(secondLetter),type:'Second Request - Accident Questionnaire',requested:'Confirm whether the services were related to an accident, provide accident date and location, and identify any auto, workers’ compensation, or liability coverage.',method:'Mail, secure email, and text link',status:'Awaiting Patient Response',due:fmtDate(addBusinessDays(secondLetter,10)),reference:ackNumber('LTR-AQ',a,'02')},
+      {date:fmtDate(firstLetter),type:'Initial Request - Accident Questionnaire',requested:'Complete the insurer’s accident questionnaire so the claim can be adjudicated.',method:'Mail and secure email',status:'No Response',due:fmtDate(addBusinessDays(firstLetter,10)),reference:ackNumber('LTR-AQ',a,'01')}
+    ];
+    a.notes=[
+      [fmtDateTime(call2,'4:10 PM'),'Patient Services',`Patient called for the third time after receiving another information-request letter and stated the visit was not accident related. Prior notes and open payer request require review and submission of the patient response.`],
+      [fmtDateTime(secondLetter,'9:30 AM'),'Statement Services',`Second accident-questionnaire request sent by mail, secure email, and text link. Patient billing remains suppressed.`],
+      [fmtDateTime(call1,'2:45 PM'),'Patient Services',`Patient called about the first letter and asked why the information was needed. Representative explained the payer request; no completed response was recorded.`],
+      [fmtDateTime(firstLetter,'10:15 AM'),'Statement Services',`Initial accident-questionnaire request sent to the patient.`],
+      [fmtDateTime(pendingDate,'9:30 AM'),'Insurance Follow-Up',`Aetna confirmed claim is pending member accident information under reference ${ackNumber('AET-PEND',a,'04')}. Do not bill patient. Expected TAT after response: 15-30 calendar days.`]
+    ];
+  }
+
+  if(a.id==='ACC-1019'){
+    const originalPaymentDate=adjudicationDate;
+    const patientPaymentDate=addDays(adjudicationDate,4);
+    const lateChargeDate=addDays(anchor,-14);
+    const correctionDate=addDays(anchor,-11);
+    const correctedClaimDate=addDays(anchor,-8);
+    const denialDate=addDays(anchor,-3);
+    const reviewDate=addDays(anchor,-2);
+    const lateChargeAmount=375;
+    const correctedAck=ackNumber('CH-999-LC',a,'04');
+    const correctedPayerAck=ackNumber('277CA-LC',a,'05');
+    const lateChargeEra=ackNumber('ERA-LC',a,'06');
+    const denialWork=ackNumber('DM-LC',a,'07');
+    a.balance=0;
+    a.status='Insurance Balance - Late Charge Denial Review';
+    a.insuranceBalance=lateChargeAmount;
+    a.deniedInsuranceLines=[{code:'93010',description:'ECG Interpretation - Late Charge',expected:lateChargeAmount}];
+    a.insuranceBalanceStatus='Late charge denied; denial review open';
+    a.insuranceBalanceDetail='A late ECG interpretation charge was omitted from the initial claim. The corrected claim was accepted by the clearinghouse, then denied by the payer as a duplicate service. The amount remains assigned to insurance and is not patient responsibility.';
+    a.insuranceBalanceOwner='Denial Management Team';
+    a.insuranceBalanceTAT='5-7 business days for internal review; 30-45 calendar days if payer reconsideration is required';
+    a.insuranceFollowupDate=followup10;
+    a.statementMode='none';
+    a.statementHistory=[];
+    a.latestClearinghouseReceipt=correctedAck;
+    a.latestBilledDate=fmtDateTime(correctedClaimDate,'5:48 PM');
+    a.billingHistory=[
+      [fmtDateTime(chargeDate,'11:18 AM'),'Original charges released to billing','Patient Accounting','Completed','N/A',`Original charges totaling ${money(a.eob.billed)} were finalized.`],
+      [fmtDateTime(billDate,'6:40 PM'),'Initial claim billed','Clearinghouse','Submitted',ackNumber('BATCH',a,'00'),`Claim ${a.claim} transmitted electronically without the later ECG interpretation charge.`],
+      [fmtDateTime(clearingDate,'6:42 PM'),'999 implementation acknowledgment','Clearinghouse','Accepted',initialAck,'Initial claim passed clearinghouse validation.'],
+      [fmtDateTime(payerAckDate,'8:16 AM'),'277CA claim acknowledgment',a.insurance,'Accepted',payerAck,'Payer accepted the initial claim into adjudication.'],
+      [fmtDateTime(originalPaymentDate,'7:05 AM'),'ERA/EOB received',a.insurance,'Processed',eraReceipt,`Initial claim paid. Patient responsibility ${money(a.eob.patient)}.`],
+      [fmtDateTime(lateChargeDate,'2:20 PM'),'Late charge posted','Patient Accounting','Completed',ackNumber('LATE-CHG',a,'03'),`ECG interpretation charge of ${money(lateChargeAmount)} was added after the initial claim had already adjudicated.`],
+      [fmtDateTime(correctionDate,'10:35 AM'),'Late charge moved to insurance AR','Billing Team','Completed',ackNumber('INS-AR',a,'04'),'Charge retained as insurance responsibility. Patient statement generation was suppressed.'],
+      [fmtDateTime(correctedClaimDate,'5:48 PM'),'Corrected claim with late charge billed','Clearinghouse','Accepted',correctedAck,'Corrected claim passed clearinghouse validation.'],
+      [fmtDateTime(addDays(correctedClaimDate,1),'8:12 AM'),'Corrected claim acknowledgment',a.insurance,'Accepted',correctedPayerAck,'Payer accepted the corrected claim into adjudication.'],
+      [fmtDateTime(denialDate,'7:18 AM'),'CO-18 duplicate-service denial posted',a.insurance,'Denied',lateChargeEra,`Late charge denied as duplicate. Insurance balance remains ${money(lateChargeAmount)}.`],
+      [fmtDateTime(reviewDate,'9:40 AM'),'Late-charge denial review opened','Denial Management Team','Under Review',denialWork,`Internal review TAT: 5-7 business days. Payer reconsideration TAT, if required: 30-45 calendar days. Follow-up ${followup10}.`]
+    ];
+    a.transactions=[
+      [fmtDate(originalPaymentDate),'Insurance Payment',a.eob.paid,'Posted',`${a.insurance} ERA ${eraReceipt}`],
+      [fmtDate(originalPaymentDate),'Contractual Adjustment',-a.eob.writeoff,'Posted','CO-45 contractual obligation'],
+      [fmtDate(patientPaymentDate),'Patient Payment',a.eob.patient,'Posted',`Payment confirmation ${ackNumber('PMT',a,'01')}`],
+      [fmtDate(lateChargeDate),'Late Charge',lateChargeAmount,'Posted','ECG interpretation charge added after initial claim'],
+      [fmtDate(correctionDate),'Transfer to Insurance AR',lateChargeAmount,'Posted','Late charge assigned to payer responsibility; patient statement suppressed']
+    ];
+    a.notes=[
+      [fmtDateTime(reviewDate,'9:40 AM'),'Denial Management Team',`Late-charge denial work item ${denialWork} opened after CO-18 response. Patient balance remains $0.00. Insurance balance ${money(lateChargeAmount)}. Expected internal TAT: 5-7 business days; follow-up ${followup10}.`],
+      [fmtDateTime(denialDate,'7:22 AM'),'System',`Corrected claim late-charge line denied CO-18. Amount remains in insurance AR and was not transferred to patient.`],
+      [fmtDateTime(correctionDate,'10:35 AM'),'Billing Team','Late charge reviewed and assigned to insurance responsibility. Patient statement generation suppressed because no patient balance is due.'],
+      [fmtDateTime(patientPaymentDate,'1:15 PM'),'Patient Services',`Original patient responsibility of ${money(a.eob.patient)} paid in full. Confirmation ${ackNumber('PMT',a,'01')}.`]
+    ];
+  }
+
+  const pointOfServiceCopays={
+    'ACC-1015':{amount:25,method:'Virtual credit card (VCC) ending 7740',prefix:'POS-VCC',time:'9:42 AM'},
+    'ACC-1017':{amount:30,method:'Debit card ending 8821',prefix:'POS-DB',time:'10:18 AM'},
+    'ACC-1018':{amount:40,method:'Cash',prefix:'POS-CASH',time:'8:56 AM'}
+  };
+  const posCopay=pointOfServiceCopays[a.id];
+  if(posCopay){
+    const posRef=ackNumber(posCopay.prefix,a,'01');
+    a.balance=+(Math.max(0,a.eob.patient-posCopay.amount)).toFixed(2);
+    a.status='Balance Due - Copay Paid at Visit';
+    a.posCopay={amount:posCopay.amount,method:posCopay.method,reference:posRef,date:fmtDate(dosDate)};
+    a.transactions.push([fmtDate(dosDate),'Point-of-Service Copay',posCopay.amount,'Posted',`${posCopay.method}; payment reference ${posRef}`]);
+    a.notes.push([fmtDateTime(dosDate,posCopay.time),'Front Desk',`Copay of ${money(posCopay.amount)} collected during the visit by ${posCopay.method}. Payment reference ${posRef}. Remaining patient responsibility after payer adjudication: ${money(a.balance)}.`]);
+    if(a.statementHistory[0])a.statementHistory[0].balance=a.balance;
+    if(a.statementHistory[1])a.statementHistory[1].balance=a.eob.patient;
+  }
+
+  const reminderCallCounts={
+    'ACC-1001':2,'ACC-1002':1,'ACC-1003':3,'ACC-1004':1,'ACC-1005':2,
+    'ACC-1006':1,'ACC-1011':3,'ACC-1013':2,'ACC-1015':1,'ACC-1016':2,
+    'ACC-1017':1,'ACC-1018':2
+  };
+  const requestedReminderCount=reminderCallCounts[a.id]||0;
+  const reminderOffsets=requestedReminderCount===1?[6]:requestedReminderCount===2?[11,4]:requestedReminderCount>=3?[14,8,3]:[];
+  const reminderOutcomes=['No answer; voicemail left','Reached guarantor/patient; statement availability explained','No answer; secure reminder sent'];
+  reminderOffsets.forEach((daysAgo,index)=>{
+    const callDate=addDays(anchor,-daysAgo);
+    const outcome=reminderOutcomes[index%reminderOutcomes.length];
+    const ref=ackNumber('COL-CALL',a,String(index+1).padStart(2,'0'));
+    a.reminderCallHistory.push({date:fmtDateTime(callDate,index%2===0?'10:20 AM':'3:40 PM'),outcome,reference:ref});
+    a.notes.push([fmtDateTime(callDate,index%2===0?'10:20 AM':'3:40 PM'),'Collections Outreach',`Outbound balance reminder call completed. Outcome: ${outcome}. Reference ${ref}. Current balance at time of outreach: ${money(a.balance)}.`]);
+  });
+  a.reminderCallCount=a.reminderCallHistory.length;
+  a.lastReminderCall=a.reminderCallHistory.length?a.reminderCallHistory[a.reminderCallHistory.length-1]:null;
+
+  if(a.statementMode!=='reversal'){
+    a.statementMode=(Number(a.balance)>0&&!paymentBlocked(a))?'patient':'none';
+  }
+  if(a.statementMode==='none'&&Number(a.balance)<=0&&a.id==='ACC-1014'){
+    a.statementHistory=[];
+  }
+
+  a.billingHistory.sort((x,y)=>new Date(x[0])-new Date(y[0]));
+  a.transactions.sort((x,y)=>new Date(y[0])-new Date(x[0]));
+  a.notes.sort((x,y)=>new Date(y[0])-new Date(x[0]));
+  a.statementHistory.sort((x,y)=>new Date(y.date)-new Date(x.date));
+  a.priorPatientContacts=a.notes.filter(n=>/Patient Services|Collections Team/.test(n[1])).length;
+  return a;
+}
+
+
+function patientFirstName(name){const parts=String(name||'').split(',');return parts.length>1?(parts[1].trim().split(/\s+/)[0]||'Patient'):(String(name||'Patient').trim().split(/\s+/)[0]);}
+function money(v){return new Intl.NumberFormat('en-US',{style:'currency',currency:'USD'}).format(v)}
+function esc(s){return String(s).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]))}
+function normalizeName(value){
+ return String(value||'').toUpperCase().replace(/[.,]/g,' ').replace(/\s+/g,' ').trim();
+}
+function compactIdentifier(value){
+ return String(value||'').toUpperCase().replace(/[^A-Z0-9]/g,'');
+}
+function partialIdentifierMatches(accountValue,enteredValue){
+ const entered=compactIdentifier(enteredValue);
+ return entered.length>0&&compactIdentifier(accountValue).includes(entered);
+}
+function dobMatches(accountDob,enteredDob){
+ const entered=String(enteredDob||'').replace(/\D/g,'');
+ return entered.length>0&&String(accountDob||'').replace(/\D/g,'').includes(entered);
+}
+function nameMatches(accountName,enteredName){
+ const enteredTokens=normalizeName(enteredName).split(' ').filter(Boolean);
+ if(!enteredTokens.length)return false;
+ const accountTokens=normalizeName(accountName).split(' ').filter(Boolean);
+ return enteredTokens.every(enteredToken=>
+  accountTokens.some(accountToken=>
+   accountToken.startsWith(enteredToken)||accountToken.includes(enteredToken)
+  )
+ );
+}
+function searchMatchScore(account,vals){
+ let score=0;
+ if(vals.name){
+  const entered=normalizeName(vals.name);
+  const canonical=normalizeName(account.name);
+  const parts=String(account.name).split(',').map(x=>x.trim());
+  const natural=parts.length>1?normalizeName(`${parts[1]} ${parts[0]}`):canonical;
+  score+=entered===canonical||entered===natural?20:5;
+ }
+ if(vals.dob)score+=String(account.dob).replace(/\D/g,'')===String(vals.dob).replace(/\D/g,'')?20:5;
+ if(vals.guar)score+=compactIdentifier(account.guarantor)===compactIdentifier(vals.guar)?25:6;
+ if(vals.mrn)score+=compactIdentifier(account.mrn)===compactIdentifier(vals.mrn)?25:6;
+ if(vals.stmt)score+=compactIdentifier(account.statement)===compactIdentifier(vals.stmt)?25:6;
+ return score;
+}
+function findAccount(){
+  const enteredUserName=cleanUserName(userName.value);
+  if(!enteredUserName){showLoginMsg('Enter your full name before searching for a patient account.');userName.focus();return}
+  setActiveUserName(enteredUserName);
+  const vals={name:loginName.value.trim(),dob:loginDob.value.trim(),guar:loginGuar.value.trim(),mrn:loginMrn.value.trim(),stmt:loginStmt.value.trim()};
+  if(!Object.values(vals).some(Boolean)){showLoginMsg('Enter at least one identifier. Partial information is accepted.');return}
+  const matches=accounts.filter(a=>{
+    const checks=[];
+    if(vals.name)checks.push(nameMatches(a.name,vals.name));
+    if(vals.dob)checks.push(dobMatches(a.dob,vals.dob));
+    if(vals.guar)checks.push(partialIdentifierMatches(a.guarantor,vals.guar));
+    if(vals.mrn)checks.push(partialIdentifierMatches(a.mrn,vals.mrn));
+    if(vals.stmt)checks.push(partialIdentifierMatches(a.statement,vals.stmt));
+    return checks.length>0&&checks.every(Boolean);
+  }).sort((a,b)=>searchMatchScore(b,vals)-searchMatchScore(a,vals)||a.name.localeCompare(b.name));
+  if(!matches.length){showLoginMsg('No suggested patient matches found. Check the information provided by the caller and try a broader search.');return}
+  loginMsg.classList.add('hidden');
+  renderSearchResults(matches);
+}
+function renderSearchResults(matches){
+ const rows=matches.map(a=>`<tr><td><b>${esc(a.name)}</b></td><td>${a.dob}</td><td>${a.mrn}</td><td>${a.guarantor}</td><td class="select-account"><button class="primary" type="button" onclick="openMatchedAccount('${a.id}')">Select Account</button></td></tr>`).join('');
+ const resultLabel=matches.length===1?'1 suggested patient match':`${matches.length} suggested patient matches`;
+ searchResults.innerHTML=`<div class="search-results-head"><b>${resultLabel}</b><span class="muted">Confirm the patient using the DOB, MRN, and guarantor number before selecting the account.</span></div><table><thead><tr><th>Patient Name</th><th>DOB</th><th>MRN</th><th>Guarantor Number</th><th></th></tr></thead><tbody>${rows}</tbody></table>`;
+ searchResults.classList.remove('hidden');
+}
+function openMatchedAccount(id){
+ const found=accounts.find(a=>a.id===id);
+ if(!found)return;
+ searchResults.classList.add('hidden');
+ current=buildRuntimeAccount(found);renderAll();loginView.classList.add('hidden');appView.classList.remove('hidden');
+}
+function showLoginMsg(t){loginMsg.textContent=t;loginMsg.classList.remove('hidden');searchResults.classList.add('hidden')}
+function logout(){current=null;appView.classList.add('hidden');loginView.classList.remove('hidden');searchResults.classList.add('hidden')}
+function showTab(id,btn){
+ document.querySelectorAll('.tab').forEach(x=>x.classList.add('hidden'));
+ document.getElementById(id).classList.remove('hidden');
+ document.querySelectorAll('.sidebar button').forEach(x=>x.classList.remove('active'));
+ btn?.classList.add('active');
+ const statusPill=document.getElementById('accountStatusPill');
+ if(statusPill&&current){
+  if(id==='insurance'){
+   statusPill.className='pill';
+   statusPill.textContent='Coverage Information';
+  }else{
+   statusPill.className=`pill ${statusClass(displayStatus(current))}`;
+   statusPill.textContent=displayStatus(current);
+  }
+ }
+}
+function displayStatus(a=current){const s=String(a?.status||'');return Number(a?.balance)>0&&s.toLowerCase().includes('balance due')?'Balance Due':s}
+function statusClass(s){const v=String(s).toLowerCase();return v.includes('do not bill')||v.includes('billing hold')?'danger':v.includes('review')||v.includes('denial')||v.includes('no-show')||v.includes('pending')?'warn':v.includes('partial')?'warn':'ok'}
+function paymentBlocked(a=current){const s=String(a?.status||'').toLowerCase();return !a||a.balance<=0||s.includes('do not bill')||s.includes('no-show')||s.includes('billing hold')}
+function statementMode(a=current){
+ if(!a)return 'none';
+ if(a.statementMode==='reversal')return 'reversal';
+ return Number(a.balance)>0&&!paymentBlocked(a)?'patient':'none';
+}
+
+function renderAll(){
+ accountBanner.innerHTML=`<div style="display:flex;justify-content:space-between;gap:20px;align-items:center;flex-wrap:wrap"><div><b>${esc(current.name)}</b><div class="muted">${current.mrn} | ${current.guarantor} | Claim ${current.claim} | Timeline refreshed ${current.accessDate}</div><div class="muted" style="margin-top:4px">Active user: ${esc(noteAuthor())}</div></div><span id="accountStatusPill" class="pill ${statusClass(displayStatus(current))}">${esc(displayStatus(current))}</span></div>`;
+ overview.innerHTML=renderOverview(); demographics.innerHTML=renderDemographics(); insurance.innerHTML=renderInsurance(); billing.innerHTML=renderBillingHistory(); letters.innerHTML=renderPatientLetters(); eob.innerHTML=renderEob(); transactions.innerHTML=renderTransactions(); statements.innerHTML=renderStatements(); notes.innerHTML=renderNotes(); payment.innerHTML=renderPayment(); escalation.innerHTML=renderEscalation();
+ showTab('overview',navButton('overview'));
+}
+function renderOverview(){
+ const collect=!paymentBlocked(current);
+ const mode=statementMode(current);
+ const planText=paymentBlocked(current)?'Not currently available while the account is on hold':current.paymentPlanEligible?'Available: 3, 6, or 12 monthly payments':'Not available for this balance';
+ const discountText=paymentBlocked(current)?'Not currently available while the account is on hold':current.discountEligible?`Eligible for up to 15% one-time settlement discount. Discounted payoff: ${money(current.balance*(1-current.discountRate))}`:'No one-time settlement discount available';
+ const contactAlert=current.priorPatientContacts>=2?`<div class="info-note"><b>Multiple previous patient contacts are documented.</b> Review the Account Notes before responding so you can acknowledge the caller’s prior effort and provide a clear update.</div>`:'';
+ const reminderDetail=current.lastReminderCall?`Latest reminder: ${current.lastReminderCall.date}<br><span class="muted">${esc(current.lastReminderCall.outcome)} · ${current.lastReminderCall.reference}</span>`:'No outbound balance-reminder calls are documented.';
+ const deniedInsuranceBreakdown=(current.deniedInsuranceLines||[]).length?`<div class="table-wrap" style="margin-top:12px"><table><thead><tr><th>Claim Line</th><th>Description</th><th>Expected Insurance Amount</th></tr></thead><tbody>${current.deniedInsuranceLines.map(line=>`<tr><td>${esc(line.code)}</td><td>${esc(line.description)}</td><td>${money(line.expected)}</td></tr>`).join('')}</tbody><tfoot><tr><th colspan="2">Total Expected Insurance Amount</th><th>${money(current.deniedInsuranceLines.reduce((sum,line)=>sum+Number(line.expected||0),0))}</th></tr></tfoot></table></div>`:'';
+ const insuranceBalancePanel=Number(current.insuranceBalance)>0?`<div class="card insurance-balance-card"><h3 class="section-title">Insurance AR Details</h3><div class="grid"><div class="kpi"><span class="metric-label">Status</span><b>${esc(current.insuranceBalanceStatus||'Pending payer resolution')}</b></div><div class="kpi"><span class="metric-label">Assigned Team</span><b>${esc(current.insuranceBalanceOwner||'Insurance Follow-Up Team')}</b></div><div class="kpi"><span class="metric-label">Next Follow-Up</span><b>${esc(current.insuranceFollowupDate||'Not yet scheduled')}</b></div></div><div class="info-note" style="margin-top:12px"><b>Insurance AR detail:</b> ${esc(current.insuranceBalanceDetail||'An unpaid amount remains assigned to insurance.')}<br><b>Expected TAT:</b> ${esc(current.insuranceBalanceTAT||'Review account notes for the applicable turnaround time.')}</div>${deniedInsuranceBreakdown}</div>`:'';
+ const statementAction=mode==='patient'?`<button class="secondary" onclick="openStatementSend()">Resend Statement</button>`:mode==='reversal'?`<button class="secondary" onclick="openStatementSend()">Resend Reversal Notice</button>`:'';
+ const statementDisplay=mode==='patient'?current.statement:mode==='reversal'?(current.reversalNotice?.number||'Reversal Notice'):'Not issued';
+ const patientBal=Number(current.balance||0);
+ const insuranceBal=Number(current.insuranceBalance||0);
+ const accountNotice=patientBal>0&&insuranceBal>0
+  ?`<div class="notice">Balances are assigned to both the patient and the insurance payer. Review the EOB, billing history, prior notes, and account holds before discussing payment or payer follow-up.</div>`
+  :insuranceBal>0
+   ?`<div class="notice">No collectible patient balance is due. An unpaid amount remains assigned to insurance. Review the billing history and notes before explaining the next step.</div>`
+   :collect
+    ?`<div class="notice">A collectible patient balance is present. Review the EOB, insurance sequence, previous notes, and any open letters before requesting payment.</div>`
+    :`<div class="notice">Payment is not available at this time. Review the status, insurance routing, letters, and notes before explaining the next step.</div>`;
+ return `<div class="grid2 balance-summary">
+ <div class="kpi patient-balance-kpi"><span class="metric-label">Patient Balance</span><div class="balance-value">${money(current.balance)}</div><div class="muted">Amount currently assigned to the patient</div></div>
+ <div class="kpi insurance-balance-kpi"><span class="metric-label">Insurance Balance</span><div class="balance-value">${money(current.insuranceBalance||0)}</div><div class="muted">Amount currently assigned to the insurance payer</div></div>
+ </div>
+ <div class="grid4">
+ <div class="kpi"><span class="metric-label">Date of Service</span><div class="metric-value">${current.dos}</div></div>
+ <div class="kpi"><span class="metric-label">Current Statement / Notice</span><div class="metric-value">${statementDisplay}</div></div>
+ <div class="kpi"><span class="metric-label">Balance Reminder Calls</span><div class="metric-value">${current.reminderCallCount}</div></div>
+ <div class="kpi"><span class="metric-label">Prior Patient Contacts</span><div class="metric-value">${current.priorPatientContacts}</div></div>
+ <div class="kpi"><span class="metric-label">Patient Type</span><div class="metric-value">${current.isMinor?'Minor':esc(current.patientRelationship)}</div></div></div>
+ ${insuranceBalancePanel}
+ <div class="card"><h3 class="section-title">Account Review</h3>${contactAlert}
+ ${accountNotice}
+ <div class="grid2"><div><label>Provider</label><div>${current.provider}</div></div><div><label>Facility</label><div>${current.facility}</div></div><div><label>Insurance</label><div>${current.insurance}</div></div><div><label>Claim Number</label><div>${current.claim}</div></div></div>
+ <div class="contact-activity"><div><strong>Outstanding-Balance Outreach</strong><div>${reminderDetail}</div></div><div class="contact-count">${current.reminderCallCount} call${current.reminderCallCount===1?'':'s'}</div></div></div>
+ <div class="card payment-options-card"><h3 class="section-title">Available Payment Options</h3>
+ <div class="grid2"><div class="kpi">Payment Plan<b>${planText}</b></div><div class="kpi">One-Time Discount<b>${discountText}</b></div></div>
+ <div class="actions"><button class="primary" onclick="showTab('payment',navButton('payment'))">Take Payment</button>${statementAction}<button class="secondary" onclick="showTab('notes',navButton('notes'))">Review Notes</button></div></div>`}
+function renderDemographics(){
+ const verificationNotice=current.isMinor
+  ?`<div class="minor-banner"><b>Minor patient.</b> Verify the parent or legal guardian’s name, DOB, contact information, and authority to discuss the account before disclosing protected information.</div>`
+  :`<div class="notice">Verify the patient’s complete name, date of birth, and complete address before discussing account information. When another responsible party is calling, verify their identity and authority as well.</div>`;
+ return `<div class="card"><h3 class="section-title">Identity Verification</h3>${verificationNotice}
+ <div class="grid"><div><label>Patient Name</label><div>${current.name}</div></div><div><label>Date of Birth</label><div>${current.dob}</div></div><div><label>Age</label><div>${current.age??'Not available'}</div></div><div><label>Minor</label><div><span class="pill ${current.isMinor?'warn':'ok'}">${current.isMinor?'Yes':'No'}</span></div></div><div><label>Relationship to Guarantor</label><div>${esc(current.patientRelationship)}</div></div><div><label>Complete Address</label><div>${current.address}</div></div><div><label>Patient Phone</label><div>${current.phone}</div></div><div><label>Patient Email</label><div>${current.email}</div></div><div><label>MRN</label><div>${current.mrn}</div></div><div><label>Statement Number</label><div>${current.statement}</div></div></div>
+ <div class="responsible-party-card"><h3 class="section-title">Parent, Guardian, or Responsible Party</h3><div class="grid"><div><label>Responsible Party Name</label><div>${esc(current.guarantorName)}</div></div><div><label>Relationship</label><div>${esc(current.guarantorRelationship)}</div></div><div><label>Date of Birth</label><div>${esc(current.guarantorDob)}</div></div><div><label>Contact Number</label><div>${esc(current.guarantorPhone)}</div></div><div><label>Guarantor Number</label><div>${current.guarantor}</div></div></div></div></div>`}
+function insuranceCoverageDisplay(c){
+ const recentlyAdded=Boolean(c.addedByLearner);
+ if(recentlyAdded)return {label:'Verification Pending',className:'warn'};
+ const effective=String(c.effective||'').toLowerCase();
+ if(effective.includes('active'))return {label:'Active on DOS',className:'ok'};
+ return {label:'Coverage on File',className:''};
+}
+function renderInsurance(){
+ const cards=(current.coverages||[]).map(c=>{
+  const display=insuranceCoverageDisplay(c);
+  return `<div class="coverage-card ${c.priority==='Primary'?'primary-coverage':'secondary-coverage'}"><div class="coverage-head"><div class="coverage-title">${esc(c.priority)} Insurance</div><span class="pill ${display.className}">${display.label}</span></div><div class="coverage-details"><div><span>Payer</span><b>${esc(c.payer)}</b></div><div><span>Member ID</span><b>${esc(c.member)}</b></div><div><span>Group</span><b>${esc(c.group)}</b></div><div><span>Plan</span><b>${esc(c.plan)}</b></div><div><span>Coverage on DOS</span><b>${esc(c.effective)}</b></div><div><span>Coverage Order</span><b>${esc(c.priority)}</b></div></div></div>`;
+ }).join('');
+ return `<div class="card"><div style="display:flex;justify-content:space-between;gap:12px;align-items:center;flex-wrap:wrap"><div><h3 class="section-title" style="margin-bottom:3px">Insurance Information</h3><div class="muted">Coverage records currently listed on the patient account.</div></div><button class="primary" type="button" onclick="openAddInsurance()">Add New Insurance</button></div><div class="grid2" style="margin-top:15px">${cards}</div></div>`;
+}
+function openAddInsurance(){showModal(`<h3>Add Insurance Coverage</h3><p class="muted">Enter the caller-provided information. Saving the coverage will also submit an eligibility and billing-order review request to the Benefits and Eligibility Verification Team.</p><div class="grid2"><div><label>Coverage Order</label><select id="newCovPriority"><option>Secondary</option><option>Primary</option></select></div><div><label>Payer Name</label><input id="newCovPayer"></div><div><label>Member ID</label><input id="newCovMember"></div><div><label>Group Number</label><input id="newCovGroup"></div><div><label>Plan Type</label><input id="newCovPlan" placeholder="PPO, HMO, Medicare Supplement"></div><div><label>Effective Date</label><input id="newCovEffective" placeholder="MM/DD/YYYY"></div><div><label>Policyholder Name</label><input id="newCovHolder"></div><div><label>Relationship to Patient</label><select id="newCovRelationship"><option>Self</option><option>Spouse</option><option>Parent</option><option>Other</option></select></div></div><div class="actions"><button class="primary" type="button" onclick="submitNewInsurance()">Save New Insurance</button></div>`)}
+function submitNewInsurance(){
+ const payer=document.getElementById('newCovPayer')?.value.trim();
+ const member=document.getElementById('newCovMember')?.value.trim();
+ if(!payer||!member){showModal('<h3>Missing Insurance Information</h3><p>Enter at least the payer name and member ID before saving the coverage.</p>');return}
+ const priority=document.getElementById('newCovPriority').value;
+ const group=document.getElementById('newCovGroup').value.trim()||'Not provided';
+ const plan=document.getElementById('newCovPlan').value.trim()||'Not provided';
+ const effective=document.getElementById('newCovEffective').value.trim()||'Verification required';
+ const holder=document.getElementById('newCovHolder').value.trim()||'Not provided';
+ const relationship=document.getElementById('newCovRelationship').value;
+ const ref='ELG-'+Math.floor(100000+Math.random()*900000);
+ current.coverages.push({priority,payer,member,group,plan,effective,status:'Pending Eligibility Review',addedByLearner:true});
+ current.coverageRequests.unshift({date:new Date().toLocaleDateString('en-US'),type:`New ${priority.toLowerCase()} insurance - Benefits and Eligibility Verification review`,reference:ref,status:'Submitted',tat:'Eligibility: 3-5 business days; billing after verification: 2 business days'});
+ current.status='New Insurance Review - Billing Hold';
+ current.discountEligible=false;
+ current.notes.unshift([new Date().toLocaleString('en-US'),noteAuthor(),`Added ${priority.toLowerCase()} insurance ${payer}, member ${member}. Policyholder ${holder}; relationship ${relationship}. Benefits and Eligibility Verification review submitted under ${ref}. Expected TAT: 3-5 business days. Patient billing hold applied pending review.`]);
+ renderAll();showTab('insurance',navButton('insurance'));
+ showModal(`<h3>Insurance Added and Review Submitted</h3><p><b>Reference:</b> ${ref}</p><p>The request was submitted to the Benefits and Eligibility Verification Team. Expected eligibility TAT is 3-5 business days. Do not promise payment or claim resolution until verification is complete.</p>`)
+}
+function renderBillingHistory(){
+ const rows=current.billingHistory.map(r=>`<tr><td>${r[0]}</td><td>${r[1]}</td><td>${r[2]}</td><td><span class="pill ${r[3]==='Accepted'||r[3]==='Completed'||r[3]==='Processed'||r[3]==='Posted'?'ok':r[3].includes('Denied')||r[3].includes('Review')?'warn':''}">${r[3]}</span></td><td>${r[4]}</td><td>${r[5]}</td></tr>`).join('');
+ return `<div class="grid"><div class="kpi">Latest Billed Date<b>${current.latestBilledDate}</b></div><div class="kpi">Clearinghouse Status<b>${current.clearinghouseStatus}</b></div><div class="kpi">Latest ACK / Receipt<b>${current.latestClearinghouseReceipt}</b></div></div>
+ <div class="card"><h3 class="section-title">Claim Billing and Acknowledgment History</h3><p class="muted">Dates are refreshed when the account is opened so the timeline remains current for recurring training classes.</p><table><thead><tr><th>Date/Time</th><th>Billing Activity</th><th>Destination/Owner</th><th>Status</th><th>ACK / Receipt #</th><th>Details / TAT</th></tr></thead><tbody>${rows}</tbody></table></div>`}
+function renderPatientLetters(){
+ const list=current.patientLetters||[];
+ if(!list.length)return `<div class="card"><h3 class="section-title">Patient Information Request Letters</h3><div class="info-note">No patient information-request letters are currently documented for this account.</div></div>`;
+ const rows=list.map((l,i)=>`<tr><td>${l.date}</td><td>${esc(l.type)}</td><td>${esc(l.requested)}</td><td>${esc(l.method)}</td><td class="letter-status"><span class="pill ${String(l.status).includes('Awaiting')||String(l.status).includes('Open')||String(l.status).includes('Needed')||String(l.status).includes('No Response')?'warn':'ok'}">${esc(l.status)}</span></td><td>${l.due}</td><td>${l.reference}</td><td class="letter-actions-column"><div class="patient-letter-actions"><button class="secondary" type="button" onclick="viewPatientLetter(${i})">View Letter</button><button class="primary" type="button" onclick="recordPatientLetterResponse(${i})">Record Response</button></div></td></tr>`).join('');
+ return `<div class="card"><h3 class="section-title">Patient Information Request Letters</h3><p class="muted">These letters request information required by the insurer before the claim can be processed correctly.</p><table class="patient-letter-table"><thead><tr><th>Sent Date</th><th>Letter</th><th>Information Requested</th><th>Delivery</th><th>Status</th><th>Response Due</th><th>Reference</th><th class="letter-actions-column">Actions</th></tr></thead><tbody>${rows}</tbody></table></div>`}
+function viewPatientLetter(i){const l=current.patientLetters[i];showModal(`<div style="border:1px solid #aebdca;padding:20px"><div style="display:flex;justify-content:space-between;border-bottom:3px solid #17324d;padding-bottom:10px"><div><h2 style="margin:0;font-size:20px">Patient Information Request</h2><div>${current.facility}</div></div><div style="text-align:right"><b>${l.reference}</b><br>Sent ${l.date}<br>Response requested by ${l.due}</div></div><p>Dear ${patientFirstName(current.name)},</p><p>Your insurance company needs additional information before it can complete the review of claim <b>${current.claim}</b> for services dated <b>${current.dos}</b>.</p><p><b>Please provide:</b> ${esc(l.requested)}</p><p>Providing the information does not guarantee payment. Once received, it will be forwarded for insurance review and claim processing.</p><p>Sincerely,<br>Patient Financial Services</p></div>`)}
+function patientLetterRoutingTeam(letter){const type=String(letter?.type||'').toLowerCase();return /(coverage|insurance|coordination of benefits|cob)/.test(type)?'Benefits and Eligibility Verification Team':'Insurance Follow-Up Team'}
+function recordPatientLetterResponse(i){const l=current.patientLetters[i];const team=patientLetterRoutingTeam(l);showModal(`<h3>Record Patient Response</h3><p><b>${esc(l.type)}</b></p><label>Information Received</label><textarea id="letterResponse" rows="5" placeholder="Document the caller's response and all information provided."></textarea><div class="actions"><button class="primary" type="button" onclick="submitPatientLetterResponse(${i})">Save and Submit to ${esc(team)}</button></div>`)}
+function submitPatientLetterResponse(i){const details=document.getElementById('letterResponse')?.value.trim();if(!details){showModal('<h3>Missing Details</h3><p>Document the information received from the patient.</p>');return}const letter=current.patientLetters[i];const team=patientLetterRoutingTeam(letter);const ref='INF-'+Math.floor(100000+Math.random()*900000);letter.status='Patient Response Received - Submitted';current.notes.unshift([new Date().toLocaleString('en-US'),noteAuthor(),`Patient response received for ${letter.type}. ${details} Submitted to ${team} under ${ref}. Expected TAT: 5-7 business days.`]);current.coverageRequests.unshift({date:new Date().toLocaleDateString('en-US'),type:'Patient-provided information review',reference:ref,status:'Submitted',tat:'5-7 business days'});letters.innerHTML=renderPatientLetters();notes.innerHTML=renderNotes();showModal(`<h3>Information Submitted</h3><p><b>Reference:</b> ${ref}</p><p>The patient response was submitted to the ${team}. Expected TAT: 5-7 business days.</p>`)}
+
+function eobLineStatus(line){
+ const reason=String(line?.[6]||'').toUpperCase();
+ if(/^CO-\d+/.test(reason))return 'Denied — Insurance/Provider Review';
+ if(/^PR-(96|204)\b/.test(reason)||/SERVICE EXCLUDED BY PLAN|NOT COVERED BY (THE )?PLAN/.test(reason))return 'Not Covered — Patient Responsibility';
+ if(/PENDING|QUESTIONNAIRE|INFORMATION REQUESTED/.test(reason))return 'Pending';
+ return 'Processed';
+}
+function isDeniedOrExcludedLine(line){
+ const reason=String(line?.[6]||'').toUpperCase();
+ return /^CO-\d+/.test(reason)||/^PR-(96|204)\b/.test(reason)||/SERVICE EXCLUDED BY PLAN|NOT COVERED BY (THE )?PLAN/.test(reason);
+}
+function renderEob(){
+ let rows=current.lines.map(r=>`<tr><td>${esc(r[0])}</td><td>${esc(r[1])}</td><td>${money(r[2])}</td><td>${money(r[3])}</td><td>${money(r[4])}</td><td>${money(r[5])}</td><td><span class="pill ${eobLineStatus(r).startsWith('Processed')?'ok':eobLineStatus(r).startsWith('Pending')?'warn':''}">${esc(eobLineStatus(r))}</span></td><td>${esc(r[6])}</td></tr>`).join('');
+ const hasMixedOutcome=current.lines.some(isDeniedOrExcludedLine)&&current.lines.some(r=>!isDeniedOrExcludedLine(r)&&Number(r[4]||0)>0);
+ const mixedOutcomeNote=hasMixedOutcome?`<div class="info-note" style="margin-top:12px"><b>Line-level payment reminder:</b> The total insurance payment reflects only the service lines the plan paid. Every denied or plan-excluded line shows <b>$0.00</b> under Paid.</div>`:'';
+ const remit=current.remittance||{};
+ const paymentNumberLabel=String(remit.method||'').toLowerCase().includes('check')?'Check Number':'EFT Number';
+ const remittancePanel=remit.issued?`<div class="card"><h3 class="section-title">Payment and Remittance Details</h3><div class="grid4"><div class="kpi">Payment Method<b>${esc(remit.method)}</b></div><div class="kpi">Payment Date<b>${esc(remit.paymentDate)}</b></div><div class="kpi">Payment Amount<b>${money(remit.amount)}</b></div><div class="kpi">${paymentNumberLabel}<b>${esc(remit.paymentNumber)}</b></div></div><div class="grid4" style="margin-top:12px"><div class="kpi">EFT Trace Number<b>${esc(remit.traceNumber)}</b></div><div class="kpi">ERA / Remittance Number<b>${esc(remit.remittanceAdvice)}</b></div><div class="kpi">Payer Claim Control #<b>${esc(remit.payerClaimControl)}</b></div><div class="kpi">Posting Status<b>${esc(remit.depositStatus)}</b></div></div></div>`:`<div class="card"><h3 class="section-title">Payment and Remittance Details</h3><div class="info-note"><b>No insurance payment was issued for this adjudication.</b> Review the claim status, reason codes, billing history, and account notes before discussing the balance.</div><div class="grid2" style="margin-top:12px"><div><label>ERA / Remittance Number</label><div>${esc(remit.remittanceAdvice||'N/A')}</div></div><div><label>Payer Claim Control Number</label><div>${esc(remit.payerClaimControl||'N/A')}</div></div></div></div>`;
+ return `<div class="card"><div style="display:flex;justify-content:space-between"><h3 class="section-title">Explanation of Benefits</h3><button class="secondary" onclick="viewEobCopy()">View EOB Copy</button></div>
+ <div class="grid"><div class="kpi">Total Billed<b>${money(current.eob.billed)}</b></div><div class="kpi">Allowed<b>${money(current.eob.allowed)}</b></div><div class="kpi">Insurance Paid<b>${money(current.eob.paid)}</b></div><div class="kpi">Patient Responsibility<b>${money(current.eob.patient)}</b></div><div class="kpi">Plan / Claim Adjustments<b>${money(current.eob.writeoff)}</b></div></div>${mixedOutcomeNote}</div>
+ ${remittancePanel}
+ <div class="card"><table><thead><tr><th>CPT</th><th>Description</th><th>Billed</th><th>Allowed</th><th>Paid</th><th>Patient Resp</th><th>Line Status</th><th>Remark</th></tr></thead><tbody>${rows}</tbody></table></div>`}
+function renderTransactions(){
+ let rows=current.transactions.map(r=>`<tr><td>${r[0]}</td><td>${r[1]}</td><td>${money(r[2])}</td><td>${r[3]}</td><td>${r[4]}</td></tr>`).join('');
+ const posSummary=current.posCopay?`<div class="card pos-payment-summary"><h3 class="section-title">Copay Collected During Visit</h3><div class="grid4"><div class="kpi">Amount<b>${money(current.posCopay.amount)}</b></div><div class="kpi">Payment Date<b>${current.posCopay.date}</b></div><div class="kpi">Payment Method<b>${esc(current.posCopay.method)}</b></div><div class="kpi">Payment Reference<b>${current.posCopay.reference}</b></div></div><p class="muted" style="margin-bottom:0">Review this payment before discussing the remaining balance so the caller receives credit for what was already paid at the facility.</p></div>`:'';
+ return `${posSummary}<div class="card"><h3 class="section-title">Financial Transactions</h3><table><thead><tr><th>Posted Date</th><th>Transaction</th><th>Amount</th><th>Status</th><th>Explanation</th></tr></thead><tbody>${rows}</tbody></table></div>`}
+function renderStatements(){
+ const mode=statementMode(current);
+ const rows=(current.statementHistory||[]).map(s=>`<tr><td>${s.date}</td><td>${s.number}</td><td>${s.method}</td><td>${s.status}</td><td>${money(s.balance)}</td></tr>`).join('');
+ const history=rows?`<table><thead><tr><th>Date</th><th>Statement / Notice</th><th>Method</th><th>Status</th><th>Balance</th></tr></thead><tbody>${rows}</tbody></table>`:`<div class="no-statement-state"><b>No patient statements have been generated.</b><br>The account does not currently have a collectible patient balance.</div>`;
+ let actions='';
+ let guidance='';
+ if(mode==='patient'){
+   actions=`<div class="actions"><button class="primary" onclick="viewPatientStatement()">View Current Statement</button><button class="secondary" onclick="openStatementSend()">Resend Statement</button></div>`;
+ }else if(mode==='reversal'){
+   guidance=`<div class="info-note" style="margin-bottom:14px"><b>A reversal notice is available.</b> The prior patient statement was withdrawn after the account was returned to insurance review.</div>`;
+   actions=`<div class="actions"><button class="primary" onclick="viewPatientStatement()">View Reversal Notice</button><button class="secondary" onclick="openStatementSend()">Resend Reversal Notice</button></div>`;
+ }else{
+   guidance=`<div class="info-note" style="margin-bottom:14px"><b>No current patient statement is available.</b> The patient balance is ${money(current.balance)}. ${Number(current.insuranceBalance)>0?'The remaining amount is assigned to insurance.':'Review the account status and notes for the active hold or review.'}</div>`;
+ }
+ return `<div class="card"><h3 class="section-title">Patient Statement History</h3>${guidance}${history}${actions}</div>`}
+function renderNotes(){
+ let rows=current.notes.map(r=>`<tr><td>${r[0]}</td><td>${r[1]}</td><td>${r[2]}</td></tr>`).join('');
+ return `<div class="card"><h3 class="section-title">Account Notes</h3><table><thead><tr><th>Date/Time</th><th>Source</th><th>Note</th></tr></thead><tbody>${rows}</tbody></table>
+ <div style="margin-top:14px"><label>Add Call Note</label><textarea id="newNote" rows="4" placeholder="Document reason for call, information provided, payment discussion, outcome, and next steps."></textarea><div class="actions"><button class="primary" onclick="addNote()">Save Note</button></div></div></div>`}
+function renderPayment(){
+ let disabled=paymentBlocked(current);
+ const discountAmount=current.discountEligible?(current.balance*(1-current.discountRate)):current.balance;
+ return `<div class="card"><h3 class="section-title">Take Payment</h3>${disabled?'<div class="notice">Payment is not available while this account is on hold or has no collectible balance.</div>':''}
+ <div class="grid2"><div><label>Current Balance</label><div class="big-balance">${money(current.balance)}</div></div><div><label>Payment Processing Reminder</label><div class="info-note" style="margin:0">Use only the card information provided by the caller. The processor response will appear after submission. Never announce an approval or decline before the transaction is attempted.</div></div></div>
+ <hr><h4>Choose Payment Arrangement</h4>
+ <div class="payment-choice-grid"><div class="grid">
+ <label class="payment-choice"><input type="radio" name="paymentChoice" value="full" checked onchange="applyPaymentChoice()" ${disabled?'disabled':''}><span><strong>Full Balance</strong><small>${money(current.balance)}</small></span></label>
+ <label class="payment-choice"><input type="radio" name="paymentChoice" value="other" onchange="applyPaymentChoice()" ${disabled?'disabled':''}><span><strong>Other Amount</strong><small>Caller specifies amount</small></span></label>
+ <label class="payment-choice"><input type="radio" name="paymentChoice" value="plan" onchange="applyPaymentChoice()" ${disabled||!current.paymentPlanEligible?'disabled':''}><span><strong>Payment Plan</strong><small>${current.paymentPlanEligible?'3, 6, or 12 months':'Not eligible'}</small></span></label>
+ <label class="payment-choice"><input type="radio" name="paymentChoice" value="discount" onchange="applyPaymentChoice()" ${disabled||!current.discountEligible?'disabled':''}><span><strong>One-Time Discount</strong><small>${current.discountEligible?money(discountAmount)+' payoff':'Not eligible'}</small></span></label>
+ </div></div>
+ <div id="planBox" class="hidden" style="margin-top:12px"><label>Payment Plan</label><select id="planChoice"><option>3 monthly payments</option><option>6 monthly payments</option><option>12 monthly payments</option></select></div>
+ <div style="margin-top:12px"><label>Payment Amount</label><input id="payAmount" type="number" step="0.01" value="${current.balance.toFixed(2)}" ${disabled?'disabled':''}></div>
+ <hr><h4>Card Information</h4><div class="grid2"><div><label>Name on Card</label><input id="cardName" ${disabled?'disabled':''}></div><div><label>Card Number</label><input id="cardNumber" placeholder="Enter caller-provided card number" ${disabled?'disabled':''}></div><div><label>Expiration</label><input id="cardExp" placeholder="MM/YY" ${disabled?'disabled':''}></div><div><label>CVV</label><input id="cardCvv" placeholder="123" ${disabled?'disabled':''}></div><div><label>Billing ZIP</label><input id="cardZip" ${disabled?'disabled':''}></div></div>
+ <div class="actions"><button class="primary" onclick="processPayment()" ${disabled?'disabled':''}>Submit Payment</button></div></div>`}
+const reviewTypeDetails={
+ 'Billing Review':{owner:'Billing Team',tat:'5-7 business days',detail:'Account charges, posting, statement, or billing workflow review.',script:'“I will submit this to our Billing Team for review. The expected turnaround time is 5-7 business days. We will update the account once the review is completed.”'},
+ 'Insurance Follow-Up':{owner:'Insurance Follow-Up Team',tat:'15-30 calendar days',detail:'Payer follow-up or claim-status review. Final timing may depend on the payer.',script:'“I will submit this to our Insurance Follow-Up Team. The expected turnaround time is 15-30 calendar days, depending on the payer’s response. We will document the outcome on the account.”'},
+ 'Eligibility and Benefits Review':{owner:'Benefits and Eligibility Verification Team',tat:'3-5 business days',detail:'Coverage, benefit, member-ID, effective-date, or eligibility validation.',script:'“I will submit this to our Benefits and Eligibility Verification Team. The expected turnaround time is 3-5 business days. This review confirms the coverage details but does not guarantee claim payment.”'},
+ 'Coordination of Benefits Review':{owner:'Benefits and Eligibility Verification Team',tat:'5-7 business days',detail:'Primary/secondary order, other active coverage, or COB review.',script:'“I will submit a coordination-of-benefits review to our Benefits and Eligibility Verification Team. The expected turnaround time is 5-7 business days. We will confirm the correct insurance order before additional billing action is taken.”'},
+ 'New Insurance Billing':{owner:'Benefits and Eligibility Verification Team',tat:'3-5 business days for verification',detail:'New coverage must be verified before billing or corrected-claim action can begin.',script:'“I will submit the new insurance information to our Benefits and Eligibility Verification Team. Verification is expected within 3-5 business days. Once coverage and billing order are confirmed, the appropriate billing action can begin.”'},
+ 'Denial Review':{owner:'Denial Management Team',tat:'5-7 business days for internal review; 30-45 calendar days if sent to the payer',detail:'Denial validation, correction, reconsideration, or appeal review.',script:'“I will submit this to our Denial Management Team. The internal review is expected within 5-7 business days. If a reconsideration or appeal is sent to the payer, the payer review may take approximately 30-45 calendar days.”'},
+ 'Authorization Review':{owner:'Authorization Team',tat:'7-10 business days for internal review; payer timing may vary',detail:'Authorization, retro-authorization, or medical-necessity support review.',script:'“I will submit this to our Authorization Team. The internal review is expected within 7-10 business days. If payer review is required, additional processing time may apply.”'},
+ 'Coding Review':{owner:'Coding Team',tat:'5-7 business days for internal review; 15-30 calendar days after payer acceptance',detail:'Diagnosis, procedure, modifier, or documentation-related coding review.',script:'“I will submit this to our Coding Team. The internal review is expected within 5-7 business days. If a corrected claim is required, payer processing may take another 15-30 calendar days after acceptance.”'},
+ 'No-Show Dispute':{owner:'Clinic or Scheduling Review Team',tat:'7-10 business days',detail:'Review of cancellation history, scheduling records, and charge validity.',script:'“I will submit the no-show charge for review. The expected turnaround time is 7-10 business days. The charge cannot be removed during this call unless an approved adjustment is already documented.”'},
+ 'Supervisor Assistance':{owner:'Patient Services Supervisor',tat:'1-2 business days',detail:'Supervisor callback or additional service review.',script:'“I will request supervisor assistance. The expected callback or review time is 1-2 business days. I will include the details we discussed so you do not have to repeat the full concern.”'}
+};
+function reviewOption(type){const d=reviewTypeDetails[type];return `<option value="${type}">${type} — ${d.tat}</option>`}
+function reviewTatHTML(type,priority='Routine'){
+ const d=reviewTypeDetails[type]||reviewTypeDetails['Billing Review'];
+ const priorityText=priority==='Urgent'?'This request will be flagged as urgent. Urgent priority does not guarantee a shorter turnaround time.':'The standard turnaround time applies unless the receiving team documents a different timeframe.';
+ return `<div class="review-tat-head"><div><strong>Expected Turnaround Time</strong><div class="muted">Review the timeframe before submitting so you can set accurate expectations.</div></div><div class="review-tat-value">${d.tat}</div></div><div class="review-tat-grid"><span>Assigned Team</span><div>${d.owner}</div><span>Review Scope</span><div>${d.detail}</div></div><div class="priority-note">${priorityText}</div><div class="muted" style="margin-top:8px">Patient-facing wording is available in the Call &amp; Script Guide.</div>`
+}
+function updateReviewTat(){
+ const type=document.getElementById('escType')?.value||'Billing Review';
+ const priority=document.getElementById('escPriority')?.value||'Routine';
+ const panel=document.getElementById('reviewTatPanel');
+ if(panel)panel.innerHTML=reviewTatHTML(type,priority);
+}
+function renderEscalation(){
+ const types=Object.keys(reviewTypeDetails).map(reviewOption).join('');
+ return `<div class="card"><h3 class="section-title">Escalate for Internal Review</h3><div class="grid2"><div><label>Review Type</label><select id="escType" onchange="updateReviewTat()">${types}</select></div><div><label>Priority</label><select id="escPriority" onchange="updateReviewTat()"><option>Routine</option><option>Urgent</option></select></div></div><div id="reviewTatPanel" class="review-tat-panel">${reviewTatHTML('Billing Review','Routine')}</div><div style="margin-top:12px"><label>Reason and Supporting Details</label><textarea id="escReason" rows="5" placeholder="Document the account issue, actions already completed, and supporting details."></textarea></div><div class="actions"><button class="primary" onclick="submitEscalation()">Submit Review Request</button></div></div>`}
+function applyPaymentChoice(){
+ const selected=document.querySelector('input[name="paymentChoice"]:checked')?.value||'full';
+ planBox.classList.toggle('hidden',selected!=='plan');
+ if(selected==='discount'&&current.discountEligible) payAmount.value=(current.balance*(1-current.discountRate)).toFixed(2);
+ else if(selected==='full') payAmount.value=current.balance.toFixed(2);
+ else if(selected==='plan'){
+   const months=parseInt(planChoice?.value)||3;
+   payAmount.value=(current.balance/months).toFixed(2);
+ }
+}
+function processPayment(){
+ let amt=parseFloat(payAmount.value||0);
+ if(amt<=0||amt>current.balance){showModal('<h3>Payment Not Processed</h3><p>Enter an amount greater than $0 and not more than the current balance.</p>');return}
+ if(cardNumber.value.trim()===''||cardExp.value.trim()===''||cardCvv.value.trim()===''||cardName.value.trim()===''||cardZip.value.trim()===''){showModal('<h3>Payment Not Processed</h3><p>Complete all required card fields.</p>');return}
+ const outcome=current.paymentScenario;
+ const now=new Date().toLocaleString('en-US');
+ const failures={
+   issuer_decline:{title:'Payment Declined',code:'DCL-05',note:'Card issuer did not approve the transaction.',script:'“The card issuer did not approve this transaction. We can verify the information once, try another card, or discuss another available payment option.”'},
+   expired_card:{title:'Payment Not Authorized',code:'EXP-14',note:'Card expiration information was not accepted.',script:'“The payment could not be authorized because the card information appears to be expired. May we verify the expiration date or use another payment method?”'},
+   insufficient_funds:{title:'Payment Declined',code:'NSF-51',note:'Card issuer returned an insufficient-funds response.',script:'“The card issuer was unable to approve the amount. We can try a different amount if appropriate, use another payment method, or review payment-plan options.”'},
+   processor_unavailable:{title:'Payment Processor Unavailable',code:'SYS-91',note:'Processor was temporarily unavailable. No authorization was completed.',script:'“Our payment processor is temporarily unavailable, and no charge was completed. I can review another payment method or explain how to try again later.”'}
+ };
+ if(failures[outcome]){
+   const f=failures[outcome];
+   current.notes.unshift([now,noteAuthor(),`Card payment attempt for ${money(amt)} was not completed. ${f.note} Response code ${f.code}. No funds posted.`]);
+   showModal(`<h3>${f.title}</h3><p>${f.note}</p><p><b>Response Code:</b> ${f.code}</p><p class="muted">Refer to the Call &amp; Script Guide for patient-facing wording. Do not ask why the issuer declined the card and do not retry repeatedly without the caller’s permission.</p>`);
+   notes.innerHTML=renderNotes();
+   return;
+ }
+ const conf='PMT-'+Math.floor(100000+Math.random()*900000);
+ current.balance=+(current.balance-amt).toFixed(2);
+ current.transactions.unshift([new Date().toLocaleDateString('en-US'),'Patient Payment',amt,'Posted','Card payment confirmation '+conf]);
+ current.notes.unshift([now,noteAuthor(),`Payment of ${money(amt)} processed successfully. Confirmation ${conf}. Remaining balance ${money(current.balance)}.`]);
+ current.lastPayment={amount:amt,confirmation:conf,date:now};
+ showModal(`<h3>Payment Successful</h3><p><b>Amount:</b> ${money(amt)}</p><p><b>Remaining Balance:</b> ${money(current.balance)}</p><p><b>Confirmation Number:</b> ${conf}</p><p class="muted">Refer to the Call &amp; Script Guide for payment-confirmation wording.</p>`);
+ renderAll();showTab('payment',navButton('payment'));
+}
+function addNote(){if(!newNote.value.trim())return;current.notes.unshift([new Date().toLocaleString('en-US'),noteAuthor(),newNote.value.trim()]);notes.innerHTML=renderNotes();showModal('<h3>Note Saved</h3><p>The account note was added successfully.</p>')}
+function submitEscalation(){
+ if(!escReason.value.trim()){showModal('<h3>Missing Details</h3><p>Enter the reason for escalation.</p>');return}
+ const ref='REV-'+Math.floor(10000+Math.random()*90000);
+ const type=escType.value;
+ const priority=escPriority.value;
+ const d=reviewTypeDetails[type]||reviewTypeDetails['Billing Review'];
+ current.notes.unshift([new Date().toLocaleString('en-US'),noteAuthor(),`${type} submitted to ${d.owner}. Priority: ${priority}. Reference ${ref}. Expected TAT: ${d.tat}. ${escReason.value.trim()}`]);
+ showModal(`<h3>Review Request Submitted</h3><p><b>Reference:</b> ${ref}</p><p><b>Assigned Team:</b> ${d.owner}</p><p><b>Expected TAT:</b> ${d.tat}</p><p class="muted">Refer to the Call &amp; Script Guide for expectation-setting wording. Billing activity may continue unless a hold is specifically applied. Priority selection does not guarantee a shorter TAT.</p>`);notes.innerHTML=renderNotes();
+}
+
+function reviewScriptGuideHTML(){
+ return Object.entries(reviewTypeDetails).map(([type,d])=>`<div class="script-line"><b>${esc(type)}</b><br><span class="muted">Assigned team: ${esc(d.owner)} | Expected TAT: ${esc(d.tat)}</span><br><br>${d.script}</div>`).join('');
+}
+
+function openScriptGuide(){showModal(`<div class="script-guide"><h2 style="margin-top:0;font-size:21px">Patient Financial Services Call &amp; Script Guide</h2><p class="muted">Use these as support, not as a word-for-word requirement. Always verify the account before selecting the appropriate explanation.</p>
+<details open><summary>Basic Call Flow</summary><div class="script-body"><ol class="script-check"><li>Open the call and ask for the caller’s name so you can personalize the conversation.</li><li>Ask how you can help, then listen to the complete concern before reviewing the account.</li><li>Verify full name, DOB, and complete address before disclosing account details.</li><li>Review the current status, insurance order, EOB, billing history, patient letters, transactions, and previous notes.</li><li>Acknowledge what the caller said before explaining the account.</li><li>Give the resolution or next step, including a realistic TAT.</li><li>Collect payment only when the balance is valid and no hold applies.</li><li>Document the conversation, action, reference number, and expectation set.</li></ol><div class="script-line"><b>Opening:</b><br>“Thank you for calling Patient Services, my name is ___. Can I have your name, please?”<br><br><b>After the caller provides their name:</b><br>“Thank you, [Caller Name]. How can we help you today?”</div></div></details>
+<details><summary>Minor or Dependent Patient Verification</summary><div class="script-body"><p>Review the demographics first to identify whether the patient is a minor or another person is financially responsible for the account.</p><div class="script-line"><b>Minor patient:</b><br>“Before I discuss the account, may I verify your full name, date of birth, relationship to the patient, and the contact information listed for the parent or guardian?”</div><div class="script-line"><b>Spouse or dependent:</b><br>“I can see that another person is listed as the guarantor. I’ll first verify your identity and authority to discuss the account before reviewing any account-specific information.”</div><p>Do not assume that a parent, spouse, or guarantor automatically has permission to receive all clinical information. Follow the organization’s verification and authorization requirements.</p></div></details>
+<details><summary>Empathy, Acknowledgment, and Assurance</summary><div class="script-body"><div class="script-line"><b>Repeat caller:</b><br>“I understand why this is frustrating, especially since you have already contacted us. I’m reviewing the prior notes and the current account status so I can give you a clear update and next step today.”</div><div class="script-line"><b>Concerned about a bill:</b><br>“I can understand why receiving this balance would be concerning. Let me review how the claim processed and explain what the account currently shows.”</div><div class="script-line"><b>Assurance without overpromising:</b><br>“I will document what you shared and route the account to the correct team. The expected review time is ____. While I cannot guarantee the payer’s decision, I can make sure the request includes the information needed for review.”</div></div></details>
+<details><summary>Internal Review TAT and Expectation Setting</summary><div class="script-body"><p>Select the appropriate review type in the Internal Review tab, confirm the assigned team and TAT, then use the matching wording below. Do not promise approval, adjustment, payment, or a faster outcome.</p>${reviewScriptGuideHTML()}</div></details>
+<details><summary>How to Explain an EOB</summary><div class="script-body"><div class="script-line">“The provider billed <b>[billed amount]</b>. Your insurance allowed <b>[allowed amount]</b>, paid <b>[plan payment]</b>, and assigned <b>[patient amount]</b> to you as <b>[deductible, copay, coinsurance, or non-covered service]</b>. The remaining difference was adjusted according to the provider’s agreement with the plan.”</div><p><b>Keep the terms simple:</b></p><ul><li><b>Deductible:</b> The amount the plan requires the member to pay before the plan begins paying certain benefits.</li><li><b>Copay:</b> A fixed amount assigned for a covered service.</li><li><b>Coinsurance:</b> The member’s percentage of the allowed amount.</li><li><b>Allowed amount:</b> The amount the plan recognizes for the service; it is not always the original charge.</li></ul><div class="script-line"><b>Check for understanding:</b><br>“Would it help if I walk through one service line at a time?”</div></div></details>
+<details><summary>Service Not Covered by the Plan — Patient Responsible</summary><div class="script-body"><p>Confirm that the EOB assigns the amount to patient responsibility, such as PR-96 or PR-204. Do not assume every non-covered denial is billable to the patient.</p><div class="script-line">“The EOB shows that this service is excluded under the benefit plan and that the plan assigned <b>[amount]</b> to patient responsibility. This is different from a provider-responsibility denial. I can review the service and payment options, and you may also contact the plan if you would like benefit details directly from them.”</div></div></details>
+<details><summary>Denial or Claim Review — Amount Not Collectible</summary><div class="script-body"><div class="script-line">“A portion of the claim is still being reviewed by our billing or denial team. That denied amount is not included in what I am asking you to pay today. The review is expected to take ____, and the account notes show the next follow-up date as ____.”</div><p>Do not tell the patient the denial will definitely be overturned. Explain the current status, TAT, and any billing hold.</p></div></details>
+<details><summary>Coordination of Benefits and Two Insurances</summary><div class="script-body"><div class="script-line"><b>Verify order:</b><br>“Before we discuss payment, may I confirm which insurance was primary on the date of service and whether the secondary plan was also active?”</div><div class="script-line"><b>Secondary not billed:</b><br>“I can see the primary claim activity, but the secondary billing is not complete. I will submit a request to the Benefits and Eligibility Verification Team to verify the coverage order and secondary billing status. The expected TAT is ____.”</div><div class="script-line"><b>Secondary billed before primary:</b><br>“The account shows that the insurance sequence needs review. I am placing the appropriate request so the primary plan can be handled before the secondary plan. We will not ask you to pay the amount under review.”</div></div></details>
+<details><summary>Caller Provides New Insurance</summary><div class="script-body"><p>Collect payer name, member ID, group number, policyholder, relationship, effective date, and whether the coverage is primary or secondary.</p><div class="script-line">“Thank you for providing the insurance information. I’ll add it to the account and submit it to the Benefits and Eligibility Verification Team for eligibility and billing-order review. Verification generally takes 3–5 business days. Once verified, the billing team can determine whether the claim should be submitted or corrected.”</div><p>Do not promise that the insurance will pay. Document all information and the review reference number.</p></div></details>
+<details><summary>Patient Information Request Letter</summary><div class="script-body"><div class="script-line">“Your insurance company requested additional information before it can complete the claim. The letter asks for <b>[requested information]</b>. Once we receive your response, we will forward it to the insurance team. The payer’s review time begins after it receives the information.”</div><p>Examples include COB questionnaires, accident details, other-liability information, student/dependent status, or other active insurance.</p></div></details>
+<details><summary>Requesting and Processing Payment</summary><div class="script-body"><div class="script-line"><b>Transition:</b><br>“Based on the EOB and account review, the current amount due is <b>[amount]</b>. Would you like to take care of that balance today?”</div><div class="script-line"><b>Before submitting:</b><br>“I’ll submit the payment for <b>[amount]</b>. Please hold while the processor returns the result.”</div><p>Repeat only the last four digits when confirming the card. Never announce that a card will approve or decline before submission.</p></div></details>
+<details><summary>Card Declined or Payment Not Completed</summary><div class="script-body"><div class="script-line"><b>Issuer decline:</b><br>“The card issuer did not approve this transaction. We can verify the information once, try another card, or review another payment option.”</div><div class="script-line"><b>Expired card:</b><br>“The payment could not be authorized because the expiration information was not accepted. May we verify the expiration date or use another payment method?”</div><div class="script-line"><b>Insufficient funds response:</b><br>“The card issuer was unable to approve this amount. We can try a different amount if appropriate, use another payment method, or review payment-plan options.”</div><div class="script-line"><b>Processor unavailable:</b><br>“Our payment processor is temporarily unavailable, and no charge was completed. I can review another payment method or explain how to try again later.”</div><p>Do not state why the bank declined the card beyond the system response. Do not repeatedly retry without permission.</p></div></details>
+<details><summary>Payment Plan, Partial Payment, or Discount</summary><div class="script-body"><div class="script-line"><b>Payment plan:</b><br>“The account currently qualifies for a payment plan. The available terms are ____. The estimated monthly amount would be ____.”</div><div class="script-line"><b>Partial payment:</b><br>“We can accept the amount you are able to pay today. The remaining balance will still be due unless a payment plan or other arrangement is established.”</div><div class="script-line"><b>One-time discount:</b><br>“The account qualifies for a one-time settlement amount of ____. This requires payment of the full discounted amount today.”</div></div></details>
+<details><summary>Reprocessing, Billing Hold, or Do Not Bill</summary><div class="script-body"><div class="script-line">“The claim is currently being reprocessed, and the account is on a billing hold. I will not request payment today. The expected review time is ____, and the next follow-up date is ____.”</div></div></details>
+<details><summary>Statement, Itemized Bill, or EOB Copy</summary><div class="script-body"><div class="script-line">“I can resend the patient statement by email, text link, or mail. I can also review the EOB details with you and provide the current statement copy available in the account.”</div><p>Confirm the delivery address or contact information before sending.</p></div></details>
+<details><summary>No-Show Charge Dispute</summary><div class="script-body"><div class="script-line"><b>Empathy and acknowledgment:</b><br>“I understand why this charge would be frustrating, especially if you believe the appointment was cancelled. Let me review the scheduling notes, prior calls, and any cancellation documentation before I explain the next step.”</div><p><b>Research before responding:</b></p><ul><li>Confirm the appointment date, time, location, and no-show charge.</li><li>Review scheduling notes, cancellation records, call history, portal messages, and prior patient contacts.</li><li>Check whether the charge is already under review or on hold.</li><li>Do not remove, validate, or collect the disputed charge without documented resolution.</li></ul><div class="script-line"><b>If no cancellation is documented:</b><br>“I’m not seeing a completed cancellation in the records available to me. I will document the details you provided and submit the charge to the Clinic or Scheduling Review Team. The expected TAT is 7–10 business days.”</div><div class="script-line"><b>If the patient has called before:</b><br>“I can see that you have contacted us previously about this concern. I’m sorry you have had to follow up again. I’ll include the prior contacts in the review so the team has the complete history.”</div><div class="script-line"><b>Expectation setting:</b><br>“The charge will remain under review while the clinic checks the scheduling and cancellation records. I cannot promise that it will be removed, but the review team will determine whether the charge is valid. The expected TAT is 7–10 business days.”</div></div></details>
+<details><summary>General Dispute or Supervisor Request</summary><div class="script-body"><div class="script-line"><b>Dispute:</b><br>“I understand that you disagree with the charge. I’ll document what happened and route it for review. The expected TAT is ____. I cannot remove the charge during the call unless the account shows an approved adjustment.”</div><div class="script-line"><b>Supervisor request:</b><br>“I can request supervisor assistance. Before I do, let me summarize what I found and the action already available so you do not have to repeat the entire concern.”</div></div></details>
+<details><summary>Caller Is Not the Patient or Verification Fails</summary><div class="script-body"><div class="script-line">“To protect the patient’s information, I’m unable to discuss the account until the required verification or authorization is completed. I can explain the general process, but I cannot disclose account-specific details.”</div></div></details>
+</div>`)}
+
+function viewReversalNotice(){
+ const notice=current.reversalNotice||{};
+ showModal(`<div class="reversal-notice">
+ <div class="statement-header"><div><h2>Statement Reversal Notice</h2><div>${esc(current.facility)}</div></div><div class="statement-meta"><b>${esc(notice.number||'Reversal Notice')}</b><br>Notice Date: ${esc(notice.date||current.accessDate)}<br>Account: ${esc(current.guarantor)}</div></div>
+ <div class="grid2 statement-addresses"><div><b>Patient</b><br>${esc(current.name)}<br>${esc(current.address)}</div><div><b>Original Statement</b><br>${esc(notice.originalStatement||current.statement)}<br>Previously stated amount: ${money(notice.originalAmount||0)}</div></div>
+ <div class="reversal-banner"><b>Please disregard the previous patient statement.</b><br>${esc(notice.reason||'The account was corrected and the prior patient balance was withdrawn.')}</div>
+ <div class="statement-amount-due"><b>Current Patient Amount Due</b><strong>${money(current.balance)}</strong></div>
+ <div class="statement-calculation" style="margin-top:16px"><div class="statement-calc-title">Corrected Account Summary</div><div class="statement-calc-row"><span>Previously stated patient amount</span><b>${money(notice.originalAmount||0)}</b></div><div class="statement-calc-row"><span>Patient balance reversal</span><b>-${money(notice.originalAmount||0)}</b></div><div class="statement-calc-row statement-final"><span>Current patient amount due</span><b>${money(current.balance)}</b></div></div>
+ <div class="statement-help-note" style="margin-top:16px"><b>What this means</b><br>${esc(notice.status||'No payment is required on the withdrawn statement. Review is continuing with the insurance plan.')}</div>
+ </div>`,true)
+}
+
+function viewPatientStatement(){
+ const mode=statementMode(current);
+ if(mode==='reversal'){viewReversalNotice();return}
+ if(mode==='none'){
+   showModal(`<h3>No Current Patient Statement</h3><div class="info-note"><b>No statement is available because the patient balance is ${money(current.balance)}.</b> ${Number(current.insuranceBalance)>0?'The remaining amount is assigned to insurance.':'Review the account status and notes for the active hold or review.'}</div>`);
+   return;
+ }
+ const paymentsReceived=(current.transactions||[])
+   .filter(r=>/patient payment|point-of-service copay/i.test(String(r[1]))&&String(r[3]).toLowerCase()==='posted')
+   .reduce((sum,r)=>sum+Math.max(0,Number(r[2])||0),0);
+ const otherCredits=Math.max(0,(Number(current.eob.patient)||0)-paymentsReceived-(Number(current.balance)||0));
+ const creditAmount=value=>Number(value)>0?`-${money(value)}`:money(0);
+ const detailRows=current.lines.map(r=>{
+   const adjustment=(Number(current.eob.writeoff)||0)>0?Math.max(0,(Number(r[2])||0)-(Number(r[3])||0)):0;
+   return `<tr><td>${esc(r[1])}</td><td>${current.dos}</td><td>${money(r[2])}</td><td>${creditAmount(adjustment)}</td><td>${creditAmount(r[4])}</td><td>${money(r[5])}</td></tr>`;
+ }).join('');
+ const creditRows=[
+   paymentsReceived>0?`<div class="statement-calc-row"><span>Patient payments received</span><b>-${money(paymentsReceived)}</b></div>`:'',
+   otherCredits>0?`<div class="statement-calc-row"><span>Other credits or billing holds</span><b>-${money(otherCredits)}</b></div>`:''
+ ].join('');
+ showModal(`<div class="patient-statement-copy">
+ <div class="statement-header">
+ <div><h2>Patient Statement</h2><div>${current.facility}</div></div>
+ <div class="statement-meta"><b>Statement ${current.statement}</b><br>Statement Date: ${current.statementHistory[0].date}<br>Account: ${current.guarantor}</div></div>
+ <div class="grid2 statement-addresses"><div><b>Patient</b><br>${current.name}<br>${current.address}</div>
+ <div><b>Patient Financial Services</b><br>Questions about your balance?<br>Call the number listed on your statement.</div></div>
+ <div class="statement-amount-due"><b>Amount Due</b><strong>${money(current.balance)}</strong></div>
+ <div class="statement-explanation"><b>How your balance was calculated</b><br>The original charges were reduced by insurance payments and plan/provider adjustments. Only the amount assigned to the patient, less any payments or account credits already posted, remains due.</div>
+ <div class="statement-reconciliation" aria-label="Statement balance reconciliation">
+   <div class="statement-reconciliation-item"><span>Original Charges</span><b>${money(current.eob.billed)}</b></div>
+   <div class="statement-reconciliation-item adjustment"><span>Plan / Provider Adjustments</span><b>${creditAmount(current.eob.writeoff)}</b></div>
+   <div class="statement-reconciliation-item"><span>Insurance Paid</span><b>${creditAmount(current.eob.paid)}</b></div>
+   <div class="statement-reconciliation-item"><span>Patient Responsibility</span><b>${money(current.eob.patient)}</b></div>
+ </div>
+ <div class="statement-table-wrap"><table class="statement-detail-table"><thead><tr><th>Description</th><th>Date</th><th>Charge</th><th>Plan / Provider Adjustment</th><th>Insurance Paid</th><th>Patient Responsibility</th></tr></thead><tbody>${detailRows}
+ <tr class="statement-total-row"><td colspan="2">Totals</td><td>${money(current.eob.billed)}</td><td>${creditAmount(current.eob.writeoff)}</td><td>${creditAmount(current.eob.paid)}</td><td>${money(current.eob.patient)}</td></tr></tbody></table></div>
+ <div class="statement-balance-grid">
+   <div class="statement-help-note"><b>What is a plan/provider adjustment?</b><br>This is the portion of the original charge reduced under the payer’s contracted rate or other approved adjustment. It is not included in the amount you owe.</div>
+   <div class="statement-calculation">
+     <div class="statement-calc-title">Current Balance Summary</div>
+     <div class="statement-calc-row"><span>Original charges</span><b>${money(current.eob.billed)}</b></div>
+     <div class="statement-calc-row"><span>Plan / provider adjustments</span><b>${creditAmount(current.eob.writeoff)}</b></div>
+     <div class="statement-calc-row"><span>Insurance paid</span><b>${creditAmount(current.eob.paid)}</b></div>
+     <div class="statement-calc-row"><span>Patient responsibility</span><b>${money(current.eob.patient)}</b></div>
+     ${creditRows}
+     <div class="statement-calc-row statement-final"><span>Amount due</span><b>${money(current.balance)}</b></div>
+   </div>
+ </div>
+ <div class="statement-payment-options"><b>Payment Options</b><br>Pay online at <a href="https://patientportal.example.com/pay" target="_blank" rel="noopener">patientportal.example.com/pay</a> or call Patient Services for assistance.</div>
+ </div>`,true)
+}
+
+function openStatementSend(){
+ const mode=statementMode(current);
+ if(mode==='none'){
+   showModal(`<h3>No Statement Available</h3><div class="info-note"><b>A patient statement cannot be sent because the current patient balance is ${money(current.balance)}.</b> ${Number(current.insuranceBalance)>0?'The outstanding amount remains assigned to insurance.':'Review the account status and notes for the active hold or review.'}</div>`);
+   return;
+ }
+ const documentLabel=mode==='reversal'?'Reversal Notice':'Patient Statement';
+ showModal(`<h3>Resend ${documentLabel}</h3>
+ <p class="muted">Select where the patient would like the ${documentLabel.toLowerCase()} delivered. Confirm the destination before sending.</p>
+ <label>Delivery Method</label>
+ <select id="sendMethod" onchange="updateStatementDeliveryFields()">
+   <option value="primaryEmail">Email to primary address — ${esc(current.email)}</option>
+   <option value="alternateEmail">Email to another address</option>
+   <option value="text">Text link to ${esc(current.phone)}</option>
+   <option value="mail">Mail to address on file</option>
+ </select>
+ <div id="alternateEmailFields" class="hidden" style="margin-top:12px">
+   <label for="alternateStatementEmail">Alternate Email Address</label>
+   <input id="alternateStatementEmail" type="email" autocomplete="off" placeholder="name@example.com">
+   <p class="muted" style="margin:6px 0 0">This address will be used only for this statement delivery and will not replace the email in Patient Demographics.</p>
+ </div>
+ <div id="statementDeliveryError" class="notice hidden" style="margin-top:12px"></div>
+ <div class="actions"><button class="primary" onclick="sendStatement()">Send Statement</button></div>`)
+}
+function updateStatementDeliveryFields(){
+ const method=document.getElementById('sendMethod')?.value;
+ const fields=document.getElementById('alternateEmailFields');
+ const error=document.getElementById('statementDeliveryError');
+ if(fields)fields.classList.toggle('hidden',method!=='alternateEmail');
+ if(error)error.classList.add('hidden');
+ if(method==='alternateEmail')setTimeout(()=>document.getElementById('alternateStatementEmail')?.focus(),0);
+}
+function sendStatement(){
+ const mode=statementMode(current);
+ if(mode==='none'){
+   modalContent.innerHTML=`<h3>Statement Not Sent</h3><div class="info-note"><b>No patient statement is available because the patient balance is ${money(current.balance)}.</b></div>`;
+   return;
+ }
+ const method=document.getElementById('sendMethod')?.value||'primaryEmail';
+ const error=document.getElementById('statementDeliveryError');
+ let deliveryMethod='Email';
+ let destination=current.email;
+ if(method==='alternateEmail'){
+   const alternate=(document.getElementById('alternateStatementEmail')?.value||'').trim();
+   const emailPattern=/^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+   if(!emailPattern.test(alternate)){
+     if(error){error.textContent='Enter a valid alternate email address before sending.';error.classList.remove('hidden')}
+     document.getElementById('alternateStatementEmail')?.focus();
+     return;
+   }
+   destination=alternate;
+ }else if(method==='text'){
+   deliveryMethod='Text link';
+   destination=current.phone;
+ }else if(method==='mail'){
+   deliveryMethod='Mail';
+   destination=current.address;
+ }
+ const now=new Date();
+ const isReversal=mode==='reversal';
+ const ref=(isReversal?'RVL':'STMT')+'-'+Math.floor(10000+Math.random()*90000);
+ const date=now.toLocaleDateString('en-US');
+ const timestamp=now.toLocaleString('en-US');
+ const documentNumber=isReversal?(current.reversalNotice?.number||`RV-${current.statement}`):current.statement;
+ const documentLabel=isReversal?'Reversal notice':'Patient statement';
+ current.statementHistory.unshift({date,number:documentNumber,method:deliveryMethod,status:isReversal?'Reversal Notice Delivery Requested':'Delivery Requested',balance:isReversal?0:current.balance,type:isReversal?'Reversal Notice':'Patient Statement'});
+ current.notes.unshift([timestamp,noteAuthor(),`${documentLabel} ${documentNumber} sent by ${deliveryMethod.toLowerCase()} to ${destination}. Reference ${ref}.`]);
+ renderAll();
+ modalContent.innerHTML=`<h3>${isReversal?'Reversal Notice':'Statement'} Sent</h3><div class="info-note"><b>Delivery request completed.</b></div><div class="grid2"><div><label>Delivery Method</label><div>${esc(deliveryMethod)}</div></div><div><label>Destination</label><div>${esc(destination)}</div></div><div><label>${isReversal?'Notice':'Statement'} Number</label><div>${esc(documentNumber)}</div></div><div><label>Reference</label><div>${ref}</div></div></div>`
+}
+function viewEobCopy(){
+ const remit=current.remittance||{};
+ const lineRows=current.lines.map(r=>{
+   const adjustment=Math.max(0,Number(r[2]||0)-Number(r[3]||0));
+   return `<tr><td>${esc(r[0])}</td><td>${esc(r[1])}</td><td>${money(r[2])}</td><td>${money(r[3])}</td><td>${money(adjustment)}</td><td>${money(r[4])}</td><td>${money(r[5])}</td><td>${esc(eobLineStatus(r))}</td><td>${esc(r[6])}</td></tr>`;
+ }).join('');
+ const hasMixedOutcome=current.lines.some(isDeniedOrExcludedLine)&&current.lines.some(r=>!isDeniedOrExcludedLine(r)&&Number(r[4]||0)>0);
+ const linePaymentNote=hasMixedOutcome?`<div style="margin-top:12px;padding:10px;border-left:3px solid #2a6099;background:#eef5fa"><b>Line-level payment reminder:</b> The total plan payment applies only to the paid service lines. Denied and plan-excluded lines have a plan payment of $0.00.</div>`:'';
+ const paymentNumberLabel=String(remit.method||'').toLowerCase().includes('check')?'Check Number':'EFT Number';
+ const paymentDetails=remit.issued?`<div style="margin-top:16px;border:1px solid #c7d5e1;border-radius:8px;padding:14px;background:#f8fbfd"><div style="font-weight:700;color:#17324d;margin-bottom:10px">Payment / Remittance Information</div><div class="grid4"><div><b>Payment Method</b><br>${esc(remit.method)}</div><div><b>Payment Date</b><br>${esc(remit.paymentDate)}</div><div><b>Payment Amount</b><br>${money(remit.amount)}</div><div><b>${paymentNumberLabel}</b><br>${esc(remit.paymentNumber)}</div></div><div class="grid4" style="margin-top:12px"><div><b>EFT Trace Number</b><br>${esc(remit.traceNumber)}</div><div><b>ERA / Remittance Number</b><br>${esc(remit.remittanceAdvice)}</div><div><b>Payer Claim Control #</b><br>${esc(remit.payerClaimControl)}</div><div><b>Payee / Posting Status</b><br>${esc(remit.payee)}<br>${esc(remit.depositStatus)}</div></div></div>`:`<div style="margin-top:16px;border:1px solid #c7d5e1;border-radius:8px;padding:14px;background:#f8fbfd"><div style="font-weight:700;color:#17324d;margin-bottom:8px">Payment / Remittance Information</div><div><b>No payment issued for this claim determination.</b></div><div class="grid2" style="margin-top:10px"><div><b>ERA / Remittance Number</b><br>${esc(remit.remittanceAdvice||'N/A')}</div><div><b>Payer Claim Control #</b><br>${esc(remit.payerClaimControl||'N/A')}</div></div></div>`;
+ showModal(`<div style="border:1px solid #aebdca;padding:18px;background:#fff">
+ <div style="display:flex;justify-content:space-between;border-bottom:3px solid #17324d;padding-bottom:10px;margin-bottom:12px">
+ <div><h2 style="margin:0;color:#17324d">Explanation of Benefits</h2><div class="muted">This is not a bill</div></div>
+ <div style="text-align:right"><b>${esc(current.insurance)}</b><br>Claim ${esc(current.claim)}<br>Processed ${esc(current.eobProcessedDate)}</div></div>
+ <div class="grid2"><div><b>Member</b><br>${esc(current.name)}<br>Member ID: ${esc(current.member)}<br>Group: ${esc(current.group)}<br>${esc(current.address)}</div>
+ <div><b>Provider</b><br>${esc(current.provider)}<br>${esc(current.facility)}<br>Date of Service: ${esc(current.dos)}<br>Payer Claim Control #: ${esc(remit.payerClaimControl||'N/A')}</div></div>
+ <div style="margin-top:16px" class="grid">
+ <div class="kpi">Amount Billed<b>${money(current.eob.billed)}</b></div>
+ <div class="kpi">Plan / Claim Adjustments<b>${money(current.eob.writeoff)}</b></div>
+ <div class="kpi">Plan Paid<b>${money(current.eob.paid)}</b></div>
+ <div class="kpi">You May Owe<b>${money(current.eob.patient)}</b></div></div>
+ ${paymentDetails}
+ ${linePaymentNote}<table style="margin-top:16px"><thead><tr><th>Code</th><th>Service</th><th>Billed</th><th>Allowed</th><th>Adjustment / Denied Amount</th><th>Plan Paid</th><th>You Owe</th><th>Line Status</th><th>Reason</th></tr></thead><tbody>${lineRows}</tbody></table>
+ <div style="margin-top:14px;padding:10px;background:#f4f7fa"><b>How the Amount Was Calculated</b><br>${money(current.eob.billed)} billed − ${money(current.eob.writeoff)} plan/claim adjustments − ${money(current.eob.paid)} plan payment = ${money(current.eob.patient)} patient responsibility.<br><span class="muted">Plan/claim adjustments may include contractual reductions and denied amounts. Any unresolved expected payer reimbursement is tracked separately under Insurance Balance.</span></div>
+ <div style="margin-top:10px;padding:10px;background:#f4f7fa"><b>Reason Code Guide</b><br>PR-1: Deductible &nbsp; PR-2: Coinsurance &nbsp; PR-3: Copayment<br>CO codes identify adjustments or denials that may require provider or insurance review.</div>
+ </div>`,true)
+}
+
+
+function generateTransactionReport(){
+ const noteRows=current.notes.map(n=>`<tr><td>${n[0]}</td><td>${n[1]}</td><td>${n[2]}</td></tr>`).join('');
+ const txRows=current.transactions.map(r=>`<tr><td>${r[0]}</td><td>${r[1]}</td><td>${money(r[2])}</td><td>${r[3]}</td><td>${r[4]}</td></tr>`).join('');
+ const coverageRows=(current.coverages||[]).map(c=>`<tr><td>${c.priority}</td><td>${c.payer}</td><td>${c.member}</td><td>${c.group}</td><td>${c.plan}</td><td>${c.status}</td></tr>`).join('');
+ const letterRows=(current.patientLetters||[]).map(l=>`<tr><td>${l.date}</td><td>${l.type}</td><td>${l.requested}</td><td>${l.status}</td><td>${l.due}</td><td>${l.reference}</td></tr>`).join('');
+ const billingRows=current.billingHistory.map(r=>`<tr><td>${r[0]}</td><td>${r[1]}</td><td>${r[2]}</td><td>${r[3]}</td><td>${r[4]}</td><td>${r[5]}</td></tr>`).join('');
+ const report=`<!doctype html><html><head><meta charset="utf-8"><title>Transaction Summary - ${current.name}</title>
+ <style>body{font-family:Arial;padding:28px;color:#222}h1{font-size:22px;border-bottom:3px solid #17324d;padding-bottom:8px}table{width:100%;border-collapse:collapse;margin:12px 0 22px}th,td{border:1px solid #bbb;padding:7px;font-size:12px;text-align:left}th{background:#eef4f8}.grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}.box{border:1px solid #bbb;padding:10px}.muted{color:#666;font-size:12px}@media print{button{display:none}}</style></head><body>
+ <h1>Patient Services Training Transaction Summary</h1>
+ <p><b>Prepared by:</b> ${esc(noteAuthor())}</p>
+ <div class="grid"><div class="box"><b>Patient:</b> ${current.name}<br><b>DOB:</b> ${current.dob}<br><b>Age / Minor:</b> ${current.age??'N/A'} / ${current.isMinor?'Yes':'No'}<br><b>MRN:</b> ${current.mrn}<br><b>Guarantor:</b> ${current.guarantor}</div>
+ <div class="box"><b>Responsible Party:</b> ${current.guarantorName} (${current.guarantorRelationship})<br><b>Responsible Party DOB:</b> ${current.guarantorDob}<br><b>Claim:</b> ${current.claim}<br><b>Date of Service:</b> ${current.dos}<br><b>Insurance:</b> ${current.insurance}<br><b>Current Patient Balance:</b> ${money(current.balance)}<br><b>Insurance Balance:</b> ${money(current.insuranceBalance||0)}<br><b>Balance Reminder Calls:</b> ${current.reminderCallCount}</div></div>
+ <h2>Account Status</h2><p>${current.status}</p>
+ <h2>Insurance Coverage</h2><table><thead><tr><th>Order</th><th>Payer</th><th>Member ID</th><th>Group</th><th>Plan</th><th>Status</th></tr></thead><tbody>${coverageRows}</tbody></table>
+ ${letterRows?`<h2>Patient Information Request Letters</h2><table><thead><tr><th>Date</th><th>Letter</th><th>Requested Information</th><th>Status</th><th>Due</th><th>Reference</th></tr></thead><tbody>${letterRows}</tbody></table>`:''}
+ <h2>Claim Billing History</h2><table><thead><tr><th>Date/Time</th><th>Activity</th><th>Destination/Owner</th><th>Status</th><th>ACK / Receipt</th><th>Details / TAT</th></tr></thead><tbody>${billingRows}</tbody></table>
+ <h2>Financial Transactions</h2><table><thead><tr><th>Date</th><th>Transaction</th><th>Amount</th><th>Status</th><th>Explanation</th></tr></thead><tbody>${txRows}</tbody></table>
+ <h2>Account Notes</h2><table><thead><tr><th>Date/Time</th><th>Source</th><th>Note</th></tr></thead><tbody>${noteRows}</tbody></table>
+ <p class="muted">Generated from the Patient Financial Services Training Environment.</p>
+ <button onclick="window.print()">Save as PDF / Print</button>
+ </body></html>`;
+ const w=window.open('','_blank');w.document.write(report);w.document.close();setTimeout(()=>w.print(),400);
+}
+
+function showModal(html,wide=false){modalContent.innerHTML=html;const box=document.querySelector('#modal .modalbox');if(box)box.classList.toggle('statement-wide',Boolean(wide));modal.classList.remove('hidden')} function closeModal(){modal.classList.add('hidden');const box=document.querySelector('#modal .modalbox');if(box)box.classList.remove('statement-wide')}
+
+restoreActiveUserName();
+
+document.querySelectorAll('#loginView input').forEach(input=>{
+  input.addEventListener('keydown',event=>{
+    if(event.key==='Enter'){
+      event.preventDefault();
+      findAccount();
+    }
+  });
+});
+
+</script>
+</body>
+</html>
