@@ -299,6 +299,40 @@ tbody tr:hover td{background:#fbfdff}
 .script-guide .script-body{padding:13px 15px}
 .script-line{background:#f7fafc;border:1px solid #e3ebf0;border-left:4px solid var(--blue);border-radius:6px;padding:10px 12px;margin:8px 0}
 .script-check{margin:6px 0;padding-left:18px}
+.modalbox.script-guide-modal{width:85vw;height:90vh;max-width:1500px;max-height:90vh;padding:0;overflow:hidden;display:flex;flex-direction:column}
+.script-guide-modal .modal-close{position:absolute;top:13px;right:16px;z-index:4;border-color:#b9cad7}
+.script-guide-modal #modalContent{height:100%;min-height:0;display:flex;flex-direction:column}
+.script-guide-header{flex:0 0 auto;padding:16px 68px 14px 20px;border-bottom:1px solid var(--border);background:#fff;box-shadow:0 3px 10px rgba(23,50,77,.06);z-index:2}
+.script-guide-header h2{margin:0 0 11px;font-size:21px;color:var(--nav)}
+.script-guide-search-row{display:flex;align-items:center;gap:10px}
+.script-guide-search-row label{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+.script-guide-search-row input{max-width:560px;padding:9px 11px}
+.script-guide-search-status{color:var(--muted);font-size:12px;white-space:nowrap}
+.script-guide-layout{display:grid;grid-template-columns:minmax(210px,24%) minmax(0,1fr);min-height:0;flex:1}
+.script-guide-toc{overflow:auto;padding:16px 12px 72px;background:#f6f9fb;border-right:1px solid var(--border)}
+.script-guide-toc-title{padding:0 8px 8px;font-size:11px;font-weight:750;color:#5b6d7b;text-transform:uppercase;letter-spacing:.4px}
+.script-guide-toc button{width:100%;display:block;padding:8px 9px;border:0;border-radius:7px;background:transparent;color:#405565;text-align:left;font-size:12.5px;line-height:1.35;cursor:pointer}
+.script-guide-toc button:hover,.script-guide-toc button:focus{background:#e8f1f7;color:var(--nav);outline:none}
+.script-guide{overflow:auto;min-height:0;padding:16px 22px 78px;scroll-behavior:smooth}
+.script-guide .guide-intro{margin-top:0}
+.script-guide mark{background:#ffe58a;color:inherit;border-radius:2px;padding:0 1px}
+.script-guide-empty{padding:24px;border:1px dashed #b8c8d4;border-radius:9px;background:#f8fafc;color:var(--muted);text-align:center}
+.script-guide-floating-close{position:absolute;right:22px;bottom:18px;z-index:5;min-height:39px;padding:9px 14px;border:1px solid var(--blue);border-radius:9px;background:var(--blue);color:#fff;font-weight:700;cursor:pointer;box-shadow:0 7px 18px rgba(31,82,126,.28)}
+.script-guide-floating-close:hover{background:var(--blue-dark)}
+@media(max-width:760px){
+  .modal{padding:8px}
+  .modalbox.script-guide-modal{width:96vw;height:94vh;max-height:94vh}
+  .script-guide-header{padding:14px 56px 12px 14px}
+  .script-guide-search-row{display:block}
+  .script-guide-search-row input{max-width:none}
+  .script-guide-search-status{display:block;margin-top:5px}
+  .script-guide-layout{grid-template-columns:1fr;grid-template-rows:auto minmax(0,1fr)}
+  .script-guide-toc{display:flex;gap:5px;overflow-x:auto;overflow-y:hidden;padding:9px 10px;border-right:0;border-bottom:1px solid var(--border)}
+  .script-guide-toc-title{display:none}
+  .script-guide-toc button{width:auto;min-width:max-content;white-space:nowrap;background:#edf3f7}
+  .script-guide{padding:12px 13px 72px}
+  .script-guide-floating-close{right:16px;bottom:14px}
+}
 .letter-status{white-space:nowrap}
 .patient-letter-table .letter-actions-column{width:156px;min-width:156px}
 .patient-letter-actions{
@@ -439,7 +473,7 @@ h4{font-size:14px;margin:12px 0 9px;color:#30495b}
   </main>
 </div>
 
-<div id="modal" class="modal hidden"><div class="modalbox"><button class="modal-close" type="button" aria-label="Close window" title="Close" onclick="closeModal()">&times;</button><div id="modalContent"></div></div></div>
+<div id="modal" class="modal hidden" role="dialog" aria-modal="true"><div class="modalbox"><button class="modal-close" type="button" aria-label="Close window" title="Close" onclick="closeModal()">&times;</button><div id="modalContent"></div></div></div>
 
 <script>
 const accounts = [{"id":"ACC-1001","name":"TORRES, MICHAEL ANDREW","dob":"11/15/1985","mrn":"MRN-774512","guarantor":"GRT-774512","statement":"STM-100145","phone":"(555) 713-2298","email":"michael.torres@example.com","address":"1458 Pinecrest Ave, Phoenix, AZ 85016","insurance":"Aetna","member":"AET99823411","group":"GRP-44552","plan":"PPO","provider":"Dr. Lisa Nguyen","facility":"Desert Valley Clinic","claim":"CLM-884522","dos":"03/05/2026","balance":140.0,"status":"Balance Due","eob":{"billed":950,"allowed":700,"paid":560,"patient":140,"writeoff":250},"lines":[["99213","Office Visit",250,180,140,40,"PR-3 Copay"],["80050","General Health Panel",400,300,240,60,"PR-2 Coinsurance"],["36415","Venipuncture",100,70,56,14,"PR-2 Coinsurance"],["Facility Fee","Clinic Fee",200,150,124,26,"PR-2 Coinsurance"]],"transactions":[["03/18/2026","Insurance Payment",560,"Posted","Aetna EFT"],["03/18/2026","Contractual Adjustment",-250,"Posted","CO-45 Contractual obligation"]],"notes":[["03/18/2026 10:22 AM","System","Insurance payment and contractual adjustment posted. Patient responsibility: $140.00."],["03/25/2026 2:10 PM","Statement Services","Initial statement generated and mailed."]]},{"id":"ACC-1002","name":"LEE, SAMANTHA ROSE","dob":"09/27/1993","mrn":"MRN-556781","guarantor":"GRT-556781","statement":"STM-100216","phone":"(555) 662-9182","email":"samantha.lee@example.com","address":"998 Harbor St, San Diego, CA 92101","insurance":"Blue Cross Blue Shield","member":"BCBS33221144","group":"GRP-77221","plan":"PPO","provider":"Dr. Aaron Kim","facility":"Coastal Medical Group","claim":"CLM-771233","dos":"02/18/2026","balance":180.0,"status":"Balance Due","eob":{"billed":1200,"allowed":900,"paid":720,"patient":180,"writeoff":300},"lines":[["99214","Office Visit",350,250,200,50,"PR-3 Copay"],["93000","ECG",250,200,160,40,"PR-2 Coinsurance"],["71020","Chest X-Ray",300,250,200,50,"PR-2 Coinsurance"],["Facility Fee","Diagnostic Services",300,200,160,40,"PR-2 Coinsurance"]],"transactions":[["03/01/2026","Insurance Payment",720,"Posted","BCBS ERA"],["03/01/2026","Adjustment",-300,"Posted","Contractual write-off"]],"notes":[["03/01/2026 9:15 AM","System","Claim finalized. Patient responsibility assigned per EOB."],["03/08/2026 4:05 PM","Statement Services","Statement delivered by email."]]},{"id":"ACC-1003","name":"RIVERA, DANIEL JOSE","dob":"01/08/1978","mrn":"MRN-889122","guarantor":"GRT-889122","statement":"STM-100337","phone":"(555) 334-5567","email":"daniel.rivera@example.com","address":"221 Sunset Dr, Dallas, TX 75201","insurance":"UnitedHealthcare","member":"UHC77889900","group":"GRP-88219","plan":"HDHP","provider":"Dr. Emily Carter","facility":"Lone Star Medical Center","claim":"CLM-665544","dos":"03/10/2026","balance":400.0,"status":"Balance Due","eob":{"billed":1500,"allowed":1000,"paid":600,"patient":400,"writeoff":500},"lines":[["99215","Office Visit",400,300,150,150,"PR-1 Deductible"],["80061","Lipid Panel",300,200,160,40,"PR-2 Coinsurance"],["84443","Thyroid Test",300,200,160,40,"PR-2 Coinsurance"],["Facility Fee","Outpatient Charge",500,300,130,170,"PR-1 Deductible"]],"transactions":[["03/20/2026","Insurance Payment",600,"Posted","UHC ERA"],["03/20/2026","Contractual Adjustment",-500,"Posted","CO-45"]],"notes":[["03/20/2026 11:40 AM","System","Deductible and coinsurance applied by payer."],["04/02/2026 1:30 PM","Patient Services","Patient requested itemized statement; sent by email."]]},{"id":"ACC-1004","name":"MARTINEZ, OLIVIA MARIE","dob":"04/12/1988","mrn":"MRN-221133","guarantor":"GRT-221133","statement":"STM-100458","phone":"(555) 778-4432","email":"olivia.martinez@example.com","address":"554 Elm St, Miami, FL 33101","insurance":"Humana","member":"HUM44332211","group":"GRP-99113","plan":"HMO","provider":"Dr. Kevin Brooks","facility":"Sunshine Health Clinic","claim":"CLM-992211","dos":"02/28/2026","balance":150.0,"status":"Partial Payment Made","eob":{"billed":1300,"allowed":950,"paid":650,"patient":300,"writeoff":350},"lines":[["99214","Office Visit",300,220,120,100,"PR-1 Deductible"],["87086","Urine Culture",200,150,120,30,"PR-2 Coinsurance"],["81001","Urinalysis",200,150,120,30,"PR-2 Coinsurance"],["Facility Fee","Lab Services",600,430,290,140,"PR-3 Copay"]],"transactions":[["03/12/2026","Insurance Payment",650,"Posted","Humana ERA"],["03/12/2026","Adjustment",-350,"Posted","Contractual"],["04/01/2026","Patient Payment",150,"Posted","Visa ending 4242"]],"notes":[["04/01/2026 3:18 PM","Patient Services","Patient paid $150.00 by phone. Confirmation PMT-482193. Remaining balance $150.00."],["04/15/2026 8:50 AM","Statement Services","Updated statement sent by text link."]]},{"id":"ACC-1005","name":"COOPER, BRIAN JAMES","dob":"07/19/1975","mrn":"MRN-667890","guarantor":"GRT-667890","statement":"STM-100579","phone":"(555) 921-7744","email":"brian.cooper@example.com","address":"320 Ridge Rd, Denver, CO 80203","insurance":"Kaiser Permanente","member":"KP99887766","group":"GRP-66789","plan":"HMO","provider":"Dr. Rachel Adams","facility":"Mountain View Outpatient Center","claim":"CLM-554433","dos":"03/15/2026","balance":240.0,"status":"Balance Due","eob":{"billed":1800,"allowed":1200,"paid":960,"patient":240,"writeoff":600},"lines":[["99214","Office Visit",400,300,240,60,"PR-3 Copay"],["72148","MRI Lumbar Spine",900,600,480,120,"PR-2 Coinsurance"],["96372","Injection",200,150,120,30,"PR-2 Coinsurance"],["Facility Fee","Imaging Center Fee",300,150,120,30,"PR-2 Coinsurance"]],"transactions":[["03/28/2026","Insurance Payment",960,"Posted","Kaiser ERA"],["03/28/2026","Adjustment",-600,"Posted","Contractual"]],"notes":[["03/28/2026 10:05 AM","System","Claim processed. Patient responsibility $240.00."],["04/08/2026 5:12 PM","Patient Services","Patient asked about payment plan options; no plan established."]]},{"id":"ACC-1006","name":"MILES, REBECCA ANN","dob":"03/11/1984","mrn":"MRN-445566","guarantor":"GRT-445566","statement":"STM-100681","phone":"(555) 778-9912","email":"rebecca.miles@example.com","address":"144 Cedar Lane, Houston, TX 77002","insurance":"UnitedHealthcare","member":"UHC55443322","group":"GRP-65422","plan":"PPO","provider":"Dr. Hannah Lewis","facility":"Memorial Outpatient Center","claim":"CLM-883311","dos":"03/14/2026","balance":220.0,"status":"Balance Due / Partial Denial","eob":{"billed":1400,"allowed":950,"paid":730,"patient":220,"writeoff":450},"lines":[["99214","Office Visit",350,250,200,50,"PR-3 Copay"],["80053","Comprehensive Metabolic Panel",250,180,144,36,"PR-2 Coinsurance"],["71020","Chest X-Ray",300,0,0,0,"CO-50 Non-covered service"],["Facility Fee","Outpatient Services",500,520,386,134,"PR-1 Deductible"]],"transactions":[["03/29/2026","Insurance Payment",730,"Posted","UHC ERA"],["03/29/2026","Adjustment",-450,"Posted","Contractual/denial adjustment"]],"notes":[["03/29/2026 2:40 PM","System","Chest X-ray denied CO-50. Denied amount not transferred to patient."],["04/04/2026 11:05 AM","Patient Services","Patient advised balance is deductible/copay only; denial under provider review."]]},{"id":"ACC-1007","name":"COLLINS, ANDREW PAUL","dob":"07/26/1979","mrn":"MRN-778211","guarantor":"GRT-778211","statement":"STM-100792","phone":"(555) 226-1188","email":"andrew.collins@example.com","address":"882 River Rd, Nashville, TN 37201","insurance":"Cigna","member":"CIG77884411","group":"GRP-77884","plan":"PPO","provider":"Dr. Melissa Grant","facility":"Riverbend Medical Clinic","claim":"CLM-441122","dos":"02/27/2026","balance":310.0,"status":"Balance Due / Denial Review","eob":{"billed":1650,"allowed":1050,"paid":740,"patient":310,"writeoff":600},"lines":[["99215","Office Visit",400,300,240,60,"PR-3 Copay"],["93000","ECG",250,180,144,36,"PR-2 Coinsurance"],["97110","Physical Therapy",400,0,0,0,"CO-16 Missing information"],["Facility Fee","Therapy Services",600,570,356,214,"PR-1 Deductible"]],"transactions":[["03/13/2026","Insurance Payment",740,"Posted","Cigna ERA"],["03/13/2026","Adjustment",-600,"Posted","Contractual/denial"]],"notes":[["03/13/2026 1:45 PM","System","PT line denied CO-16. Coding team notified."],["03/18/2026 9:25 AM","Billing Review","Missing therapy plan of care requested from clinic. Patient billing hold applied to denied line."]]},{"id":"ACC-1008","name":"BENNETT, JASON MICHAEL","dob":"01/17/1975","mrn":"MRN-114477","guarantor":"GRT-114477","statement":"STM-100913","phone":"(555) 339-8821","email":"jason.bennett@example.com","address":"554 Highland Dr, Charlotte, NC 28202","insurance":"Aetna","member":"AET22335577","group":"GRP-22335","plan":"PPO","provider":"Dr. Nicole Reed","facility":"Highland Family Clinic","claim":"CLM-889955","dos":"03/19/2026","balance":420.0,"status":"Balance Due / Authorization Denial","eob":{"billed":1700,"allowed":1100,"paid":680,"patient":420,"writeoff":600},"lines":[["99214","Office Visit",350,250,150,100,"PR-1 Deductible"],["80061","Lipid Panel",250,180,144,36,"PR-2 Coinsurance"],["72148","MRI Lumbar Spine",700,0,0,0,"CO-197 Authorization required"],["Facility Fee","Imaging Facility Charge",400,670,386,284,"PR-1 Deductible"]],"transactions":[["04/01/2026","Insurance Payment",680,"Posted","Aetna ERA"],["04/01/2026","Adjustment",-600,"Posted","Contractual/denial"]],"notes":[["04/01/2026 4:00 PM","System","MRI denied for missing authorization; denial not patient responsibility."],["04/07/2026 10:20 AM","Authorization Team","Retro-authorization request submitted. Do not bill denied MRI line while under review."]]},{"id":"ACC-1009","name":"TURNER, MELISSA GRACE","dob":"06/29/1988","mrn":"MRN-663311","guarantor":"GRT-663311","statement":"STM-101024","phone":"(555) 880-4477","email":"melissa.turner@example.com","address":"999 Palm St, San Antonio, TX 78205","insurance":"Humana","member":"HUM11442255","group":"GRP-11442","plan":"HMO","provider":"Dr. Robert Kim","facility":"Southside Medical Group","claim":"CLM-774488","dos":"03/11/2026","balance":0.0,"status":"Do Not Bill - Reprocessing","eob":{"billed":1350,"allowed":920,"paid":660,"patient":260,"writeoff":430},"lines":[["99214","Office Visit",300,220,176,44,"PR-3 Copay"],["87086","Urine Culture",200,150,120,30,"PR-2 Coinsurance"],["96372","Injection Administration",250,0,0,0,"CO-151 Information missing"],["Facility Fee","Outpatient Facility Charge",600,550,364,186,"PR-1 Deductible"]],"transactions":[["03/25/2026","Insurance Payment",660,"Posted","Humana ERA"],["03/25/2026","Adjustment",-430,"Posted","Contractual"],["04/05/2026","Patient Balance Reversal",-260,"Posted","Insurance requested reprocessing"]],"notes":[["04/05/2026 9:12 AM","Insurance Call","Humana representative advised claim is being reprocessed. Requested patient billing stop. Reference HUM-RP-7741."],["04/05/2026 9:20 AM","Patient Services","Patient balance reversed and billing hold applied. Do not collect until new EOB posts."]]},{"id":"ACC-1010","name":"HALL, CHRISTINA MARIE","dob":"10/08/1992","mrn":"MRN-991100","guarantor":"GRT-991100","statement":"STM-101135","phone":"(555) 661-7744","email":"christina.hall@example.com","address":"223 Magnolia Ave, Orlando, FL 32801","insurance":"Blue Cross Blue Shield","member":"BCBS88776655","group":"GRP-88776","plan":"PPO","provider":"Dr. Kevin Morris","facility":"Central Florida Specialty Center","claim":"CLM-552244","dos":"03/03/2026","balance":0.0,"status":"No-Show Charge Under Review","eob":{"billed":150,"allowed":0,"paid":0,"patient":150,"writeoff":0},"lines":[["NO-SHOW","Missed Appointment Fee",150,0,0,150,"Patient charge - no claim adjudication"]],"transactions":[["03/03/2026","No-Show Charge",150,"Posted","Appointment marked no-show"],["03/10/2026","Billing Hold",0,"Posted","Dispute review"]],"notes":[["03/03/2026 3:30 PM","Scheduling","Patient marked no-show for 2:00 PM appointment."],["03/10/2026 11:18 AM","Patient Services","Patient disputed no-show and stated cancellation was made by phone. Escalated to clinic manager. Balance placed on hold."]]},{"id":"ACC-1011","name":"MORGAN, ASHLEY NICOLE","dob":"12/02/1990","mrn":"MRN-335902","guarantor":"GRT-335902","statement":"STM-101246","phone":"(555) 417-2268","email":"ashley.morgan@example.com","address":"715 Willow Bend, Columbus, OH 43215","insurance":"Anthem Blue Cross Blue Shield","member":"ANT55119420","group":"GRP-19420","plan":"PPO","provider":"Dr. Simone Wright","facility":"Riverside Specialty Clinic","claim":"CLM-615740","dos":"04/02/2026","balance":415.0,"status":"Balance Due - Plan Exclusion","eob":{"billed":900.0,"allowed":575.0,"paid":160.0,"patient":415.0,"writeoff":325.0},"lines":[["99213","Office Visit",300,200,160,40,"PR-3 Copayment"],["97014","Electrical Stimulation",350,300,0,300,"PR-204 Service excluded by plan"],["L3020","Orthotic Supply",250,75,0,75,"PR-204 Service excluded by plan"]],"transactions":[],"notes":[]},{"id":"ACC-1012","name":"ELLIS, ROBERT JAMES","dob":"05/21/1954","mrn":"MRN-704418","guarantor":"GRT-704418","statement":"STM-101357","phone":"(555) 903-4471","email":"robert.ellis@example.com","address":"440 Lakeview Terrace, Tampa, FL 33602","insurance":"Medicare / Cigna","member":"1EG4TE5MK72","group":"CIG-88417","plan":"Medicare Primary + PPO Secondary","provider":"Dr. Elena Foster","facility":"Bayview Medical Pavilion","claim":"CLM-702219","dos":"03/26/2026","balance":1200.0,"status":"COB Billing Order Review - Billing Hold","eob":{"billed":1200,"allowed":0,"paid":0,"patient":1200,"writeoff":0},"lines":[["99215","Office Visit",400,0,0,400,"CO-22 Possible coverage by another payer"],["93000","Electrocardiogram",300,0,0,300,"CO-22 Possible coverage by another payer"],["71046","Chest X-Ray",500,0,0,500,"CO-22 Possible coverage by another payer"]],"transactions":[],"notes":[]},{"id":"ACC-1013","name":"PARKER, LINDA MAY","dob":"08/30/1967","mrn":"MRN-508631","guarantor":"GRT-508631","statement":"STM-101468","phone":"(555) 231-8064","email":"linda.parker@example.com","address":"1840 Oak Crossing, Richmond, VA 23219","insurance":"UnitedHealthcare","member":"UHC77126009","group":"GRP-26009","plan":"PPO","provider":"Dr. Marcus Hill","facility":"Capital Region Outpatient Center","claim":"CLM-508631","dos":"04/08/2026","balance":600.0,"status":"Balance Due","eob":{"billed":2100,"allowed":1500,"paid":900,"patient":600,"writeoff":600},"lines":[["99215","Office Visit",450,350,200,150,"PR-1 Deductible"],["74177","CT Abdomen/Pelvis",1100,800,500,300,"PR-1 Deductible"],["Facility Fee","Outpatient Imaging",550,350,200,150,"PR-2 Coinsurance"]],"transactions":[],"notes":[]},{"id":"ACC-1014","name":"GREEN, MARCUS DAVID","dob":"02/14/1982","mrn":"MRN-882041","guarantor":"GRT-882041","statement":"STM-101579","phone":"(555) 684-2190","email":"marcus.green@example.com","address":"905 Garden Way, Portland, OR 97205","insurance":"Aetna","member":"AET66741020","group":"GRP-41020","plan":"PPO","provider":"Dr. Naomi Bell","facility":"Northwest Ambulatory Center","claim":"CLM-882041","dos":"04/11/2026","balance":0.0,"status":"Do Not Bill - Patient Information Requested","eob":{"billed":2200,"allowed":0,"paid":0,"patient":0,"writeoff":0},"lines":[["99214","Office Visit",400,0,0,0,"Claim pending member questionnaire"],["73564","Knee X-Ray",600,0,0,0,"Claim pending accident details"],["73721","MRI Lower Extremity",1200,0,0,0,"Claim pending accident details"]],"transactions":[],"notes":[]},{"id":"ACC-1015","name":"HALL, CHRISTINA MARIE","dob":"03/22/1986","mrn":"MRN-462781","guarantor":"GRT-462781","statement":"STM-101680","phone":"(555) 284-9017","email":"christina.hall86@example.com","address":"641 Cypress Grove, Jacksonville, FL 32202","insurance":"Cigna","member":"CIG46278190","group":"GRP-46278","plan":"PPO","provider":"Dr. Lauren Price","facility":"North River Primary Care","claim":"CLM-462781","dos":"04/15/2026","balance":95.0,"status":"Balance Due","eob":{"billed":520,"allowed":380,"paid":285,"patient":95,"writeoff":140},"lines":[["99213","Office Visit",260,190,143,47,"PR-3 Copayment"],["80048","Basic Metabolic Panel",180,130,98,32,"PR-2 Coinsurance"],["36415","Venipuncture",80,60,44,16,"PR-2 Coinsurance"]],"transactions":[],"notes":[]},{"id":"ACC-1016","name":"LEE, SAMANTHA ROSE","dob":"02/14/1987","mrn":"MRN-830514","guarantor":"GRT-830514","statement":"STM-101791","phone":"(555) 775-4130","email":"samantha.lee87@example.com","address":"2801 Meadow Ridge, Sacramento, CA 95814","insurance":"Aetna","member":"AET83051422","group":"GRP-83051","plan":"HMO","provider":"Dr. Peter Wallace","facility":"Capitol Family Medicine","claim":"CLM-830514","dos":"04/18/2026","balance":275.0,"status":"Balance Due","eob":{"billed":1250,"allowed":900,"paid":625,"patient":275,"writeoff":350},"lines":[["99214","Office Visit",350,250,175,75,"PR-1 Deductible"],["71046","Chest X-Ray",500,360,250,110,"PR-2 Coinsurance"],["Facility Fee","Outpatient Diagnostic Fee",400,290,200,90,"PR-1 Deductible"]],"transactions":[],"notes":[]}];
@@ -1360,6 +1394,126 @@ function reviewScriptGuideHTML(){
  return Object.entries(reviewTypeDetails).map(([type,d])=>`<div class="script-line"><b>${esc(type)}</b><br><span class="muted">Assigned team: ${esc(d.owner)} | Expected TAT: ${esc(d.tat)}</span><br><br>${d.script}</div>`).join('');
 }
 
+function removeGuideHighlights(root){
+ root.querySelectorAll('mark[data-guide-highlight]').forEach(mark=>mark.replaceWith(document.createTextNode(mark.textContent)));
+ root.normalize();
+}
+
+function highlightGuideMatches(section,query){
+ const walker=document.createTreeWalker(section,NodeFilter.SHOW_TEXT,{acceptNode(node){
+   if(!node.nodeValue.trim()||node.parentElement.closest('mark'))return NodeFilter.FILTER_REJECT;
+   return NodeFilter.FILTER_ACCEPT;
+ }});
+ const nodes=[];
+ while(walker.nextNode())nodes.push(walker.currentNode);
+ nodes.forEach(node=>{
+   const value=node.nodeValue;
+   const lower=value.toLocaleLowerCase();
+   const fragment=document.createDocumentFragment();
+   let cursor=0;
+   let match=lower.indexOf(query);
+   if(match<0)return;
+   while(match>=0){
+     fragment.append(document.createTextNode(value.slice(cursor,match)));
+     const mark=document.createElement('mark');
+     mark.dataset.guideHighlight='true';
+     mark.textContent=value.slice(match,match+query.length);
+     fragment.append(mark);
+     cursor=match+query.length;
+     match=lower.indexOf(query,cursor);
+   }
+   fragment.append(document.createTextNode(value.slice(cursor)));
+   node.replaceWith(fragment);
+ });
+}
+
+function filterScriptGuide(){
+ const guide=document.querySelector('.script-guide');
+ const input=document.getElementById('scriptGuideSearch');
+ const status=document.getElementById('scriptGuideSearchStatus');
+ if(!guide||!input)return;
+ const query=input.value.trim().toLocaleLowerCase();
+ const sections=[...guide.querySelectorAll('details')];
+ removeGuideHighlights(guide);
+ let matches=0;
+ sections.forEach(section=>{
+   const match=!query||section.textContent.toLocaleLowerCase().includes(query);
+   section.hidden=!match;
+   if(match){
+     matches++;
+     if(query){section.open=true;highlightGuideMatches(section,query)}
+     else section.open=section.dataset.guideInitiallyOpen==='true';
+   }
+ });
+ let empty=guide.querySelector('.script-guide-empty');
+ if(query&&matches===0){
+   if(!empty){empty=document.createElement('div');empty.className='script-guide-empty';empty.textContent='No guide sections match your search.';guide.append(empty)}
+ }else if(empty)empty.remove();
+ if(status)status.textContent=query?`${matches} ${matches===1?'section':'sections'} found`:`${sections.length} sections`;
+}
+
+function initializeScriptGuide(){
+ const box=document.querySelector('#modal .modalbox');
+ const content=document.getElementById('modalContent');
+ const guide=content?.querySelector('.script-guide');
+ if(!box||!content||!guide)return;
+ box.classList.add('script-guide-modal');
+
+ const title=guide.querySelector('h2');
+ const intro=title?.nextElementSibling;
+ if(intro)intro.classList.add('guide-intro');
+ const header=document.createElement('div');
+ header.className='script-guide-header';
+ if(title)header.append(title);
+ const searchRow=document.createElement('div');
+ searchRow.className='script-guide-search-row';
+ searchRow.innerHTML='<label for="scriptGuideSearch">Search the Call and Script Guide</label><input id="scriptGuideSearch" type="search" placeholder="Search scripts, TATs, or topics…" autocomplete="off"><span id="scriptGuideSearchStatus" class="script-guide-search-status" aria-live="polite"></span>';
+ header.append(searchRow);
+
+ const toc=document.createElement('nav');
+ toc.className='script-guide-toc';
+ toc.setAttribute('aria-label','Guide contents');
+ const tocTitle=document.createElement('div');
+ tocTitle.className='script-guide-toc-title';
+ tocTitle.textContent='Contents';
+ toc.append(tocTitle);
+ const sections=[...guide.querySelectorAll('details')];
+ sections.forEach((section,index)=>{
+   const summary=section.querySelector('summary');
+   section.id=`script-guide-section-${index+1}`;
+   section.dataset.guideInitiallyOpen=String(section.open);
+   const button=document.createElement('button');
+   button.type='button';
+   button.textContent=summary?.textContent||`Section ${index+1}`;
+   button.addEventListener('click',()=>{
+     const search=document.getElementById('scriptGuideSearch');
+     if(search?.value){search.value='';filterScriptGuide()}
+     section.open=true;
+     section.scrollIntoView({behavior:'smooth',block:'start'});
+     if(summary)summary.focus({preventScroll:true});
+   });
+   toc.append(button);
+ });
+
+ const layout=document.createElement('div');
+ layout.className='script-guide-layout';
+ content.insertBefore(header,guide);
+ content.insertBefore(layout,guide);
+ layout.append(toc,guide);
+
+ const floatingClose=document.createElement('button');
+ floatingClose.type='button';
+ floatingClose.className='script-guide-floating-close';
+ floatingClose.textContent='Close Guide ×';
+ floatingClose.addEventListener('click',closeModal);
+ box.append(floatingClose);
+
+ const search=document.getElementById('scriptGuideSearch');
+ search.addEventListener('input',filterScriptGuide);
+ filterScriptGuide();
+ requestAnimationFrame(()=>search.focus());
+}
+
 function openScriptGuide(){showModal(`<div class="script-guide"><h2 style="margin-top:0;font-size:21px">Patient Financial Services Call &amp; Script Guide</h2><p class="muted">Use these as support, not as a word-for-word requirement. Always verify the account before selecting the appropriate explanation.</p>
 <details open><summary>Basic Call Flow</summary><div class="script-body"><ol class="script-check"><li>Open the call and ask for the caller’s name so you can personalize the conversation.</li><li>Ask how you can help, then listen to the complete concern before reviewing the account.</li><li>Verify full name, DOB, and complete address before disclosing account details.</li><li>Review the current status, insurance order, EOB, billing history, patient letters, transactions, and previous notes.</li><li>Acknowledge what the caller said before explaining the account.</li><li>Give the resolution or next step, including a realistic TAT.</li><li>Collect payment only when the balance is valid and no hold applies.</li><li>Document the conversation, action, reference number, and expectation set.</li></ol><div class="script-line"><b>Opening:</b><br>“Thank you for calling Patient Services, my name is ___. Can I have your name, please?”<br><br><b>After the caller provides their name:</b><br>“Thank you, [Caller Name]. How can we help you today?”</div></div></details>
 <details><summary>Minor or Dependent Patient Verification</summary><div class="script-body"><p>Review the demographics first to identify whether the patient is a minor or another person is financially responsible for the account.</p><div class="script-line"><b>Minor patient:</b><br>“Before I discuss the account, may I verify your full name, date of birth, relationship to the patient, and the contact information listed for the parent or guardian?”</div><div class="script-line"><b>Spouse or dependent:</b><br>“I can see that another person is listed as the guarantor. I’ll first verify your identity and authority to discuss the account before reviewing any account-specific information.”</div><p>Do not assume that a parent, spouse, or guarantor automatically has permission to receive all clinical information. Follow the organization’s verification and authorization requirements.</p></div></details>
@@ -1379,7 +1533,7 @@ function openScriptGuide(){showModal(`<div class="script-guide"><h2 style="margi
 <details><summary>No-Show Charge Dispute</summary><div class="script-body"><div class="script-line"><b>Empathy and acknowledgment:</b><br>“I understand why this charge would be frustrating, especially if you believe the appointment was cancelled. Let me review the scheduling notes, prior calls, and any cancellation documentation before I explain the next step.”</div><p><b>Research before responding:</b></p><ul><li>Confirm the appointment date, time, location, and no-show charge.</li><li>Review scheduling notes, cancellation records, call history, portal messages, and prior patient contacts.</li><li>Check whether the charge is already under review or on hold.</li><li>Do not remove, validate, or collect the disputed charge without documented resolution.</li></ul><div class="script-line"><b>If no cancellation is documented:</b><br>“I’m not seeing a completed cancellation in the records available to me. I will document the details you provided and submit the charge to the Clinic or Scheduling Review Team. The expected TAT is 7–10 business days.”</div><div class="script-line"><b>If the patient has called before:</b><br>“I can see that you have contacted us previously about this concern. I’m sorry you have had to follow up again. I’ll include the prior contacts in the review so the team has the complete history.”</div><div class="script-line"><b>Expectation setting:</b><br>“The charge will remain under review while the clinic checks the scheduling and cancellation records. I cannot promise that it will be removed, but the review team will determine whether the charge is valid. The expected TAT is 7–10 business days.”</div></div></details>
 <details><summary>General Dispute or Supervisor Request</summary><div class="script-body"><div class="script-line"><b>Dispute:</b><br>“I understand that you disagree with the charge. I’ll document what happened and route it for review. The expected TAT is ____. I cannot remove the charge during the call unless the account shows an approved adjustment.”</div><div class="script-line"><b>Supervisor request:</b><br>“I can request supervisor assistance. Before I do, let me summarize what I found and the action already available so you do not have to repeat the entire concern.”</div></div></details>
 <details><summary>Caller Is Not the Patient or Verification Fails</summary><div class="script-body"><div class="script-line">“To protect the patient’s information, I’m unable to discuss the account until the required verification or authorization is completed. I can explain the general process, but I cannot disclose account-specific details.”</div></div></details>
-</div>`)}
+</div>`,false,true)}
 
 function viewReversalNotice(){
  const notice=current.reversalNotice||{};
@@ -1568,7 +1722,31 @@ function generateTransactionReport(){
  const w=window.open('','_blank');w.document.write(report);w.document.close();setTimeout(()=>w.print(),400);
 }
 
-function showModal(html,wide=false){modalContent.innerHTML=html;const box=document.querySelector('#modal .modalbox');if(box)box.classList.toggle('statement-wide',Boolean(wide));modal.classList.remove('hidden')} function closeModal(){modal.classList.add('hidden');const box=document.querySelector('#modal .modalbox');if(box)box.classList.remove('statement-wide')}
+function resetModalBox(){
+ const box=document.querySelector('#modal .modalbox');
+ if(!box)return;
+ box.classList.remove('statement-wide','script-guide-modal');
+ box.querySelector('.script-guide-floating-close')?.remove();
+}
+function showModal(html,wide=false,isScriptGuide=false){
+ resetModalBox();
+ modalContent.innerHTML=html;
+ const box=document.querySelector('#modal .modalbox');
+ if(box)box.classList.toggle('statement-wide',Boolean(wide));
+ modal.classList.remove('hidden');
+ if(isScriptGuide)initializeScriptGuide();
+}
+function closeModal(){
+ modal.classList.add('hidden');
+ resetModalBox();
+}
+
+document.addEventListener('keydown',event=>{
+ if(event.key==='Escape'&&!modal.classList.contains('hidden')){
+   event.preventDefault();
+   closeModal();
+ }
+});
 
 restoreActiveUserName();
 
