@@ -73,6 +73,8 @@ header h1{font-size:19px;margin:0;font-weight:650;letter-spacing:.15px}
   transition:transform .15s ease,box-shadow .15s ease,background .15s ease
 }
 .guide-button:hover{background:#f7fbfe;box-shadow:0 4px 12px rgba(0,0,0,.12);transform:translateY(-1px)}
+.chat-button{background:#dbeef9;color:var(--nav);border:1px solid #b9d5e7;padding:8px 13px;border-radius:8px;font-weight:650;cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,.08);transition:transform .15s ease,box-shadow .15s ease,background .15s ease}
+.chat-button:hover{background:#eff8fd;box-shadow:0 4px 12px rgba(0,0,0,.12);transform:translateY(-1px)}
 .container{display:flex;min-height:calc(100vh - 58px)}
 .sidebar{
   width:248px;
@@ -319,6 +321,22 @@ tbody tr:hover td{background:#fbfdff}
 .script-guide-empty{padding:24px;border:1px dashed #b8c8d4;border-radius:9px;background:#f8fafc;color:var(--muted);text-align:center}
 .script-guide-floating-close{position:absolute;right:22px;bottom:18px;z-index:5;min-height:39px;padding:9px 14px;border:1px solid var(--blue);border-radius:9px;background:var(--blue);color:#fff;font-weight:700;cursor:pointer;box-shadow:0 7px 18px rgba(31,82,126,.28)}
 .script-guide-floating-close:hover{background:var(--blue-dark)}
+.modalbox.call-practice-modal{width:min(1120px,94vw);height:min(780px,90vh);padding:0;overflow:hidden;display:flex;flex-direction:column}
+.call-practice-modal .modal-close{position:absolute;top:13px;right:16px;z-index:6}
+.call-practice{height:100%;min-height:0;display:flex;flex-direction:column;background:#f6f9fb}
+.call-practice-header{padding:17px 64px 13px 20px;background:#fff;border-bottom:1px solid var(--border)}.call-practice-header h2{margin:0;color:var(--nav);font-size:21px}.call-practice-header p{margin:3px 0 0;color:var(--muted);font-size:13px}
+.call-practice-layout{display:grid;grid-template-columns:270px minmax(0,1fr);min-height:0;flex:1}.call-practice-sidebar{padding:16px;border-right:1px solid var(--border);background:#fff;overflow:auto}.call-practice-sidebar h3{margin:0 0 7px;color:var(--nav);font-size:14px}
+.practice-case{padding:11px;border:1px solid #d5e1ea;border-radius:9px;background:#f7fbfe;margin-bottom:15px;font-size:12.5px}.practice-case p{margin:5px 0}.practice-tip{padding:11px;border-left:3px solid var(--blue);background:#edf6fc;border-radius:0 8px 8px 0;font-size:12.5px;color:#3f5668;margin-top:12px}
+.practice-actions{display:grid;gap:8px;margin-top:16px}.practice-actions button{padding:9px 10px;border:1px solid #c3d4e0;border-radius:8px;background:#fff;color:var(--nav);font-weight:650;cursor:pointer;text-align:left}.practice-actions button:hover{background:#eef6fb;border-color:#9ebdce}
+.call-chat-area{display:flex;flex-direction:column;min-width:0;min-height:0}.call-chat-log{flex:1;min-height:0;overflow:auto;padding:19px 20px;background:linear-gradient(180deg,#f8fbfd 0%,#edf3f7 100%)}
+.chat-message{max-width:82%;margin:0 0 13px;padding:11px 13px;border-radius:12px;box-shadow:0 1px 2px rgba(23,50,77,.07);line-height:1.45}.chat-message .chat-speaker{display:block;margin-bottom:4px;font-size:11px;font-weight:750;letter-spacing:.25px;text-transform:uppercase}.chat-message.patient{margin-right:auto;background:#fff;border:1px solid #d7e2e9;border-bottom-left-radius:3px;color:#263b4b}.chat-message.patient .chat-speaker{color:#647987}.chat-message.agent{margin-left:auto;background:#dceefa;border:1px solid #bbd7e9;border-bottom-right-radius:3px;color:#183b56}.chat-message.agent .chat-speaker{color:#285f8f}.chat-message.coach{max-width:100%;background:#fff7df;border:1px solid #ecd599;color:#614a11;font-size:12.5px}.chat-message.coach .chat-speaker{color:#916500}
+.call-chat-compose{padding:13px 16px;background:#fff;border-top:1px solid var(--border)}.call-chat-compose label{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}.call-chat-compose-row{display:flex;gap:9px;align-items:flex-end}.call-chat-compose textarea{min-height:44px;max-height:105px;resize:vertical}.call-chat-compose button{min-height:44px;white-space:nowrap}.chat-quick-replies{display:flex;gap:7px;overflow:auto;margin-top:9px;padding-bottom:1px}.chat-quick-replies button{white-space:nowrap;padding:6px 9px;border:1px solid #c6d8e4;border-radius:999px;background:#f7fafc;color:#33556d;font-size:12px;cursor:pointer}.chat-quick-replies button:hover{background:#eaf3f9}
+.call-practice-window{position:fixed;right:18px;bottom:18px;z-index:19;width:min(480px,calc(100vw - 36px));height:min(720px,calc(100vh - 92px));display:flex;flex-direction:column;overflow:hidden;border:1px solid #9fb6c7;border-radius:14px;background:#fff;box-shadow:0 18px 52px rgba(15,35,55,.28);resize:both;min-width:340px;min-height:360px}
+.call-practice-window.minimized{width:330px;height:auto;min-height:0;resize:none}.call-practice-window.minimized .call-practice-window-body{display:none}.call-practice-window-header{display:flex;align-items:center;gap:10px;padding:11px 12px 11px 15px;background:linear-gradient(110deg,var(--nav) 0%,var(--nav-2) 100%);color:#fff;cursor:move;touch-action:none;user-select:none}.call-practice-window-title{min-width:0;flex:1}.call-practice-window-title b{display:block;font-size:14px}.call-practice-window-title span{display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:11px;color:#d5e5ef}.call-practice-window-controls{display:flex;gap:5px;cursor:default}.call-practice-window-controls button{width:30px;height:30px;padding:0;border:1px solid rgba(255,255,255,.26);border-radius:7px;background:rgba(255,255,255,.1);color:#fff;font-size:18px;line-height:1;cursor:pointer}.call-practice-window-controls button:hover{background:rgba(255,255,255,.2)}
+.call-practice-window-body{display:flex;flex-direction:column;min-height:0;flex:1}.practice-coaching{margin:0;border:0;border-bottom:1px solid var(--border);background:#fff8e6}.practice-coaching summary{cursor:pointer;padding:8px 12px;color:#6a5013;font-size:12px;font-weight:750}.practice-coaching-content{padding:0 12px 9px;color:#604d20;font-size:12px}.call-practice-window .call-chat-log{padding:13px 14px}.call-practice-window .chat-message{max-width:90%;margin-bottom:9px;padding:9px 11px;font-size:13px}.call-practice-window .call-chat-compose{padding:10px 11px}.call-practice-window .call-chat-compose textarea{min-height:42px}.practice-research-reminder{padding:7px 11px;border-bottom:1px solid #d8e4ec;background:#edf6fc;color:#38596f;font-size:11.5px}
+.practice-quality{display:flex;align-items:center;gap:9px;padding:8px 11px;border-bottom:1px solid #d8e4ec;background:#edf6fc;color:#38596f;font-size:11.5px}.practice-quality-track{height:7px;flex:1;overflow:hidden;border-radius:999px;background:#cedde7}.practice-quality-fill{height:100%;width:0;background:var(--green);transition:width .25s ease}.practice-quality strong{white-space:nowrap;color:var(--green)}
+.practice-choice-area{padding:10px 11px;border-top:1px solid var(--border);background:#fff}.practice-choice-label{margin-bottom:7px;color:#526b7d;font-size:11px;font-weight:750;text-transform:uppercase;letter-spacing:.28px}.practice-choice-list{display:grid;gap:7px}.practice-choice{display:flex;align-items:flex-start;gap:8px;width:100%;padding:9px 10px;border:1px solid #bfd0dc;border-radius:9px;background:#f8fbfd;color:#29485f;text-align:left;line-height:1.35;cursor:pointer}.practice-choice:hover{border-color:#7fa8c2;background:#edf6fc}.practice-choice:disabled{opacity:.52;cursor:not-allowed}.practice-choice-letter{flex:0 0 22px;height:22px;border-radius:50%;background:#dceaf3;color:#285f8f;text-align:center;font-size:11px;font-weight:800;line-height:22px}.practice-choice-text{flex:1}.practice-choice-footer{display:flex;justify-content:space-between;gap:8px;margin-top:9px}.practice-choice-footer button{padding:6px 9px;border:1px solid #c6d8e4;border-radius:8px;background:#f7fafc;color:#33556d;font-size:12px;cursor:pointer}.practice-complete{padding:14px;border:1px solid #a7d4bd;border-radius:10px;background:#eef9f3;color:#226242;text-align:center;font-weight:750}
+.practice-setup{padding:20px;overflow:auto}.practice-setup h3{margin:0 0 7px;color:var(--nav)}.practice-setup p{margin:0 0 14px;color:var(--muted)}.practice-setup-card{padding:14px;border:1px solid #d5e1ea;border-radius:10px;background:#f8fbfd}.practice-setup .primary{width:100%;margin-top:12px}.practice-learning-tips{margin-top:14px;padding:12px;border-left:4px solid var(--blue);border-radius:7px;background:#edf6fc;color:#36576e;font-size:12.5px}.practice-learning-tips b{display:block;margin-bottom:5px;color:var(--nav)}.practice-learning-tips ul{margin:5px 0;padding-left:18px}.practice-skill{padding:7px 11px;border-bottom:1px solid #d8e4ec;background:#f8fafc;color:#526879;font-size:11.5px}.practice-skill b{color:var(--nav)}
 @media(max-width:760px){
   .modal{padding:8px}
   .modalbox.script-guide-modal{width:96vw;height:94vh;max-height:94vh}
@@ -332,6 +350,8 @@ tbody tr:hover td{background:#fbfdff}
   .script-guide-toc button{width:auto;min-width:max-content;white-space:nowrap;background:#edf3f7}
   .script-guide{padding:12px 13px 72px}
   .script-guide-floating-close{right:16px;bottom:14px}
+  .modalbox.call-practice-modal{width:96vw;height:94vh}.call-practice-layout{grid-template-columns:1fr;grid-template-rows:auto minmax(0,1fr)}.call-practice-sidebar{border-right:0;border-bottom:1px solid var(--border);padding:11px 14px;max-height:180px}.practice-actions{grid-template-columns:1fr 1fr;margin-top:10px}.practice-tip{display:none}.call-chat-log{padding:14px}.chat-message{max-width:93%}
+  .call-practice-window{right:8px;bottom:8px;width:calc(100vw - 16px);height:min(680px,calc(100vh - 76px));min-width:0;resize:none}.call-practice-window.minimized{width:calc(100vw - 16px)}
 }
 .letter-status{white-space:nowrap}
 .patient-letter-table .letter-actions-column{width:156px;min-width:156px}
@@ -418,7 +438,7 @@ h4{font-size:14px;margin:12px 0 9px;color:#30495b}
 </style>
 </head>
 <body>
-<header><h1>Patient Financial Services</h1><div class="header-actions"><button class="guide-button" type="button" onclick="openScriptGuide()">Call &amp; Script Guide</button><span id="activeUserBadge" class="environment-tag user-badge hidden"></span><span class="environment-tag">Training Environment</span></div></header>
+<header><h1>Patient Financial Services</h1><div class="header-actions"><button class="chat-button" type="button" onclick="openCallPractice()">Practice Call Chat</button><button class="guide-button" type="button" onclick="openScriptGuide()">Call &amp; Script Guide</button><span id="activeUserBadge" class="environment-tag user-badge hidden"></span><span class="environment-tag">Training Environment</span></div></header>
 
 <div id="loginView" class="login">
   <div class="card">
@@ -474,6 +494,7 @@ h4{font-size:14px;margin:12px 0 9px;color:#30495b}
 </div>
 
 <div id="modal" class="modal hidden" role="dialog" aria-modal="true"><div class="modalbox"><button class="modal-close" type="button" aria-label="Close window" title="Close" onclick="closeModal()">&times;</button><div id="modalContent"></div></div></div>
+<section id="callPracticeWindow" class="call-practice-window hidden" aria-label="Practice call chat"></section>
 
 <script>
 const accounts = [{"id":"ACC-1001","name":"TORRES, MICHAEL ANDREW","dob":"11/15/1985","mrn":"MRN-774512","guarantor":"GRT-774512","statement":"STM-100145","phone":"(555) 713-2298","email":"michael.torres@example.com","address":"1458 Pinecrest Ave, Phoenix, AZ 85016","insurance":"Aetna","member":"AET99823411","group":"GRP-44552","plan":"PPO","provider":"Dr. Lisa Nguyen","facility":"Desert Valley Clinic","claim":"CLM-884522","dos":"03/05/2026","balance":140.0,"status":"Balance Due","eob":{"billed":950,"allowed":700,"paid":560,"patient":140,"writeoff":250},"lines":[["99213","Office Visit",250,180,140,40,"PR-3 Copay"],["80050","General Health Panel",400,300,240,60,"PR-2 Coinsurance"],["36415","Venipuncture",100,70,56,14,"PR-2 Coinsurance"],["Facility Fee","Clinic Fee",200,150,124,26,"PR-2 Coinsurance"]],"transactions":[["03/18/2026","Insurance Payment",560,"Posted","Aetna EFT"],["03/18/2026","Contractual Adjustment",-250,"Posted","CO-45 Contractual obligation"]],"notes":[["03/18/2026 10:22 AM","System","Insurance payment and contractual adjustment posted. Patient responsibility: $140.00."],["03/25/2026 2:10 PM","Statement Services","Initial statement generated and mailed."]]},{"id":"ACC-1002","name":"LEE, SAMANTHA ROSE","dob":"09/27/1993","mrn":"MRN-556781","guarantor":"GRT-556781","statement":"STM-100216","phone":"(555) 662-9182","email":"samantha.lee@example.com","address":"998 Harbor St, San Diego, CA 92101","insurance":"Blue Cross Blue Shield","member":"BCBS33221144","group":"GRP-77221","plan":"PPO","provider":"Dr. Aaron Kim","facility":"Coastal Medical Group","claim":"CLM-771233","dos":"02/18/2026","balance":180.0,"status":"Balance Due","eob":{"billed":1200,"allowed":900,"paid":720,"patient":180,"writeoff":300},"lines":[["99214","Office Visit",350,250,200,50,"PR-3 Copay"],["93000","ECG",250,200,160,40,"PR-2 Coinsurance"],["71020","Chest X-Ray",300,250,200,50,"PR-2 Coinsurance"],["Facility Fee","Diagnostic Services",300,200,160,40,"PR-2 Coinsurance"]],"transactions":[["03/01/2026","Insurance Payment",720,"Posted","BCBS ERA"],["03/01/2026","Adjustment",-300,"Posted","Contractual write-off"]],"notes":[["03/01/2026 9:15 AM","System","Claim finalized. Patient responsibility assigned per EOB."],["03/08/2026 4:05 PM","Statement Services","Statement delivered by email."]]},{"id":"ACC-1003","name":"RIVERA, DANIEL JOSE","dob":"01/08/1978","mrn":"MRN-889122","guarantor":"GRT-889122","statement":"STM-100337","phone":"(555) 334-5567","email":"daniel.rivera@example.com","address":"221 Sunset Dr, Dallas, TX 75201","insurance":"UnitedHealthcare","member":"UHC77889900","group":"GRP-88219","plan":"HDHP","provider":"Dr. Emily Carter","facility":"Lone Star Medical Center","claim":"CLM-665544","dos":"03/10/2026","balance":400.0,"status":"Balance Due","eob":{"billed":1500,"allowed":1000,"paid":600,"patient":400,"writeoff":500},"lines":[["99215","Office Visit",400,300,150,150,"PR-1 Deductible"],["80061","Lipid Panel",300,200,160,40,"PR-2 Coinsurance"],["84443","Thyroid Test",300,200,160,40,"PR-2 Coinsurance"],["Facility Fee","Outpatient Charge",500,300,130,170,"PR-1 Deductible"]],"transactions":[["03/20/2026","Insurance Payment",600,"Posted","UHC ERA"],["03/20/2026","Contractual Adjustment",-500,"Posted","CO-45"]],"notes":[["03/20/2026 11:40 AM","System","Deductible and coinsurance applied by payer."],["04/02/2026 1:30 PM","Patient Services","Patient requested itemized statement; sent by email."]]},{"id":"ACC-1004","name":"MARTINEZ, OLIVIA MARIE","dob":"04/12/1988","mrn":"MRN-221133","guarantor":"GRT-221133","statement":"STM-100458","phone":"(555) 778-4432","email":"olivia.martinez@example.com","address":"554 Elm St, Miami, FL 33101","insurance":"Humana","member":"HUM44332211","group":"GRP-99113","plan":"HMO","provider":"Dr. Kevin Brooks","facility":"Sunshine Health Clinic","claim":"CLM-992211","dos":"02/28/2026","balance":150.0,"status":"Partial Payment Made","eob":{"billed":1300,"allowed":950,"paid":650,"patient":300,"writeoff":350},"lines":[["99214","Office Visit",300,220,120,100,"PR-1 Deductible"],["87086","Urine Culture",200,150,120,30,"PR-2 Coinsurance"],["81001","Urinalysis",200,150,120,30,"PR-2 Coinsurance"],["Facility Fee","Lab Services",600,430,290,140,"PR-3 Copay"]],"transactions":[["03/12/2026","Insurance Payment",650,"Posted","Humana ERA"],["03/12/2026","Adjustment",-350,"Posted","Contractual"],["04/01/2026","Patient Payment",150,"Posted","Visa ending 4242"]],"notes":[["04/01/2026 3:18 PM","Patient Services","Patient paid $150.00 by phone. Confirmation PMT-482193. Remaining balance $150.00."],["04/15/2026 8:50 AM","Statement Services","Updated statement sent by text link."]]},{"id":"ACC-1005","name":"COOPER, BRIAN JAMES","dob":"07/19/1975","mrn":"MRN-667890","guarantor":"GRT-667890","statement":"STM-100579","phone":"(555) 921-7744","email":"brian.cooper@example.com","address":"320 Ridge Rd, Denver, CO 80203","insurance":"Kaiser Permanente","member":"KP99887766","group":"GRP-66789","plan":"HMO","provider":"Dr. Rachel Adams","facility":"Mountain View Outpatient Center","claim":"CLM-554433","dos":"03/15/2026","balance":240.0,"status":"Balance Due","eob":{"billed":1800,"allowed":1200,"paid":960,"patient":240,"writeoff":600},"lines":[["99214","Office Visit",400,300,240,60,"PR-3 Copay"],["72148","MRI Lumbar Spine",900,600,480,120,"PR-2 Coinsurance"],["96372","Injection",200,150,120,30,"PR-2 Coinsurance"],["Facility Fee","Imaging Center Fee",300,150,120,30,"PR-2 Coinsurance"]],"transactions":[["03/28/2026","Insurance Payment",960,"Posted","Kaiser ERA"],["03/28/2026","Adjustment",-600,"Posted","Contractual"]],"notes":[["03/28/2026 10:05 AM","System","Claim processed. Patient responsibility $240.00."],["04/08/2026 5:12 PM","Patient Services","Patient asked about payment plan options; no plan established."]]},{"id":"ACC-1006","name":"MILES, REBECCA ANN","dob":"03/11/1984","mrn":"MRN-445566","guarantor":"GRT-445566","statement":"STM-100681","phone":"(555) 778-9912","email":"rebecca.miles@example.com","address":"144 Cedar Lane, Houston, TX 77002","insurance":"UnitedHealthcare","member":"UHC55443322","group":"GRP-65422","plan":"PPO","provider":"Dr. Hannah Lewis","facility":"Memorial Outpatient Center","claim":"CLM-883311","dos":"03/14/2026","balance":220.0,"status":"Balance Due / Partial Denial","eob":{"billed":1400,"allowed":950,"paid":730,"patient":220,"writeoff":450},"lines":[["99214","Office Visit",350,250,200,50,"PR-3 Copay"],["80053","Comprehensive Metabolic Panel",250,180,144,36,"PR-2 Coinsurance"],["71020","Chest X-Ray",300,0,0,0,"CO-50 Non-covered service"],["Facility Fee","Outpatient Services",500,520,386,134,"PR-1 Deductible"]],"transactions":[["03/29/2026","Insurance Payment",730,"Posted","UHC ERA"],["03/29/2026","Adjustment",-450,"Posted","Contractual/denial adjustment"]],"notes":[["03/29/2026 2:40 PM","System","Chest X-ray denied CO-50. Denied amount not transferred to patient."],["04/04/2026 11:05 AM","Patient Services","Patient advised balance is deductible/copay only; denial under provider review."]]},{"id":"ACC-1007","name":"COLLINS, ANDREW PAUL","dob":"07/26/1979","mrn":"MRN-778211","guarantor":"GRT-778211","statement":"STM-100792","phone":"(555) 226-1188","email":"andrew.collins@example.com","address":"882 River Rd, Nashville, TN 37201","insurance":"Cigna","member":"CIG77884411","group":"GRP-77884","plan":"PPO","provider":"Dr. Melissa Grant","facility":"Riverbend Medical Clinic","claim":"CLM-441122","dos":"02/27/2026","balance":310.0,"status":"Balance Due / Denial Review","eob":{"billed":1650,"allowed":1050,"paid":740,"patient":310,"writeoff":600},"lines":[["99215","Office Visit",400,300,240,60,"PR-3 Copay"],["93000","ECG",250,180,144,36,"PR-2 Coinsurance"],["97110","Physical Therapy",400,0,0,0,"CO-16 Missing information"],["Facility Fee","Therapy Services",600,570,356,214,"PR-1 Deductible"]],"transactions":[["03/13/2026","Insurance Payment",740,"Posted","Cigna ERA"],["03/13/2026","Adjustment",-600,"Posted","Contractual/denial"]],"notes":[["03/13/2026 1:45 PM","System","PT line denied CO-16. Coding team notified."],["03/18/2026 9:25 AM","Billing Review","Missing therapy plan of care requested from clinic. Patient billing hold applied to denied line."]]},{"id":"ACC-1008","name":"BENNETT, JASON MICHAEL","dob":"01/17/1975","mrn":"MRN-114477","guarantor":"GRT-114477","statement":"STM-100913","phone":"(555) 339-8821","email":"jason.bennett@example.com","address":"554 Highland Dr, Charlotte, NC 28202","insurance":"Aetna","member":"AET22335577","group":"GRP-22335","plan":"PPO","provider":"Dr. Nicole Reed","facility":"Highland Family Clinic","claim":"CLM-889955","dos":"03/19/2026","balance":420.0,"status":"Balance Due / Authorization Denial","eob":{"billed":1700,"allowed":1100,"paid":680,"patient":420,"writeoff":600},"lines":[["99214","Office Visit",350,250,150,100,"PR-1 Deductible"],["80061","Lipid Panel",250,180,144,36,"PR-2 Coinsurance"],["72148","MRI Lumbar Spine",700,0,0,0,"CO-197 Authorization required"],["Facility Fee","Imaging Facility Charge",400,670,386,284,"PR-1 Deductible"]],"transactions":[["04/01/2026","Insurance Payment",680,"Posted","Aetna ERA"],["04/01/2026","Adjustment",-600,"Posted","Contractual/denial"]],"notes":[["04/01/2026 4:00 PM","System","MRI denied for missing authorization; denial not patient responsibility."],["04/07/2026 10:20 AM","Authorization Team","Retro-authorization request submitted. Do not bill denied MRI line while under review."]]},{"id":"ACC-1009","name":"TURNER, MELISSA GRACE","dob":"06/29/1988","mrn":"MRN-663311","guarantor":"GRT-663311","statement":"STM-101024","phone":"(555) 880-4477","email":"melissa.turner@example.com","address":"999 Palm St, San Antonio, TX 78205","insurance":"Humana","member":"HUM11442255","group":"GRP-11442","plan":"HMO","provider":"Dr. Robert Kim","facility":"Southside Medical Group","claim":"CLM-774488","dos":"03/11/2026","balance":0.0,"status":"Do Not Bill - Reprocessing","eob":{"billed":1350,"allowed":920,"paid":660,"patient":260,"writeoff":430},"lines":[["99214","Office Visit",300,220,176,44,"PR-3 Copay"],["87086","Urine Culture",200,150,120,30,"PR-2 Coinsurance"],["96372","Injection Administration",250,0,0,0,"CO-151 Information missing"],["Facility Fee","Outpatient Facility Charge",600,550,364,186,"PR-1 Deductible"]],"transactions":[["03/25/2026","Insurance Payment",660,"Posted","Humana ERA"],["03/25/2026","Adjustment",-430,"Posted","Contractual"],["04/05/2026","Patient Balance Reversal",-260,"Posted","Insurance requested reprocessing"]],"notes":[["04/05/2026 9:12 AM","Insurance Call","Humana representative advised claim is being reprocessed. Requested patient billing stop. Reference HUM-RP-7741."],["04/05/2026 9:20 AM","Patient Services","Patient balance reversed and billing hold applied. Do not collect until new EOB posts."]]},{"id":"ACC-1010","name":"HALL, CHRISTINA MARIE","dob":"10/08/1992","mrn":"MRN-991100","guarantor":"GRT-991100","statement":"STM-101135","phone":"(555) 661-7744","email":"christina.hall@example.com","address":"223 Magnolia Ave, Orlando, FL 32801","insurance":"Blue Cross Blue Shield","member":"BCBS88776655","group":"GRP-88776","plan":"PPO","provider":"Dr. Kevin Morris","facility":"Central Florida Specialty Center","claim":"CLM-552244","dos":"03/03/2026","balance":0.0,"status":"No-Show Charge Under Review","eob":{"billed":150,"allowed":0,"paid":0,"patient":150,"writeoff":0},"lines":[["NO-SHOW","Missed Appointment Fee",150,0,0,150,"Patient charge - no claim adjudication"]],"transactions":[["03/03/2026","No-Show Charge",150,"Posted","Appointment marked no-show"],["03/10/2026","Billing Hold",0,"Posted","Dispute review"]],"notes":[["03/03/2026 3:30 PM","Scheduling","Patient marked no-show for 2:00 PM appointment."],["03/10/2026 11:18 AM","Patient Services","Patient disputed no-show and stated cancellation was made by phone. Escalated to clinic manager. Balance placed on hold."]]},{"id":"ACC-1011","name":"MORGAN, ASHLEY NICOLE","dob":"12/02/1990","mrn":"MRN-335902","guarantor":"GRT-335902","statement":"STM-101246","phone":"(555) 417-2268","email":"ashley.morgan@example.com","address":"715 Willow Bend, Columbus, OH 43215","insurance":"Anthem Blue Cross Blue Shield","member":"ANT55119420","group":"GRP-19420","plan":"PPO","provider":"Dr. Simone Wright","facility":"Riverside Specialty Clinic","claim":"CLM-615740","dos":"04/02/2026","balance":415.0,"status":"Balance Due - Plan Exclusion","eob":{"billed":900.0,"allowed":575.0,"paid":160.0,"patient":415.0,"writeoff":325.0},"lines":[["99213","Office Visit",300,200,160,40,"PR-3 Copayment"],["97014","Electrical Stimulation",350,300,0,300,"PR-204 Service excluded by plan"],["L3020","Orthotic Supply",250,75,0,75,"PR-204 Service excluded by plan"]],"transactions":[],"notes":[]},{"id":"ACC-1012","name":"ELLIS, ROBERT JAMES","dob":"05/21/1954","mrn":"MRN-704418","guarantor":"GRT-704418","statement":"STM-101357","phone":"(555) 903-4471","email":"robert.ellis@example.com","address":"440 Lakeview Terrace, Tampa, FL 33602","insurance":"Medicare / Cigna","member":"1EG4TE5MK72","group":"CIG-88417","plan":"Medicare Primary + PPO Secondary","provider":"Dr. Elena Foster","facility":"Bayview Medical Pavilion","claim":"CLM-702219","dos":"03/26/2026","balance":1200.0,"status":"COB Billing Order Review - Billing Hold","eob":{"billed":1200,"allowed":0,"paid":0,"patient":1200,"writeoff":0},"lines":[["99215","Office Visit",400,0,0,400,"CO-22 Possible coverage by another payer"],["93000","Electrocardiogram",300,0,0,300,"CO-22 Possible coverage by another payer"],["71046","Chest X-Ray",500,0,0,500,"CO-22 Possible coverage by another payer"]],"transactions":[],"notes":[]},{"id":"ACC-1013","name":"PARKER, LINDA MAY","dob":"08/30/1967","mrn":"MRN-508631","guarantor":"GRT-508631","statement":"STM-101468","phone":"(555) 231-8064","email":"linda.parker@example.com","address":"1840 Oak Crossing, Richmond, VA 23219","insurance":"UnitedHealthcare","member":"UHC77126009","group":"GRP-26009","plan":"PPO","provider":"Dr. Marcus Hill","facility":"Capital Region Outpatient Center","claim":"CLM-508631","dos":"04/08/2026","balance":600.0,"status":"Balance Due","eob":{"billed":2100,"allowed":1500,"paid":900,"patient":600,"writeoff":600},"lines":[["99215","Office Visit",450,350,200,150,"PR-1 Deductible"],["74177","CT Abdomen/Pelvis",1100,800,500,300,"PR-1 Deductible"],["Facility Fee","Outpatient Imaging",550,350,200,150,"PR-2 Coinsurance"]],"transactions":[],"notes":[]},{"id":"ACC-1014","name":"GREEN, MARCUS DAVID","dob":"02/14/1982","mrn":"MRN-882041","guarantor":"GRT-882041","statement":"STM-101579","phone":"(555) 684-2190","email":"marcus.green@example.com","address":"905 Garden Way, Portland, OR 97205","insurance":"Aetna","member":"AET66741020","group":"GRP-41020","plan":"PPO","provider":"Dr. Naomi Bell","facility":"Northwest Ambulatory Center","claim":"CLM-882041","dos":"04/11/2026","balance":0.0,"status":"Do Not Bill - Patient Information Requested","eob":{"billed":2200,"allowed":0,"paid":0,"patient":0,"writeoff":0},"lines":[["99214","Office Visit",400,0,0,0,"Claim pending member questionnaire"],["73564","Knee X-Ray",600,0,0,0,"Claim pending accident details"],["73721","MRI Lower Extremity",1200,0,0,0,"Claim pending accident details"]],"transactions":[],"notes":[]},{"id":"ACC-1015","name":"HALL, CHRISTINA MARIE","dob":"03/22/1986","mrn":"MRN-462781","guarantor":"GRT-462781","statement":"STM-101680","phone":"(555) 284-9017","email":"christina.hall86@example.com","address":"641 Cypress Grove, Jacksonville, FL 32202","insurance":"Cigna","member":"CIG46278190","group":"GRP-46278","plan":"PPO","provider":"Dr. Lauren Price","facility":"North River Primary Care","claim":"CLM-462781","dos":"04/15/2026","balance":95.0,"status":"Balance Due","eob":{"billed":520,"allowed":380,"paid":285,"patient":95,"writeoff":140},"lines":[["99213","Office Visit",260,190,143,47,"PR-3 Copayment"],["80048","Basic Metabolic Panel",180,130,98,32,"PR-2 Coinsurance"],["36415","Venipuncture",80,60,44,16,"PR-2 Coinsurance"]],"transactions":[],"notes":[]},{"id":"ACC-1016","name":"LEE, SAMANTHA ROSE","dob":"02/14/1987","mrn":"MRN-830514","guarantor":"GRT-830514","statement":"STM-101791","phone":"(555) 775-4130","email":"samantha.lee87@example.com","address":"2801 Meadow Ridge, Sacramento, CA 95814","insurance":"Aetna","member":"AET83051422","group":"GRP-83051","plan":"HMO","provider":"Dr. Peter Wallace","facility":"Capitol Family Medicine","claim":"CLM-830514","dos":"04/18/2026","balance":275.0,"status":"Balance Due","eob":{"billed":1250,"allowed":900,"paid":625,"patient":275,"writeoff":350},"lines":[["99214","Office Visit",350,250,175,75,"PR-1 Deductible"],["71046","Chest X-Ray",500,360,250,110,"PR-2 Coinsurance"],["Facility Fee","Outpatient Diagnostic Fee",400,290,200,90,"PR-1 Deductible"]],"transactions":[],"notes":[]}];
@@ -519,6 +540,7 @@ accounts.forEach((a,i)=>{
 });
 let current=null;
 let activeUserName='';
+let callPracticePhoneName='';
 
 function cleanUserName(value){return String(value||'').trim().replace(/\s+/g,' ').replace(/[<>]/g,'')}
 function noteAuthor(){return activeUserName||'Training User'}
@@ -535,6 +557,13 @@ function setActiveUserName(value){
 }
 function restoreActiveUserName(){
   try{const saved=sessionStorage.getItem('pfsTrainingUserName');if(saved)setActiveUserName(saved)}catch(error){}
+}
+function setCallPracticePhoneName(value){
+ callPracticePhoneName=cleanUserName(value);
+ try{if(callPracticePhoneName)sessionStorage.setItem('pfsCallPracticePhoneName',callPracticePhoneName);else sessionStorage.removeItem('pfsCallPracticePhoneName')}catch(error){}
+}
+function restoreCallPracticePhoneName(){
+ try{const saved=sessionStorage.getItem('pfsCallPracticePhoneName');if(saved)setCallPracticePhoneName(saved)}catch(error){}
 }
 
 function atNoon(value=new Date()){
@@ -1130,7 +1159,7 @@ function openMatchedAccount(id){
  current=buildRuntimeAccount(found);renderAll();loginView.classList.add('hidden');appView.classList.remove('hidden');
 }
 function showLoginMsg(t){loginMsg.textContent=t;loginMsg.classList.remove('hidden');searchResults.classList.add('hidden')}
-function logout(){current=null;appView.classList.add('hidden');loginView.classList.remove('hidden');searchResults.classList.add('hidden')}
+function logout(){closeCallPractice();current=null;appView.classList.add('hidden');loginView.classList.remove('hidden');searchResults.classList.add('hidden')}
 function showTab(id,btn){
  document.querySelectorAll('.tab').forEach(x=>x.classList.add('hidden'));
  document.getElementById(id).classList.remove('hidden');
@@ -1535,6 +1564,189 @@ function openScriptGuide(){showModal(`<div class="script-guide"><h2 style="margi
 <details><summary>Caller Is Not the Patient or Verification Fails</summary><div class="script-body"><div class="script-line">“To protect the patient’s information, I’m unable to discuss the account until the required verification or authorization is completed. I can explain the general process, but I cannot disclose account-specific details.”</div></div></details>
 </div>`,false,true)}
 
+let callPracticeState=null;
+function practiceScenario(account){
+ const status=(account.status||'').toLowerCase();
+ const codes=(account.lines||[]).map(line=>String(line[6]||'').toLowerCase()).join(' ');
+ if(status.includes('no-show'))return {topic:'No-show charge dispute',opening:'I received a charge for an appointment I cancelled. I do not think I should have to pay it.',goal:'Acknowledge the concern, review the scheduling history, and explain the review and TAT without promising removal.',resolution:'The charge will remain under review while the clinic checks the scheduling and cancellation records. I cannot promise that it will be removed, but the review team will determine whether the charge is valid.'};
+ if(status.includes('cob'))return {topic:'Coordination of benefits review',opening:'I have two insurance plans. Why am I being billed before the other insurance pays?',goal:'Verify which coverage was primary and explain that the balance is under review.',resolution:'The insurance sequence needs review. I am placing the appropriate request so the primary plan can be handled before the secondary plan. We will not ask you to pay the amount under review.'};
+ if(status.includes('reprocessing'))return {topic:'Claim reprocessing and billing hold',opening:'I received a bill, but my insurance said the claim is being worked on. Do I need to pay now?',goal:'Explain the billing hold and set a realistic review expectation.',resolution:'The claim is currently being reprocessed, and the account is on a billing hold. I will not request payment today.'};
+ if(status.includes('exclusion')||codes.includes('pr-204'))return {topic:'Plan exclusion',opening:'Why am I being charged when I have insurance? I thought my plan covered this.',goal:'Explain the EOB assignment in plain language and offer appropriate next steps.',resolution:'The EOB shows that this service is excluded under the benefit plan and that the plan assigned the amount to patient responsibility.'};
+ if(codes.includes('deductible'))return {topic:'Deductible and coinsurance balance',opening:'I have insurance, so why is there still a balance on my statement?',goal:'Explain the EOB, deductible, and coinsurance in simple language before discussing payment.',resolution:'The insurance processed the claim and assigned part of the allowed amount to your deductible or coinsurance. The remaining difference was adjusted according to the provider agreement.'};
+ return {topic:'Patient statement question',opening:'I received a statement and I am not sure what this balance is for. Can you explain it?',goal:'Verify the caller, review the EOB and account, then explain the valid balance in plain language.',resolution:'I can walk through the statement and the insurance processing one service at a time, then review the available next step.'};
+}
+function addPracticeMessage(role,text){
+ const log=document.getElementById('callChatLog');
+ if(!log)return;
+ const label=role==='agent'?`You · ${callPracticePhoneName||'Representative'}`:role==='coach'?'Coaching':'Patient';
+ const message=document.createElement('div');message.className=`chat-message ${role}`;
+ message.innerHTML=`<span class="chat-speaker">${label}</span>${esc(text).replace(/\n/g,'<br>')}`;
+ log.append(message);log.scrollTop=log.scrollHeight;
+}
+function practiceCoach(text){addPracticeMessage('coach',text)}
+const practiceStageCount=8;
+function practiceSkillForStage(stage){return ['Professional opening','Invite the caller’s concern','Identity verification','Proper hold procedure','Research-based explanation','Resolution and expectation setting','Offer additional assistance','Professional close'][Math.min(stage,practiceStageCount-1)]}
+function practiceExplanation(){
+ const scenario=callPracticeState.scenario;
+ if(scenario.topic==='Deductible and coinsurance balance')return `Thank you for holding. The provider billed ${money(current.eob.billed)}. Your insurance allowed ${money(current.eob.allowed)}, paid ${money(current.eob.paid)}, and assigned ${money(current.eob.patient)} to you based on your deductible, copay, or coinsurance. The remaining difference was adjusted under the provider agreement.`;
+ return `Thank you for holding. ${scenario.resolution}`;
+}
+function practiceChoices(){
+ const callerName=current.name.split(',')[1]?.trim().split(' ')[0]||current.name;
+ const scenario=callPracticeState.scenario;
+ const stages=[
+  [
+   {rating:'best',text:`Thank you for calling Patient Services, my name is ${callPracticePhoneName}. Can I have your name, please?`,coach:'This follows the approved opening: greeting, preferred phone name, and caller-name request.'},
+   {rating:'least',text:`Thank you for calling Patient Services, my name is ${callPracticePhoneName}. May I have your account or statement number so I can open the record?`,coach:'This sounds professional, but it begins account access before establishing the caller’s name and purpose.'},
+   {rating:'acceptable',text:`Thank you for calling Patient Services, my name is ${callPracticePhoneName}. How may I assist you with your account today?`,coach:'This is courteous and identifies the representative, but it misses the caller-name request used to personalize the conversation.'}
+  ],
+  [
+   {rating:'acceptable',text:`Thank you, ${callerName}. Please tell me briefly what part of the statement you are calling about today.`,coach:'This invites the concern, but it narrows the caller to a statement issue before hearing what prompted the call.'},
+   {rating:'best',text:`Thank you, ${callerName}. How can we help you today?`,coach:'This personalizes the conversation and gives the caller space to explain the complete concern.'},
+   {rating:'least',text:`Thank you, ${callerName}. Before you explain the concern, I need to verify your date of birth and complete address.`,coach:'Verification is necessary, but the call guide directs the representative to hear the complete concern first.'}
+  ],
+  [
+   {rating:'least',text:`I have located the account and can see a balance of ${money(current.balance)}. Before we continue, can you confirm your date of birth?`,coach:'This discloses the balance before verification is complete and may expose information to an unauthorized caller.'},
+   {rating:'acceptable',text:'Before I review the balance, may I verify your full name and date of birth so I can confirm I have the correct account?',coach:'This begins verification appropriately, but it omits the complete address required by the call flow.'},
+   {rating:'best',text:'Before I discuss the account, may I verify your full name, date of birth, and complete address?',coach:'This protects patient information and completes the required verification before disclosure.'}
+  ],
+  [
+   {rating:'best',text:'I understand why this is concerning. To make sure I give you accurate information, may I place you on a brief hold for 2–3 minutes while I review the account, EOB, billing history, and previous notes?',coach:'This uses the complete hold procedure: acknowledge the concern, ask permission, state the reason, and give a specific expected duration.'},
+   {rating:'least',text:'I understand the concern. I am going to place you on a brief hold for 2–3 minutes while I review the account, EOB, billing history, and previous notes.',coach:'This gives a reason and duration but announces the hold instead of asking the caller’s permission.'},
+   {rating:'acceptable',text:'I understand why this is concerning. May I place you on a brief hold while I review the account, EOB, billing history, and previous notes?',coach:'This asks permission and states the reason, but it omits the expected hold duration.'}
+  ],
+  [
+   {rating:'acceptable',text:`Thank you for holding. Insurance processed the claim, and the account currently shows ${money(current.balance)} as patient responsibility. That is the amount remaining after the insurance payment and adjustment.`,coach:'This sounds complete but does not explain the specific EOB reason or distinguish a collectible balance from an amount under review.'},
+   {rating:'least',text:`Thank you for holding. Insurance finalized the claim and assigned ${money(current.balance)} to you, so the full balance is valid and must be paid today even if you disagree with the processing.`,coach:'This overstates collectibility, removes appropriate review options, and may be inaccurate when a hold or unresolved issue applies.'},
+   {rating:'best',text:practiceExplanation(),coach:'This uses the researched account status, explains it in plain language, and avoids unsupported promises.'}
+  ],
+  [
+   {rating:'least',text:'I will ask the billing team to correct the account today. This should be resolved within two business days, and you should not receive another statement while it is being handled.',coach:'This sounds reassuring but promises a correction, timing, and billing outcome that may not be supported.'},
+   {rating:'best',text:`${scenario.resolution} I will document our conversation and complete the appropriate account action.`,coach:'This gives an accurate next step, sets expectations, and includes documentation without promising approval.'},
+   {rating:'acceptable',text:'I will document what we discussed and send the account to the appropriate team for review. They will evaluate the information and provide an update once their review is complete.',coach:'This avoids a guarantee but does not explain the account-specific action, current status, or realistic review expectation.'}
+  ],
+  [
+   {rating:'acceptable',text:'I have documented the account and explained the next step. If you have questions later, you are welcome to contact Patient Services again.',coach:'This is courteous but begins closing without checking whether the caller has another need today.'},
+   {rating:'best',text:'Before we finish, is there anything else I can help you with today?',coach:'This checks for any remaining need before closing the call.'},
+   {rating:'least',text:'Before we finish, can you confirm that you understand the explanation and agree with the next step I provided today?',coach:'This pressures the caller to agree instead of inviting remaining questions or assistance.'}
+  ],
+  [
+   {rating:'best',text:'Thank you for calling Patient Services. Have a good day.',coach:'This provides a clear, courteous, and professional close.'},
+   {rating:'acceptable',text:'Thank you for your time today. Please call us back if you need anything else regarding this account.',coach:'This is courteous but less concise and does not use the standard department closing.'},
+   {rating:'least',text:'Thank you for calling. I will make sure the account is completely resolved for you. Have a good day.',coach:'This sounds polished but adds an unsupported guarantee after the resolution and expectation were already explained.'}
+  ]
+ ];
+ const stageIndex=Math.min(callPracticeState.stage,stages.length-1);
+ callPracticeState.choiceOrders=callPracticeState.choiceOrders||{};
+ if(!callPracticeState.choiceOrders[stageIndex]){
+  const order=stages[stageIndex].map((_,index)=>index);
+  for(let index=order.length-1;index>0;index--){const swap=Math.floor(Math.random()*(index+1));[order[index],order[swap]]=[order[swap],order[index]]}
+  callPracticeState.choiceOrders[stageIndex]=order;
+ }
+ return callPracticeState.choiceOrders[stageIndex].map(index=>stages[stageIndex][index]);
+}
+function updatePracticeQuality(){
+ const score=Math.round((Math.min(callPracticeState?.stage||0,practiceStageCount)/practiceStageCount)*100);
+ const value=document.getElementById('practiceQualityValue');const fill=document.getElementById('practiceQualityFill');
+ if(value)value.textContent=`${score}% Quality`;if(fill)fill.style.width=`${score}%`;
+ const skill=document.getElementById('practiceCurrentSkill');if(skill&&callPracticeState?.stage<practiceStageCount)skill.textContent=practiceSkillForStage(callPracticeState.stage);
+ const coaching=document.getElementById('practiceCoachingContent');
+ if(coaching)coaching.textContent=callPracticeState?.stage>=2?`${callPracticeState.scenario.goal} Use the simulator to research, take actions, and enter notes.`:'Follow the call flow in order. Listen to the caller’s concern before the scenario-specific coaching is revealed.';
+}
+function renderPracticeChoices(){
+ const area=document.getElementById('practiceChoiceList');if(!area||!callPracticeState)return;
+ updatePracticeQuality();
+ if(callPracticeState.stage>=practiceStageCount){area.innerHTML='<div class="practice-complete">Call complete — 100% Quality achieved</div>';return}
+ area.innerHTML='';
+ practiceChoices().forEach((choice,index)=>{const button=document.createElement('button');button.type='button';button.className='practice-choice';button.disabled=callPracticeState.attempted.has(index);button.innerHTML=`<span class="practice-choice-letter">${String.fromCharCode(65+index)}</span><span class="practice-choice-text">${esc(choice.text)}</span>`;button.addEventListener('click',()=>selectPracticeChoice(index));area.append(button)});
+}
+function patientReplyForStage(stage){
+ const callerName=current.name.split(',')[1]?.trim().split(' ')[0]||current.name;
+ return [
+  `My name is ${callerName}.`,
+  callPracticeState.scenario.opening,
+  `My full name is ${current.name}. My date of birth is ${current.dob}, and my address is ${current.address}.`,
+  'Yes, that is fine. Thank you for letting me know.',
+  'Thank you for explaining that. What happens next?',
+  'That makes sense. Thank you.',
+  'No, that is everything.',
+  'Thank you. You too.'
+ ][stage];
+}
+function selectPracticeChoice(index){
+ const state=callPracticeState;if(!state||state.stage>=practiceStageCount)return;
+ const choice=practiceChoices()[index];
+ if(choice.rating!=='best'){
+  state.attempted.add(index);
+  state.lessAppropriateAttempts+=1;
+  if(current.callPracticeActivity)current.callPracticeActivity.lessAppropriateAttempts=state.lessAppropriateAttempts;
+  const label=choice.rating==='least'?'Least appropriate response':'Appropriate, but not the best response';
+  practiceCoach(`Not sent — ${label}: “${choice.text}” ${choice.coach} Review the remaining choices and select the best response to continue.`);
+  renderPracticeChoices();return;
+ }
+ addPracticeMessage('agent',choice.text);
+ practiceCoach(`Best response: ${choice.coach}`);
+ addPracticeMessage('patient',patientReplyForStage(state.stage));
+ state.stage+=1;state.attempted=new Set();
+ if(current.callPracticeActivity)current.callPracticeActivity.score=Math.round((state.stage/practiceStageCount)*100);
+ if(state.stage===4)practiceCoach('Hold and research checkpoint: the patient agreed to a 2–3 minute hold. Minimize or move the chat, review the account tabs, complete any needed action or note, and return with an accurate explanation. Thank the patient for holding when you return.');
+ if(state.stage===practiceStageCount){
+  if(current.callPracticeActivity){current.callPracticeActivity.completed=true;current.callPracticeActivity.completedAt=new Date().toLocaleString('en-US');current.callPracticeActivity.score=100}
+  practiceCoach('100% Quality achieved. Complete any required note or account action in the simulator. For speaking practice, read the best responses aloud and repeat the call with a partner playing the patient whenever possible.');
+ }
+ renderPracticeChoices();
+}
+function resetCallPractice(){
+ if(!current)return;
+ callPracticeState={stage:0,scenario:practiceScenario(current),accountId:current.id,attempted:new Set(),lessAppropriateAttempts:0};
+ current.callPracticeActivity={used:true,phoneName:callPracticePhoneName,startedAt:new Date().toLocaleString('en-US'),completed:false,score:0,lessAppropriateAttempts:0};
+ const log=document.getElementById('callChatLog');if(log)log.innerHTML='';
+ practiceCoach(`Select the best representative response for ${callPracticePhoneName}. Read each response aloud before choosing it so the wording becomes natural. If possible, repeat the activity with another person playing the patient.`);
+ renderPracticeChoices();
+}
+function toggleCallPracticeMinimize(){
+ const win=document.getElementById('callPracticeWindow');if(!win)return;
+ const minimized=win.classList.toggle('minimized');
+ const button=document.getElementById('callPracticeMinimize');if(button){button.textContent=minimized?'▢':'–';button.title=minimized?'Restore chat':'Minimize chat';button.setAttribute('aria-label',button.title)}
+}
+function closeCallPractice(){document.getElementById('callPracticeWindow')?.classList.add('hidden')}
+function initializeCallPracticeDrag(){
+ const win=document.getElementById('callPracticeWindow');const header=win?.querySelector('.call-practice-window-header');if(!win||!header)return;
+ header.addEventListener('pointerdown',event=>{
+  if(event.target.closest('button')||event.button!==0)return;
+  event.preventDefault();
+  const rect=win.getBoundingClientRect();const offsetX=event.clientX-rect.left;const offsetY=event.clientY-rect.top;
+  win.style.left=`${rect.left}px`;win.style.top=`${rect.top}px`;win.style.right='auto';win.style.bottom='auto';
+  const move=moveEvent=>{
+   const maxLeft=Math.max(0,window.innerWidth-win.offsetWidth);const maxTop=Math.max(0,window.innerHeight-win.offsetHeight);
+   win.style.left=`${Math.min(maxLeft,Math.max(0,moveEvent.clientX-offsetX))}px`;
+   win.style.top=`${Math.min(maxTop,Math.max(0,moveEvent.clientY-offsetY))}px`;
+  };
+  const stop=()=>{document.removeEventListener('pointermove',move);document.removeEventListener('pointerup',stop)};
+  document.addEventListener('pointermove',move);document.addEventListener('pointerup',stop);
+ });
+}
+function startCallPractice(){
+ const input=document.getElementById('practicePhoneName');const phoneName=cleanUserName(input?.value);
+ if(!phoneName){const error=document.getElementById('practicePhoneNameError');if(error){error.textContent='Enter the name you want to use on calls.';error.classList.remove('hidden')}input?.focus();return}
+ setCallPracticePhoneName(phoneName);
+ const subtitle=document.getElementById('callPracticeSubtitle');if(subtitle)subtitle.textContent=`Guided role-play · Phone name: ${callPracticePhoneName}`;
+ const body=document.querySelector('#callPracticeWindow .call-practice-window-body');if(!body)return;
+ body.innerHTML=`<details class="practice-coaching" open><summary>Coaching points</summary><div id="practiceCoachingContent" class="practice-coaching-content">Follow the call flow in order. Listen to the caller’s concern before the scenario-specific coaching is revealed.</div></details><div class="practice-quality"><span>Guided quality</span><div class="practice-quality-track"><div id="practiceQualityFill" class="practice-quality-fill"></div></div><strong id="practiceQualityValue">0% Quality</strong></div><div class="practice-skill"><b>Current skill:</b> <span id="practiceCurrentSkill">Professional opening</span></div><div class="practice-research-reminder">Read each option aloud before choosing. Drag the top bar to move this window, or minimize it while researching the account.</div><div id="callChatLog" class="call-chat-log" aria-live="polite"></div><div class="practice-choice-area"><div class="practice-choice-label">Choose the representative’s response</div><div id="practiceChoiceList" class="practice-choice-list"></div><div class="practice-choice-footer"><button type="button" onclick="openScriptGuide()">Call &amp; Script Guide</button><button type="button" onclick="resetCallPractice()">Restart call</button></div></div>`;
+ resetCallPractice();
+}
+function openCallPractice(){
+ if(!current){showModal('<h3>Choose an account first</h3><p class="muted">Search for and open a patient account, then select <b>Practice Call Chat</b> to role-play that account scenario.</p>');return}
+ const win=document.getElementById('callPracticeWindow');
+ const suggestedName=callPracticePhoneName||(activeUserName.split(/\s+/)[0]||'');
+ win.innerHTML=`<div class="call-practice-window-header"><div class="call-practice-window-title"><b>Practice Call Chat</b><span id="callPracticeSubtitle">Guided role-play · Setup required</span></div><div class="call-practice-window-controls"><button id="callPracticeMinimize" type="button" aria-label="Minimize chat" title="Minimize chat" onclick="toggleCallPracticeMinimize()">–</button><button type="button" aria-label="Close chat" title="Close chat" onclick="closeCallPractice()">×</button></div></div><div class="call-practice-window-body"><div class="practice-setup"><h3>Before the call begins</h3><p>Choose the name you want patients to hear during your calls.</p><div class="practice-setup-card"><label for="practicePhoneName">Preferred phone name</label><input id="practicePhoneName" value="${esc(suggestedName)}" autocomplete="off" placeholder="e.g., Alex"><div id="practicePhoneNameError" class="notice hidden"></div><button class="primary" type="button" onclick="startCallPractice()">Begin guided call</button></div><div class="practice-learning-tips"><b>Build confidence without voice AI</b><ul><li>Read every suggested response aloud before selecting it.</li><li>Repeat difficult phrases until they sound natural rather than memorized.</li><li>When possible, practice again with another person playing the patient.</li><li>Use the movable chat alongside the account tabs to practice researching, taking action, and documenting while managing the call.</li></ul></div></div></div>`;
+ win.classList.remove('hidden','minimized');
+ initializeCallPracticeDrag();
+ const phoneNameInput=document.getElementById('practicePhoneName');
+ phoneNameInput?.addEventListener('keydown',event=>{if(event.key==='Enter'){event.preventDefault();startCallPractice()}});
+ phoneNameInput?.focus();
+}
+
 function viewReversalNotice(){
  const notice=current.reversalNotice||{};
  showModal(`<div class="reversal-notice">
@@ -1704,6 +1916,8 @@ function generateTransactionReport(){
  const coverageRows=(current.coverages||[]).map(c=>`<tr><td>${c.priority}</td><td>${c.payer}</td><td>${c.member}</td><td>${c.group}</td><td>${c.plan}</td><td>${c.status}</td></tr>`).join('');
  const letterRows=(current.patientLetters||[]).map(l=>`<tr><td>${l.date}</td><td>${l.type}</td><td>${l.requested}</td><td>${l.status}</td><td>${l.due}</td><td>${l.reference}</td></tr>`).join('');
  const billingRows=current.billingHistory.map(r=>`<tr><td>${r[0]}</td><td>${r[1]}</td><td>${r[2]}</td><td>${r[3]}</td><td>${r[4]}</td><td>${r[5]}</td></tr>`).join('');
+ const practice=current.callPracticeActivity||{};
+ const practiceUsed=practice.used?'Yes':'No';
  const report=`<!doctype html><html><head><meta charset="utf-8"><title>Transaction Summary - ${current.name}</title>
  <style>body{font-family:Arial;padding:28px;color:#222}h1{font-size:22px;border-bottom:3px solid #17324d;padding-bottom:8px}table{width:100%;border-collapse:collapse;margin:12px 0 22px}th,td{border:1px solid #bbb;padding:7px;font-size:12px;text-align:left}th{background:#eef4f8}.grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}.box{border:1px solid #bbb;padding:10px}.muted{color:#666;font-size:12px}@media print{button{display:none}}</style></head><body>
  <h1>Patient Services Training Transaction Summary</h1>
@@ -1711,6 +1925,7 @@ function generateTransactionReport(){
  <div class="grid"><div class="box"><b>Patient:</b> ${current.name}<br><b>DOB:</b> ${current.dob}<br><b>Age / Minor:</b> ${current.age??'N/A'} / ${current.isMinor?'Yes':'No'}<br><b>MRN:</b> ${current.mrn}<br><b>Guarantor:</b> ${current.guarantor}</div>
  <div class="box"><b>Responsible Party:</b> ${current.guarantorName} (${current.guarantorRelationship})<br><b>Responsible Party DOB:</b> ${current.guarantorDob}<br><b>Claim:</b> ${current.claim}<br><b>Date of Service:</b> ${current.dos}<br><b>Insurance:</b> ${current.insurance}<br><b>Current Patient Balance:</b> ${money(current.balance)}<br><b>Insurance Balance:</b> ${money(current.insuranceBalance||0)}<br><b>Balance Reminder Calls:</b> ${current.reminderCallCount}</div></div>
  <h2>Account Status</h2><p>${current.status}</p>
+ <h2>Call Chat Practice Activity</h2><div class="box"><b>Used Call Chat to practice:</b> ${practiceUsed}<br><b>Preferred phone name:</b> ${practice.used?esc(practice.phoneName||'Not recorded'):'Not applicable'}<br><b>Guided quality:</b> ${practice.used?`${Number(practice.score||0)}%`:'Not started'}<br><b>Completed at 100% Quality:</b> ${practice.completed?'Yes':'No'}<br><b>Less-appropriate selections reviewed:</b> ${Number(practice.lessAppropriateAttempts||0)}${practice.startedAt?`<br><b>Practice started:</b> ${esc(practice.startedAt)}`:''}${practice.completedAt?`<br><b>Practice completed:</b> ${esc(practice.completedAt)}`:''}<br><br><b>Additional speaking practice:</b> The learner was instructed to read the call scripts and suggested responses aloud to build comfort and natural delivery, and to repeat the activity with another person playing the patient whenever possible.</div>
  <h2>Insurance Coverage</h2><table><thead><tr><th>Order</th><th>Payer</th><th>Member ID</th><th>Group</th><th>Plan</th><th>Status</th></tr></thead><tbody>${coverageRows}</tbody></table>
  ${letterRows?`<h2>Patient Information Request Letters</h2><table><thead><tr><th>Date</th><th>Letter</th><th>Requested Information</th><th>Status</th><th>Due</th><th>Reference</th></tr></thead><tbody>${letterRows}</tbody></table>`:''}
  <h2>Claim Billing History</h2><table><thead><tr><th>Date/Time</th><th>Activity</th><th>Destination/Owner</th><th>Status</th><th>ACK / Receipt</th><th>Details / TAT</th></tr></thead><tbody>${billingRows}</tbody></table>
@@ -1725,7 +1940,7 @@ function generateTransactionReport(){
 function resetModalBox(){
  const box=document.querySelector('#modal .modalbox');
  if(!box)return;
- box.classList.remove('statement-wide','script-guide-modal');
+ box.classList.remove('statement-wide','script-guide-modal','call-practice-modal');
  box.querySelector('.script-guide-floating-close')?.remove();
 }
 function showModal(html,wide=false,isScriptGuide=false){
@@ -1749,6 +1964,7 @@ document.addEventListener('keydown',event=>{
 });
 
 restoreActiveUserName();
+restoreCallPracticePhoneName();
 
 document.querySelectorAll('#loginView input').forEach(input=>{
   input.addEventListener('keydown',event=>{
